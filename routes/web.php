@@ -15,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->name('landing.home');
+Route::get('market-place',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'index'])->name('landing.home');
+Route::get('market-place/{slug}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'show'])->name('landing.home');
