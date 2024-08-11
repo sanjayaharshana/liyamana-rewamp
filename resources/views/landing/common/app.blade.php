@@ -26,61 +26,20 @@
 
     <!-- Main CSS File -->
     <link href="{{url('landing_pages/assets/css/main.css')}}" rel="stylesheet">
+    <style>
+        .index-page .header {
+            --background-color: rgba(255, 255, 255, 0);
+            --heading-color: #ffffff;
+            --nav-color: #ffffff;
+            background: #8b262f;
+        }
+    </style>
 
-    <!-- =======================================================
-    * Template Name: Arsha
-    * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-    * Updated: Aug 07 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body class="index-page">
 
-<header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-
-        <a href="index.html" class="logo d-flex align-items-center me-auto">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
-            <!-- <img src="assets/img/logo.png" alt=""> -->
-            <h1 class="sitename">Arsha</h1>
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-            <ul>
-                <li><a href="#hero" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                        <li><a href="#">Dropdown 1</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Dropdown 1</a></li>
-                                <li><a href="#">Deep Dropdown 2</a></li>
-                                <li><a href="#">Deep Dropdown 3</a></li>
-                                <li><a href="#">Deep Dropdown 4</a></li>
-                                <li><a href="#">Deep Dropdown 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Dropdown 2</a></li>
-                        <li><a href="#">Dropdown 3</a></li>
-                        <li><a href="#">Dropdown 4</a></li>
-                    </ul>
-                </li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-
-        <a class="btn-getstarted" href="#about">Get Started</a>
-
-    </div>
-</header>
+@include('landing.common.navbar')
 
 <main class="main">
 
@@ -92,22 +51,7 @@
 
 <footer id="footer" class="footer">
 
-    <div class="footer-newsletter">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-6">
-                    <h4>Join Our Newsletter</h4>
-                    <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-                    <form action="forms/newsletter.php" method="post" class="php-email-form">
-                        <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="container footer-top">
         <div class="row gy-4">
