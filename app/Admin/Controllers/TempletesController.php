@@ -28,7 +28,6 @@ class TempletesController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
-        $grid->column('description', __('Description'));
         $grid->column('price', __('Price'));
         $grid->column('images', __('Images'));
         $grid->column('category_id', __('Category id'));
