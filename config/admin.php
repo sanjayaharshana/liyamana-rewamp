@@ -135,8 +135,8 @@ return [
         'redirect_to' => 'auth/login',
 
         // Protect agaist brute force attacks
-        'throttle_logins'   => true,
-        'throttle_attempts' => 5,
+        'throttle_logins'   => false,
+        'throttle_attempts' => 10,
         'throttle_timeout'  => 900, // in seconds
 
         // The URIs that should be excluded from authorization.
@@ -158,7 +158,7 @@ return [
     'upload' => [
 
         // Disk in `config/filesystem.php`.
-        'disk' => 'admin',
+        'disk' => 'local',
 
         // Image and file upload path under the disk above.
         'directory' => [
