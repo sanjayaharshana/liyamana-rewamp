@@ -1,0 +1,20 @@
+{
+    "status": true,
+    "products": [
+        {
+            "id": 1,
+            "name": "Sport Tees",
+            "price": 310,
+            "category": "clothes",
+            "currency": "LKR",
+            "image": "dummy_data/products/t_shirts/20.png",
+            "sub_images": [
+                "dummy_data/products/t_shirts/20.png",
+                "dummy_data/products/t_shirts/20.png",
+                "dummy_data/products/t_shirts/20.png"
+            ],
+            "description": "Lorium ipsum dolor sit amet"
+        }
+    ],
+    "message": "Products Loaded Successfully"
+}
