@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>📦 Vanilla JavaScript Example - Mini Canvas Editor</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<link rel="icon" href="./assets/favicon.ico" />
+		<link href="./assets/common.css" rel="stylesheet" />
+		<style>
+			body {
+				background: url('./assets/background-pattern.svg');
+			}
+			#placeholder {
+				width: 100%;
+				height: 50vh;
+			}
+			p {
+				text-align: center;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header bb">
+			<div class="header-title">
+				<h1>📦 Vanilla JavaScript Example</h1>
+			</div>
+			<div class="header-links">
+				<a href="https://github.com/img-js/mini-canvas-editor" target="_blank">Mini Canvas Editor</a>
+			</div>
+		</header>
+
+		<div id="placeholder"></div>
+
+		<p>
+			<button id="saveButton">Save bitmap</button>
+		</p>
+		<p>This example uses vanilla JavaScript!</p>
+
+		<script>
+			const isLocalhost = ['localhost', '127.0.0.1'].includes(location.hostname);
+			const cssUrl = isLocalhost
+				? '../../../editor/css/editor.css'
+				: 'https://cdn.jsdelivr.net/npm/mini-canvas-editor@0.3.0/css/editor.css';
+			const coreUrl = isLocalhost
+				? '../../../core/dist/index.umd.js'
+				: 'https://cdn.jsdelivr.net/npm/mini-canvas-core@0.3.0/dist/index.umd.js';
+			const editorUrl = isLocalhost
+				? '../../../editor/dist/index.umd.js'
+				: 'https://cdn.jsdelivr.net/npm/mini-canvas-editor@0.3.0/dist/index.umd.js';
+
+			document.write('<link href="' + cssUrl + '" rel="stylesheet" \/>');
+			document.write('<script src="' + coreUrl + '"><\/script>');
+			document.write('<script src="' + editorUrl + '"><\/script>');
+		</script>
+
+		<script>
+			const placeholder = document.getElementById('placeholder');
+			const saveButton = document.getElementById('saveButton');
+			const editor = miniCanvasEditor.Editor.createBlank(placeholder, 200, 300, {});
+
+			saveButton.addEventListener(
+				'click',
+				() => {
+					const a = document.createElement('a');
+					a.download = 'filename.png';
+					a.href = editor.render().toDataURL('image/png');
+					a.click();
+				},
+				false
+			);
+		</script>
+	</body>
+</html>
