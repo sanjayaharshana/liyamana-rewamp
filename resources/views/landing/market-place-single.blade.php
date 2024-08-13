@@ -37,6 +37,8 @@
 
 
 
+
+
         <section class="customizer" id="customizer">
             <a href="http://designtailor.veepixel.com/"><img src="images/logo.png" alt="" class="logo"></a>
             <div class="selector">
