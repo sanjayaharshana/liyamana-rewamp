@@ -435,7 +435,7 @@ md-tab-content {
 }
 
 .well {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .customizer {
