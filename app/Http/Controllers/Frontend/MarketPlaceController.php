@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Templetes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -10,7 +11,10 @@ class MarketPlaceController extends Controller
 {
     public function index()
     {
-        return view('landing.market-place');
+        $templates = Templetes::where('status', 1)->get();
+        return view('landing.market-place',[
+            'templates' => $templates,
+        ]);
     }
 
     public function show($slug)
