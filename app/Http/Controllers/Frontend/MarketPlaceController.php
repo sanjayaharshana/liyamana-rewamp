@@ -19,7 +19,9 @@ class MarketPlaceController extends Controller
 
     public function show($slug)
     {
-        return view('landing.market-place-single');
+        $templates = Templetes::where('slug',$slug)->first();
+        dd($templates);
+        return view('landing.single-product');
     }
 
     public function jsonSetting()

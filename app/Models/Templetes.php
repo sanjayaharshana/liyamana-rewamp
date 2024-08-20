@@ -11,6 +11,11 @@ class Templetes extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+      'images' => 'array',
+      'tags' => 'array'
+    ];
+
 
     public function category()
     {
@@ -20,5 +25,22 @@ class Templetes extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function setPicturesAttribute($pictures)
+    {
+        if (is_array($pictures)) {
+            $this->attributes['images'] = json_encode($pictures);
+        }
+    }
+
+    public function getPicturesAttribute($pictures)
+    {
+        return json_decode($pictures, true);
+    }
+
+    public function templateimages()
+    {
+        return $this->hasMany(TemplateImages::class);
     }
 }
