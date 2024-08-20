@@ -75,6 +75,10 @@
                                 <md-tooltip md-visible="copy.showTooltip" md-direction="right">Copy</md-tooltip>
                             </li>
                             <li>
+                                <a ng-click="fabricload()" href="javascript:void(0)" class="bi bi-box"></a>
+                                <md-tooltip md-visible="fabricload.showTooltip" md-direction="right">Load</md-tooltip>
+                            </li>
+                            <li>
                                 <a ng-click="pasteItem()" href="javascript:void(0)" class="bi bi-clipboard"></a>
                                 <md-tooltip md-visible="paste.showTooltip" md-direction="right">Paste</md-tooltip>
                             </li>
@@ -87,11 +91,11 @@
                                 <md-tooltip md-visible="backward.showTooltip" md-direction="right">Backward Swap</md-tooltip>
                             </li>
                             <li>
-                                <a ng-click="horizontalAlign()" href="javascript:void(0)" class="bi bi-align-end"></a>
+                                <a ng-click="horizontalAlign()" href="javascript:void(0)" class="bi bi-arrows"></a>
                                 <md-tooltip md-visible="horizontal.showTooltip" md-direction="right">Horizontal Align</md-tooltip>
                             </li>
                             <li>
-                                <a ng-click="verticalAlign()" href="javascript:void(0)" class="bi bi-align-start"></a>
+                                <a ng-click="verticalAlign()" href="javascript:void(0)"  class="bi bi-arrows-vertical"></a>
                                 <md-tooltip md-visible="vertical.showTooltip" md-direction="right">Vertical Align</md-tooltip>
                             </li>
                             <li>
