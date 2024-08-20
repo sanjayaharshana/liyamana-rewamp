@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use OpenAdmin\Admin\Admin;
+use OpenAdmin\Admin\Auth\Database\Administrator;
 use OpenAdmin\Admin\Controllers\AdminController;
 use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
@@ -91,25 +93,56 @@ class TempletesController extends AdminController
         $form = new Form(new Templetes());
 
         $form->tab('Basic', function ($form) {
-            $form->text('name', __('Name'));
-            $form->textarea('description', __('Description'));
-            $form->currency('price', __('Price'));
-            $form->image('images', __('Images'));
-            $form->number('category_id', __('Category id'));
-            $form->number('user_id', __('User id'));
-            $form->text('slug', __('Slug'));
-        })->tab('Options', function ($form) {
-            $form->switch('status', __('Status'))->default(1);
+            $form->text('name', __('Name'))->required();;
+            $form->textarea('description', __('Description'))->required();;
+            $form->image('feature_image', __('Feature image'))->required();;
+            $form->multipleImage('images', __('Images'))->removable()->sortable();
+            $form->number('category_id', __('Category id'))->required();;
+            $getAdmins = Administrator::get()->pluck('username','id')->toArray();
+            $form->select('user_id','User')->options($getAdmins)->required();;
             $form->switch('is_featured', __('Is featured'));
+            $form->text('slug', __('Slug'));
+            $form->switch('status', __('Status'))->default(1);
+            $form->switch('is_active', __('Is active'))->default(1);
+
+
+
+        })->tab('Selling', function ($form) {
+            $form->currency('price', __('Price'))->required();;
+            $form->currency('buying_price', __('Buying price'))->required();;
+            $form->switch('is_best_selling', __('Is best selling'));
+
+        })->tab('Options', function ($form) {
+
             $form->switch('is_trending', __('Is trending'));
             $form->switch('is_new', __('Is new'));
-            $form->switch('is_best_selling', __('Is best selling'));
             $form->switch('is_top_rated', __('Is top rated'));
-            $form->switch('is_active', __('Is active'))->default(1);
+
         })->tab('Search and SEO', function ($form) {
-            $form->tags('tags', __('Tags'));
-            $form->textarea('seo_description', __('Seo description'));
+
+            $form->tags('tags', __('Tags'))->required();;
+            $form->textarea('seo_description', __('Seo description'))->required();
+        })->tab('Custom Form',function ($form){
+            $form->html('<input type="hidden" name="formbuilder" id="formbuilder"> <div id="fb-editor"></div><script>jQuery(function($) {
+     var $fbEditor = document.getElementById("fb-editor");
+  var formBuilder = $($fbEditor).formBuilder();
+
+  document.addEventListener("fieldAdded", function(){
+      $("#formbuilder").val(formBuilder.formData);
+  });
+
+});
+</script>');
+
         });
+
+        $form->saving(function (Form $form) {
+            dd($form);
+        });
+
+
+
+
         return $form;
     }
 }
