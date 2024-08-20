@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('templetes', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->float('price');
+            $table->float('buying_price');
+            $table->text('feature_image')->nullable();
+            $table->text('form_data')->nullable();
             $table->text('images');
             $table->integer('category_id');
             $table->text('user_id');

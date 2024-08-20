@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Templetes;
 use Illuminate\Database\Seeder;
+use OpenAdmin\Admin\Auth\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +20,13 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // $permission = new \OpenAdmin\Admin\Auth\Database\Permission();
+
+        $this->call([
+           PermissionSeeeder::class,
+           MenuSeeder::class,
+        ]);
+
     }
 }
