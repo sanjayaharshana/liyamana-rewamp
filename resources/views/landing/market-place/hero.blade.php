@@ -11,7 +11,9 @@
                 <div class="row">
                     <div class="col-md-8">
                         <select class="form-select">
-                            <option value="romance">Romance</option>
+                            @foreach($templateCategories as $item)
+                                <option value="{{$item->slug}}">{{$item->category_name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-4">

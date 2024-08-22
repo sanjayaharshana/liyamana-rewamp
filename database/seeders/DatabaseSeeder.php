@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
            PermissionSeeeder::class,
            MenuSeeder::class,
-           SettingsSeeder::class
+           SettingsSeeder::class,
+           TemplateCategorySeeder::class,
         ]);
 
     }

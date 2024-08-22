@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Templetes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-
+use App\Models\TempleteCategories;
 class MarketPlaceController extends Controller
 {
     public function index()
     {
+        $templateCategories = TempleteCategories::where('status', 1)->get();
         $templates = Templetes::where('status', 1)->get();
         return view('landing.market-place',[
+            'templateCategories' => $templateCategories,
             'templates' => $templates,
         ]);
     }
