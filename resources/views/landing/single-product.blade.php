@@ -7,14 +7,22 @@
     <div class="container">
        <div class="row">
            <div class="col-md-6">
+               @include('landing.product_page.product_slider')
 
            </div>
            <div class="col-md-6">
-               <h2> Product Item 1</h2>
-               <p>To design a JSON structure from JavaScript using Fabric.js, you'll typically create objects
-                   (e.g., shapes, text) on a Fabric.js canvas and then export the entire canvas or individual objects t
-                   o JSON format. Here's how you can achieve this:
+               <h2>{{$template->name}}</h2>
+               <p>{{$template->description}}</p>
+
+               <p style="background: url('https://www.shutterstock.com/image-photo/wood-texture-natural-plywood-background-600nw-1901761825.jpg');color: white;padding: 10px;width: 170px;border-radius: 10px;text-align: center;font-size: 20px;background-size: contain;">
+                   LKR : {{number_format($template->price,2)}}
                </p>
+
+               <div
+
+
+               <button class="btn btn-primary" style="background: maroon;border-style: none"><i class="bi bi-envelope" style="margin-right: 10px"></i> Quick Send</button>
+               <button class="btn btn-primary" style="background: maroon;border-style: none"><i class="bi bi-pen" style="margin-right: 10px"></i> Edit This Template</button>
            </div>
        </div>
     </div>

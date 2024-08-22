@@ -123,7 +123,7 @@ class TempletesController extends AdminController
             $form->tags('tags', __('Tags'))->required();;
             $form->textarea('seo_description', __('Seo description'))->required();
         })->tab('Custom Form',function ($form){
-            $form->html('<input type="hidden" name="formbuilder" id="formbuilder"> <div id="fb-editor"></div><script>jQuery(function($) {
+            $form->html('<input type="hidden" name="form_data" id="formbuilder"> <div id="fb-editor"></div><script>jQuery(function($) {
      var $fbEditor = document.getElementById("fb-editor");
   var formBuilder = $($fbEditor).formBuilder();
 
@@ -136,9 +136,6 @@ class TempletesController extends AdminController
 
         });
 
-        $form->saving(function (Form $form) {
-            dd($form);
-        });
 
 
 

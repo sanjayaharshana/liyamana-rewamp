@@ -18,5 +18,7 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('templates', TempletesController::class);
     $router->resource('template-categories', TempleteCategoriesController::class);
+    $router->resource('settings', \App\Admin\Controllers\SettingsController::class);
+    $router->get('settings-plat', [\App\Admin\Controllers\SettingsController::class,'settingPanel']);
 
 });
