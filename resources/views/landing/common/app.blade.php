@@ -137,6 +137,20 @@
 <script src="{{url('landing_pages/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
 <script src="{{url('landing_pages/assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
 
+<script>
+    // Register the service worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+
+</script>
+
 @stack('footer-js')
 <!-- Main JS File -->
 <script src="{{url('landing_pages/assets/js/main.js')}}"></script>

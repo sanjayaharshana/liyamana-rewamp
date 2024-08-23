@@ -30,5 +30,16 @@ class PermissionSeeeder extends Seeder
         $permission->http_path = '/templates*';
         $permission->save();
 
+        $permission = \OpenAdmin\Admin\Auth\Database\Permission::firstOrNew([
+            'slug' => 'inquiries'
+        ]);
+        $permission->name = 'Inquiries';
+        $permission->http_method = '';
+        $permission->http_path = '/inquiries*';
+        $permission->save();
+
+
+
+
     }
 }

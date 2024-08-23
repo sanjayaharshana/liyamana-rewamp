@@ -11,4 +11,9 @@ class HomeController extends Controller
     {
         return view('landing.home');
     }
+
+    public function offline()
+    {
+        return view('landing.offline');
+    }
 }
