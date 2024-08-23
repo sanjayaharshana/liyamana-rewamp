@@ -35,8 +35,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div style="text-align: center">
-                    <h1 style="color: white;font-size: 40px;">Market Place</h1>
-                    <p style="color: white;font-size: 20px;">Find the perfect template for your special occasion</p>
+                    <div style="background: url('{{url('landing_pages/banding/market_place_banner.png')}}');height: 270px;background-size: contain;background-repeat: no-repeat;background-position: center;">
+
+                    </div>
                 </div>
             </div>
         </div>

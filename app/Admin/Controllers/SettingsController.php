@@ -80,9 +80,13 @@ class SettingsController extends AdminController
                 }
             });
         }
-
-        $form->saving(function (Form $form) {
-           return back();
+        $form->saving(function (Form $form) use ($getAllSettings) {
+            dd($form);
+            foreach ($getAllSettings as $key => $settingItems) {
+                foreach ($settingItems as $settingItem) {
+                    $form->model()->where('key', $settingItem->key)->update(['value' => $form->input($settingItem->key)]);
+                }
+            }
         });
 
         return $form;
@@ -96,7 +100,12 @@ class SettingsController extends AdminController
             'textarea' => 'textarea',
             'switch' => 'switch',
             'email' => 'email',
-            'image' => 'image'
+            'image' => 'image',
+            'password' => 'password',
+            'url' => 'url',
+            'number' => 'number',
+            'date' => 'date',
+            'time' => 'time',
             // Add other types here as needed
         ];
 
@@ -127,6 +136,8 @@ class SettingsController extends AdminController
 
             $formSettingsItem->value($settingItem->value);
         }
+
+
     }
 }
 
