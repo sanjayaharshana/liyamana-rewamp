@@ -31,22 +31,21 @@ class TempletesController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
         $grid->column('price', __('Price'));
-        $grid->column('images', __('Images'));
-        $grid->column('category_id', __('Category id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('slug', __('Slug'));
-        $grid->column('status', __('Status'));
-        $grid->column('is_featured', __('Is featured'));
-        $grid->column('is_trending', __('Is trending'));
-        $grid->column('is_new', __('Is new'));
-        $grid->column('is_best_selling', __('Is best selling'));
-        $grid->column('is_top_rated', __('Is top rated'));
-        $grid->column('is_active', __('Is active'));
-        $grid->column('tags', __('Tags'));
-        $grid->column('seo_description', __('Seo description'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-
+        $grid->column('status', __('Status'))->display(function ($status) {
+            return $status ? '<div style="background-color: #0ab56c;color: white;text-align: center;border-radius: 11px;width: fit-content;padding-left: 10px;padding-right: 10px;">Active</div>' : '<div style="background-color: #9b0606;color: white;text-align: center;border-radius: 11px;width: fit-content;padding-left: 10px;padding-right: 10px;">Inactive</div>';
+        });
+        $grid->column('is_featured', __('Is featured'))->display(function ($is_featured) {
+            return $is_featured ? '<div style="background-color: #0ab56c;color: white;text-align: center;border-radius: 11px;width: fit-content;padding-left: 10px;padding-right: 10px;">Yes</div>' : '<div style="background-color: #9b0606;color: white;text-align: center;border-radius: 11px;width: fit-content;padding-left: 10px;padding-right: 10px;">No</div>';
+        });
+        $grid->column('is_top_rated', __('Is top rated'))->display(function ($is_top_rated) {
+            return $is_top_rated ? '<div style="background-color: #0ab56c;color: white;text-align: center;border-radius: 11px;width: fit-content;padding-left: 10px;padding-right: 10px;">Yes</div>' : '<div style="background-color: #9b0606;color: white;text-align: center;border-radius: 11px;width: fit-content;padding-left: 10px;padding-right: 10px;">No</div>';
+        });
+        $grid->column('is_active', __('Is active'))->display(function ($is_active) {
+            return $is_active ? '<div style="background-color: #0ab56c;color: white;text-align: center;border-radius: 11px;width: fit-content;padding-left: 10px;padding-right: 10px;">Yes</div>' : '<div style="background-color: #9b0606;color: white;text-align: center;border-radius: 11px;width: fit-content;padding-left: 10px;padding-right: 10px;">No</div>';
+        });
+        $grid->column('created_at', __('Created at'))->display(function ($created_at) {
+            return date('d-m-Y', strtotime($created_at));
+        });
         return $grid;
     }
 
@@ -62,7 +61,6 @@ class TempletesController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
-        $show->field('description', __('Description'));
         $show->field('price', __('Price'));
         $show->field('images', __('Images'));
         $show->field('category_id', __('Category id'));
@@ -95,13 +93,11 @@ class TempletesController extends AdminController
         $form->tab('Basic', function ($form) {
             $form->text('name', __('Name'))->required();;
             $form->textarea('description', __('Description'))->required();;
-            $form->image('feature_image', __('Feature image'))
-                ->required();;
+            $form->image('feature_image', __('Feature image'));
             $form->multipleImage('images', __('Images'))->removable()->sortable();
-            $form->multipleSelect('category_id', __('Category'))
+            $form->multipleSelect('category_ids', __('Category'))
                 ->options(\App\Models\TempleteCategories::all()
-                    ->pluck('category_name','id'))
-                ->required();;
+                    ->pluck('category_name','id'));
             $getAdmins = Administrator::get()->pluck('username','id')->toArray();
             $form->select('user_id','User')->options($getAdmins)->required();;
             $form->switch('is_featured', __('Is featured'));
@@ -112,8 +108,8 @@ class TempletesController extends AdminController
 
 
         })->tab('Selling', function ($form) {
-            $form->currency('price', __('Price'))->required();;
-            $form->currency('buying_price', __('Buying price'))->required();;
+            $form->currency('price', __('Price'))->default(0);
+            $form->currency('buying_price', __('Buying price'))->default(0);
             $form->switch('is_best_selling', __('Is best selling'));
 
         })->tab('Options', function ($form) {
@@ -124,14 +120,14 @@ class TempletesController extends AdminController
 
         })->tab('Search and SEO', function ($form) {
 
-            $form->tags('tags', __('Tags'))->required();;
-            $form->textarea('seo_description', __('Seo description'))->required();
+            $form->tags('tags', __('Tags'));
+            $form->textarea('seo_description', __('Seo description'));
         });
 
-
-
-
-
+        $form->saving(function (Form $form) {
+            $form->category_ids = $form->input('category_ids');
+            $form->slug = str_slug($form->input('name'));
+        });
         return $form;
     }
 }
