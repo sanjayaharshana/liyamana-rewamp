@@ -17,9 +17,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('price');
             $table->integer('buying_price')->default(0);
-            $table->text('feature_image')->nullable();
+            $table->string('feature_image')->default('default.png');
             $table->text('form_data')->nullable();
-            $table->text('images');
+            $table->json('images')->nullable();
+            $table->text('category_ids')->nullable();
             $table->text('user_id');
             $table->string('slug');
             $table->boolean('status')->default(1);
