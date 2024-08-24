@@ -26,3 +26,11 @@ Admin::js('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js');
 Admin::js('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js');
 Admin::js('https://formbuilder.online/assets/js/form-builder.min.js');
 Admin::js('https://formbuilder.online/assets/js/form-render.min.js');
+
+
+Admin::navbar(function (\OpenAdmin\Admin\Widgets\Navbar $navbar) {
+
+    $navbar->left('<a style="margin-top: 10px;" target="_blank" class="btn btn-primary" href="'.url('/').'">Visit Front</a>');
+
+
+});
