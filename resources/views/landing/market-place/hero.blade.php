@@ -3,14 +3,16 @@
 <div style="margin-bottom: 0px;/* border-radius: 12px; */padding: 30px;/* border-style: solid; *//* border-width: 1px; */border-color: lightgrey;color: white;background: #732027;">
 
     <div class="container">
+
         <div class="row">
             <div class="col-md-6">
-                <input type="text" class="form-control">
+                <input type="text" placeholder="Search Templates" class="form-control" style="background: #5f1b21;border-style: none;border-radius: 30px;color: #c39898;">
             </div>
+
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-8">
-                        <select class="form-select">
+                        <select class="form-select" style="border-style: none;background: #5f1b21;color: #c39898;border-radius: 20px;">
                             @foreach($templateCategories as $item)
                                 <option value="{{$item->slug}}">{{$item->category_name}}</option>
                             @endforeach
