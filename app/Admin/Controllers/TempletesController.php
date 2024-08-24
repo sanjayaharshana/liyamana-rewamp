@@ -95,9 +95,13 @@ class TempletesController extends AdminController
         $form->tab('Basic', function ($form) {
             $form->text('name', __('Name'))->required();;
             $form->textarea('description', __('Description'))->required();;
-            $form->image('feature_image', __('Feature image'))->required();;
+            $form->image('feature_image', __('Feature image'))
+                ->required();;
             $form->multipleImage('images', __('Images'))->removable()->sortable();
-            $form->number('category_id', __('Category id'))->required();;
+            $form->multipleSelect('category_id', __('Category'))
+                ->options(\App\Models\TempleteCategories::all()
+                    ->pluck('category_name','id'))
+                ->required();;
             $getAdmins = Administrator::get()->pluck('username','id')->toArray();
             $form->select('user_id','User')->options($getAdmins)->required();;
             $form->switch('is_featured', __('Is featured'));
@@ -122,18 +126,6 @@ class TempletesController extends AdminController
 
             $form->tags('tags', __('Tags'))->required();;
             $form->textarea('seo_description', __('Seo description'))->required();
-        })->tab('Custom Form',function ($form){
-            $form->html('<input type="hidden" name="form_data" id="formbuilder"> <div id="fb-editor"></div><script>jQuery(function($) {
-     var $fbEditor = document.getElementById("fb-editor");
-  var formBuilder = $($fbEditor).formBuilder();
-
-  document.addEventListener("fieldAdded", function(){
-      $("#formbuilder").val(formBuilder.formData);
-  });
-
-});
-</script>');
-
         });
 
 
