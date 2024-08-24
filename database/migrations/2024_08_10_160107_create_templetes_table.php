@@ -32,6 +32,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(1);
             $table->text('tags')->nullable();
             $table->text('seo_description')->nullable();
+            $table->string('background')->nullable();
             $table->timestamps();
         });
     }

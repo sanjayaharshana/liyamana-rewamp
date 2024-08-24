@@ -2,7 +2,13 @@
 
 @section('content')
 
-    <div style="margin-top: 100px"></div>
+    <div style="margin-top: 70px"></div>
+
+
+
+    @include('landing.single-product.navigration_tab')
+
+
 
     <div class="container">
        <div class="row">
