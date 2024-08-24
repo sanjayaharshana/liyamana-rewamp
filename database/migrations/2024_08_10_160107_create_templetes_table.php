@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
             $table->text('name');
             $table->text('description')->nullable();
-            $table->float('price');
-            $table->float('buying_price');
+            $table->integer('price');
+            $table->integer('buying_price')->default(0);
             $table->text('feature_image')->nullable();
             $table->text('form_data')->nullable();
             $table->text('images');
-            $table->integer('category_id');
             $table->text('user_id');
             $table->string('slug');
             $table->boolean('status')->default(1);
@@ -31,7 +30,7 @@ return new class extends Migration
             $table->boolean('is_top_rated')->default('0');
             $table->boolean('is_active')->default(1);
             $table->text('tags')->nullable();
-            $table->text('seo_description');
+            $table->text('seo_description')->nullable();
             $table->timestamps();
         });
     }
