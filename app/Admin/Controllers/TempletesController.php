@@ -2,11 +2,16 @@
 
 namespace App\Admin\Controllers;
 
+use Illuminate\Support\Facades\Request;
 use OpenAdmin\Admin\Admin;
 use OpenAdmin\Admin\Auth\Database\Administrator;
 use OpenAdmin\Admin\Controllers\AdminController;
+use OpenAdmin\Admin\Controllers\Dashboard;
 use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
+use OpenAdmin\Admin\Layout\Column;
+use OpenAdmin\Admin\Layout\Content;
+use OpenAdmin\Admin\Layout\Row;
 use OpenAdmin\Admin\Show;
 use \App\Models\Templetes;
 
@@ -45,6 +50,10 @@ class TempletesController extends AdminController
         });
         $grid->column('created_at', __('Created at'))->display(function ($created_at) {
             return date('d-m-Y', strtotime($created_at));
+        });
+
+        $grid->column('slug', __('Editor'))->display(function ($slug) {
+            return '<a style="background:#75777c;border-style:none" class="btn btn-primary" href="' .url('admin/template/builder/'.$slug).'">Form Editor</a>';
         });
         return $grid;
     }
@@ -129,5 +138,24 @@ class TempletesController extends AdminController
             $form->slug = str_slug($form->input('name'));
         });
         return $form;
+    }
+
+    public function templateFEditor($slug,Content $content)
+    {
+        return $content
+            ->css_file(Admin::asset("open-admin/css/pages/dashboard.css"))
+            ->title('Dashboard')
+            ->view('admin.template-builder',compact('slug'));
+
+    }
+
+    public function storeTemplateFEditor(\Illuminate\Http\Request $request)
+    {
+            Templetes::where('slug',$request->template_slug)
+            ->update([
+                'form_data' => $request->form_data
+            ]);
+
+            return  back();
     }
 }
