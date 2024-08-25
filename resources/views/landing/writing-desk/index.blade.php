@@ -12,79 +12,43 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="textInput">Text:</label>
-                    <input class="form-control" type="text" id="textInput" name="textInput" placeholder="Enter text">
-                </div>
+        <nav>
 
-                <div class="form-group">
-                    <label for="selectInput">Options:</label>
-                    <select class="form-select" id="selectInput" name="selectInput">
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                    </select>
-                </div>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                @foreach($template->layouts as $key => $layoutItem)
+                    @if($loop->first)
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
 
+                    @else
+                        <!-- Other items -->
+                        <button class="nav-link" id="nav-{{$key}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
+                    @endif
 
+                @endforeach
             </div>
-            <div class="col-md-8">
-                <div style="width: 70%;">
-                    <canvas id="canvas" width="800" height="600"></canvas>
-                </div>
-            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            @foreach($template->layouts as $key => $layoutItem)
+                @if($loop->first)
+                    <div class="tab-pane fade show active" id="nav-{{$key}}" role="tabpanel" aria-labelledby="nav-{{$key}}-tab" tabindex="0">
+                       @include('landing.writing-desk.desk-editor')
+                    </div>
+                @else
+                    <div class="tab-pane fade" id="nav-{{$key}}" role="tabpanel" aria-labelledby="nav-{{$key}}-tab" tabindex="0">
+                        @include('landing.writing-desk.desk-editor')
+
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
 
 
 
 
-    <script>
-        // Initialize Fabric.js Canvas
-        const canvas = new fabric.Canvas('canvas');
-
-        // Add a text element to the canvas
-        const textElement = new fabric.Text('Default Text', {
-            left: 100,
-            top: 100,
-            fontSize: 30,
-            fill: 'black',
-        });
-
-
-        const imageUrl = '{{url('storage/'.$template->feature_image)}}';
-
-        // Set the background image from the URL
-        fabric.Image.fromURL(imageUrl, function(img) {
-            // Scale the image to fit the canvas
-            img.scaleToWidth(canvas.width);
-            img.scaleToHeight(canvas.height);
-
-            // Set the background image of the canvas
-            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
-        });
 
 
 
-        canvas.add(textElement);
-
-        // Handle text input change
-        document.getElementById('textInput').addEventListener('input', function() {
-            textElement.set('text', this.value);
-            canvas.renderAll(); // Re-render the canvas to apply changes
-        });
-
-        // Handle select input change
-        document.getElementById('selectInput').addEventListener('change', function() {
-            if (this.value === 'option1') {
-                textElement.set('fill', 'blue'); // Change text color to blue for option1
-            } else if (this.value === 'option2') {
-                textElement.set('fill', 'red'); // Change text color to red for option2
-            }
-            canvas.renderAll(); // Re-render the canvas to apply changes
-        });
-    </script>
 
 
 

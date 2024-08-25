@@ -14,7 +14,7 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     @foreach($templateDetails->layouts as $key => $layoutItem)
-        @if($key == 'new_1')
+        @if($loop->first)
             <li class="nav-item-active" role="presentation">
                 <button class="nav-link" id="{{$key}}-tab" data-bs-toggle="tab" data-bs-target="#{{$key}}" type="button" role="tab" aria-controls="{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
             </li>
@@ -34,7 +34,7 @@
         <input type="hidden" name="template_slug" value="{{$templateDetails->slug}}">
 
     @foreach($templateDetails->layouts as $key => $layoutItem)
-            @if($key == 'new_1')
+            @if($loop->first)
                 <div class="tab-pane fade show active" id="{{$key}}" role="tabpanel" aria-labelledby="{{$key}}-tab">
 
                         <input type="hidden" name="{{$key}}_form_data" id="{{$key}}_form_data">
@@ -43,7 +43,7 @@
                         jQuery(function($) {
                             var {{$key}}fbEditor = document.getElementById("{{$key}}-editor");
                             var {{$key}}options = {
-                                disableFields: ['header', 'paragraph','button','file','hidden'],
+                                disableFields: ['header','select','number','date','radio-group','checkbox-group' , 'paragraph','button','file','hidden','autocomplete'],
                             };
                             var {{$key}}formBuilder = $({{$key}}fbEditor).formBuilder({{$key}}options);
                             document.addEventListener("fieldAdded", function(){
@@ -64,7 +64,7 @@
                         jQuery(function($) {
                             var {{$key}}fbEditor = document.getElementById("{{$key}}-editor");
                             var {{$key}}options = {
-                                disableFields: ['header', 'paragraph','button','file','hidden'],
+                                disableFields: ['header','select','number','date','radio-group','checkbox-group' , 'paragraph','button','file','hidden','autocomplete'],
                             };
                             var {{$key}}formBuilder = $({{$key}}fbEditor).formBuilder({{$key}}options);
                             document.addEventListener("fieldAdded", function(){

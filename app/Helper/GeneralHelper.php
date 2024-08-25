@@ -38,3 +38,17 @@ if (!function_exists('str_slug')) {
         return str_replace(' ', '-', strtolower($string));
     }
 }
+
+if(!function_exists('removeUnderscores')) {
+    /**
+     * Remove all underscores from a string.
+     *
+     * @param  string  $string
+     * @return string
+     */
+    function removeUnderscores($string) {
+        // Replace all underscores with an empty string
+        $strime = str_replace('-', '', $string);
+        return $strime;
+    }
+}
