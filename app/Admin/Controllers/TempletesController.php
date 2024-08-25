@@ -117,6 +117,7 @@ class TempletesController extends AdminController
 
 
         })->tab('Selling', function ($form) {
+
             $form->currency('price', __('Price'))->default(0);
             $form->currency('buying_price', __('Buying price'))->default(0);
             $form->switch('is_best_selling', __('Is best selling'));
@@ -131,7 +132,17 @@ class TempletesController extends AdminController
 
             $form->tags('tags', __('Tags'));
             $form->textarea('seo_description', __('Seo description'));
+
+        })->tab('Layouts',function ($form) {
+            $form->table('layouts', 'Layouts', function ($table) {
+                $table->text('name');
+                $table->text('description');
+                $table->image('image');
+            });
+
         });
+
+
 
         $form->saving(function (Form $form) {
             $form->category_ids = $form->input('category_ids');
@@ -142,18 +153,35 @@ class TempletesController extends AdminController
 
     public function templateFEditor($slug,Content $content)
     {
+        $templateDetails = Templetes::where('slug',$slug)->first();
+
         return $content
             ->css_file(Admin::asset("open-admin/css/pages/dashboard.css"))
             ->title('Dashboard')
-            ->view('admin.template-builder',compact('slug'));
+            ->view('admin.template-builder',compact(['slug','templateDetails']));
 
     }
 
     public function storeTemplateFEditor(\Illuminate\Http\Request $request)
     {
+        $templateSlug = Templetes::where('slug',$request->template_slug)->first();
+
+        $layoutArray = $templateSlug->layouts;
+        foreach ($layoutArray as $key => $layout) {
+
+            $layoutArray[$key]['form_data'] = $request->input($key.'_form_data');
+
+            if($layout['name'] == $request->layout_name){
+                $templateSlug->layouts[$key]['description'] = $request->layout_description;
+                $templateSlug->layouts[$key]['image'] = $request->layout_image;
+            }
+        }
+
+
+
             Templetes::where('slug',$request->template_slug)
             ->update([
-                'form_data' => $request->form_data
+                'layouts' => $layoutArray
             ]);
 
             return  back();
