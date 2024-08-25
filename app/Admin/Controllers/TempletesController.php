@@ -99,6 +99,7 @@ class TempletesController extends AdminController
     {
         $form = new Form(new Templetes());
 
+
         $form->tab('Basic', function ($form) {
             $form->text('name', __('Name'))->required();;
             $form->textarea('description', __('Description'))->required();;
@@ -137,10 +138,18 @@ class TempletesController extends AdminController
             $form->table('layouts', 'Layouts', function ($table) {
                 $table->text('name');
                 $table->text('description');
+                $table->text('form_data');
                 $table->image('image');
             });
-
         });
+
+        $form->saving(function (Form $form) {
+            $getDetails = Templetes::where('slug',$form->input('slug'))->first();
+
+            $form->category_ids = $form->input('category_ids');
+            $form->slug = str_slug($form->input('name'));
+        });
+
 
 
 
@@ -166,10 +175,11 @@ class TempletesController extends AdminController
     {
         $templateSlug = Templetes::where('slug',$request->template_slug)->first();
 
+
         $layoutArray = $templateSlug->layouts;
         foreach ($layoutArray as $key => $layout) {
 
-            $layoutArray[$key]['form_data'] = json_decode($request->input($key.'_form_data'),true);
+            $layoutArray[$key]['form_data'] = $request->input($key.'_form_data');
 
             if($layout['name'] == $request->layout_name){
                 $templateSlug->layouts[$key]['description'] = $request->layout_description;

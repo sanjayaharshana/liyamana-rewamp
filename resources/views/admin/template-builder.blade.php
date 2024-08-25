@@ -27,14 +27,16 @@
     @endforeach
 </ul>
 
-<form action="{{url('admin/template/builder')}}"method="post">
+<form action="{{url('admin/template/builder')}}" method="post">
     <div class="tab-content" id="myTabContent">
+
+        {{csrf_field()}}
         <input type="hidden" name="template_slug" value="{{$templateDetails->slug}}">
 
     @foreach($templateDetails->layouts as $key => $layoutItem)
             @if($key == 'new_1')
                 <div class="tab-pane fade show active" id="{{$key}}" role="tabpanel" aria-labelledby="{{$key}}-tab">
-                        {{csrf_field()}}
+
                         <input type="hidden" name="{{$key}}_form_data" id="{{$key}}_form_data">
                         <div id="{{$key}}-editor"></div>
                     <script>
@@ -48,7 +50,7 @@
                                 $("#{{$key}}_form_data").val({{$key}}formBuilder.formData);
                             });
                             setTimeout(() => {
-                                {{$key}}formBuilder.actions.setData('{!! json_encode($layoutItem['form_data']) !!}');
+                                {{$key}}formBuilder.actions.setData('{!! $layoutItem['form_data'] !!}');
                                 $("#{{$key}}_form_data").val({{$key}}formBuilder.formData);
                             },1000);
                         });
@@ -69,7 +71,7 @@
                                 $("#{{$key}}_form_data").val({{$key}}formBuilder.formData);
                             });
                             setTimeout(() => {
-                                {{$key}}formBuilder.actions.setData('{!!  json_encode($layoutItem['form_data'])  !!}');
+                                {{$key}}formBuilder.actions.setData('{!!  $layoutItem['form_data']  !!}');
                                 $("#{{$key}}_form_data").val({{$key}}formBuilder.formData);
                             },2000);
                         });
