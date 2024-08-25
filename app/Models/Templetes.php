@@ -14,7 +14,8 @@ class Templetes extends Model
     protected $casts = [
       'images' => 'array',
       'tags' => 'array',
-      'category_ids' => 'array'
+      'category_ids' => 'array',
+      'layouts' => 'array'
     ];
 
 

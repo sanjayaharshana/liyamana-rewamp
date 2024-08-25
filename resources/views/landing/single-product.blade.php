@@ -6,7 +6,8 @@
 
 
 
-    @include('landing.single-product.navigration_tab')
+    @include('landing.single-product.navigration_tab',[
+    'activeTab'=>'template-overview'])
 
 
 
@@ -24,10 +25,7 @@
                    LKR : {{number_format($template->price,2)}}
                </p>
 
-               <div
-
-
-               <button class="btn btn-primary" style="background: maroon;border-style: none"><i class="bi bi-envelope" style="margin-right: 10px"></i> Quick Send</button>
+               <a href="{{route('landing.writing-desk',$template->slug)}}" class="btn btn-primary" style="background: maroon;border-style: none"><i class="bi bi-envelope" style="margin-right: 10px"></i> Quick Send</a>
                <button class="btn btn-primary" style="background: maroon;border-style: none"><i class="bi bi-pen" style="margin-right: 10px"></i> Edit This Template</button>
            </div>
        </div>

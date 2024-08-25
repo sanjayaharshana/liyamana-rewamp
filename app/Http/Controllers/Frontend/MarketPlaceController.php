@@ -58,4 +58,12 @@ class MarketPlaceController extends Controller
         ];
         return response()->json($outArray);
     }
+
+    public function writingDesk($slug)
+    {
+        $templates = Templetes::where('slug',$slug)->first();
+        return view('landing.writing-desk.index',[
+            'template' => $templates,
+        ]);
+    }
 }

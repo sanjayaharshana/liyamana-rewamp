@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('tags')->nullable();
             $table->text('seo_description')->nullable();
             $table->string('background')->nullable();
+            $table->json('layouts');
             $table->timestamps();
         });
     }
