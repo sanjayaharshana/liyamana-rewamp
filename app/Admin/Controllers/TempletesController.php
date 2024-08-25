@@ -169,14 +169,13 @@ class TempletesController extends AdminController
         $layoutArray = $templateSlug->layouts;
         foreach ($layoutArray as $key => $layout) {
 
-            $layoutArray[$key]['form_data'] = $request->input($key.'_form_data');
+            $layoutArray[$key]['form_data'] = json_decode($request->input($key.'_form_data'),true);
 
             if($layout['name'] == $request->layout_name){
                 $templateSlug->layouts[$key]['description'] = $request->layout_description;
                 $templateSlug->layouts[$key]['image'] = $request->layout_image;
             }
         }
-
 
 
             Templetes::where('slug',$request->template_slug)
