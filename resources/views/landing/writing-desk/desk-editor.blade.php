@@ -38,6 +38,7 @@
 
     // Add a text element to the canvas for each fieldItem
     @foreach(json_decode($layoutItem['form_data']) as $fieldItem)
+
     const {{$key}}{{ removeUnderscores($fieldItem->name) }} = new fabric.Text('Default Text', {
         left: 100,
         top: 100,
