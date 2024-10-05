@@ -5,6 +5,7 @@ use App\Admin\Controllers\TempletesController;
 use App\Admin\Controllers\TempleteCategoriesController;
 use OpenAdmin\Admin\Facades\Admin;
 use Illuminate\Support\Facades\Route;
+use App\Admin\Controllers\BlogPostsController;
 
 Admin::routes();
 
@@ -27,4 +28,6 @@ Route::group([
     $router->resource('settings', \App\Admin\Controllers\SettingsController::class);
     $router->get('settings-plat', [\App\Admin\Controllers\SettingsController::class,'settingPanel']);
     $router->resource('inquiries', \App\Admin\Controllers\InquiriesController::class);
+
+    $router->resource('blog-posts', BlogPostsController::class);
 });
