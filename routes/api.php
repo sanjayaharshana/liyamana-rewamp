@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('save-position_item',[\App\Admin\Controllers\TempletesController::class,'savePosition'])->name('save_positions_admin');

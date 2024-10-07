@@ -17,6 +17,8 @@
 
 
             @endforeach
+
+
         </div>
 
         <div class="col-md-8">
@@ -39,9 +41,13 @@
     // Add a text element to the canvas for each fieldItem
     @foreach(json_decode($layoutItem['form_data']) as $fieldItem)
 
-    const {{$key}}{{ removeUnderscores($fieldItem->name) }} = new fabric.Text('Default Text', {
-        left: 100,
-        top: 100,
+    const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Text(`{!! getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? 'Default Text' !!}`, {
+        left: {{getTemplatePositions($template->id,$key,$fieldItem->name)['left'] ?? 100}},
+        top: {{getTemplatePositions($template->id,$key,$fieldItem->name)['top'] ?? 100}},
+        width: 400,
+        height: 1000,
+        scaleX: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleX'] ?? 100}},
+        scaleY: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleY'] ?? 100}},
         fontSize: 30,
         fill: 'black',
     });
@@ -73,5 +79,6 @@
         // Set the background image of the canvas
         {{$key}}canvas.setBackgroundImage(img, {{$key}}canvas.renderAll.bind({{$key}}canvas));
     });
+
 
 </script>

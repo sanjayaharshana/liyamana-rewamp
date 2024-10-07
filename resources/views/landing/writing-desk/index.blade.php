@@ -4,6 +4,8 @@
 
     <div style="margin-top: 70px"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
 
 
 
@@ -27,6 +29,8 @@
                 @endforeach
             </div>
         </nav>
+
+
         <div class="tab-content" id="nav-tabContent">
             @foreach($template->layouts as $key => $layoutItem)
                 @if($loop->first)
@@ -42,14 +46,4 @@
             @endforeach
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
 @endsection

@@ -21,6 +21,7 @@ Route::group([
     // Template Management
     $router->resource('templates', TempletesController::class);
     $router->get('template/builder/{slug}',[TempletesController::class,'templateFEditor']);
+    $router->get('template/designer/{slug}',[TempletesController::class,'templateDesigner']);
     $router->post('template/builder',[TempletesController::class,'storeTemplateFEditor']);
 
 

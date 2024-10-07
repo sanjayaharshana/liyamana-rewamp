@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('template_layout_positions', function (Blueprint $table) {
             $table->id();
+            $table->text('layout_id');
+            $table->text('template_id');
+            $table->text('field_name');
+            $table->json('positions')->nullable();
+            $table->json('configuration')->nullable();
             $table->timestamps();
         });
     }

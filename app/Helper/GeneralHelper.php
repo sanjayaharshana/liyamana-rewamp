@@ -52,3 +52,41 @@ if(!function_exists('removeUnderscores')) {
         return $strime;
     }
 }
+
+if(!function_exists('getTemplatePositions')) {
+
+    function getTemplatePositions($templateId, $layout, $name) {
+       $getPositions = \App\Models\TemplateLayoutPositions::where('template_id', $templateId)
+           ->where('layout_id', $layout)
+           ->where('field_name', $name)
+           ->first();
+
+       if($getPositions)
+       {
+           $outDetails = [
+               'left' => $getPositions->positions['left'],
+               'top' => $getPositions->positions['top'],
+               'scaleX' =>  $getPositions->positions['scaleX'] ?? 1,
+               'scaleY' =>  $getPositions->positions['scaleY'] ?? 1,
+               'text' => $getPositions->positions['text'] ?? 1,
+               'angle' => $getPositions->positions['angle'] ?? 0,
+               'stroke' => $getPositions->positions['stroke'] ?? null
+           ];
+
+       }else{
+           $outDetails = [
+             'left' => 100,
+             'top' => 100,
+             'scaleX' => 1,
+             'scaleY' => 1,
+             'text' => 'Default Text',
+             'angle' => 0,
+             'stroke' => null
+           ];
+       }
+
+
+       return $outDetails;
+    }
+}
+

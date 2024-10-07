@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\TemplateLayoutPositions;
 use Illuminate\Support\Facades\Request;
 use OpenAdmin\Admin\Admin;
 use OpenAdmin\Admin\Auth\Database\Administrator;
@@ -53,7 +54,7 @@ class TempletesController extends AdminController
         });
 
         $grid->column('slug', __('Editor'))->display(function ($slug) {
-            return '<a style="background:#75777c;border-style:none" class="btn btn-primary" href="' .url('admin/template/builder/'.$slug).'">Form Editor</a>';
+            return '<a style="background:#75777c;border-style:none" class="btn btn-primary" href="' .url('admin/template/builder/'.$slug).'">Form Editor</a><a style="margin-left: 10px; background:#75777c;border-style:none" class="btn btn-primary"  href="' .url('admin/template/designer/'.$slug).'">Designer</a>';
         });
         return $grid;
     }
@@ -194,5 +195,58 @@ class TempletesController extends AdminController
             ]);
 
             return  back();
+    }
+
+
+    public function templateDesigner($slug,Content $content)
+    {
+        $template = Templetes::where('slug',$slug)->first();
+        $templatesLayout = $template->layouts;
+        return $content
+            ->css_file(Admin::asset("open-admin/css/pages/dashboard.css"))
+            ->title('Dashboard')
+            ->view('admin.template-designer',compact(['slug','template']));
+    }
+
+    public function savePosition(\Illuminate\Http\Request $request)
+    {
+        $templateDetails = Templetes::where('id', $request->templateId)->first();
+        $getLayouts = $templateDetails->layouts[$request->canvasLayout];
+
+
+        $formData = json_decode($getLayouts['form_data'],true);
+
+        $arrayFigment = [];
+        foreach ($formData as $key => $item)
+        {
+            $itemCanvas = $request->canvasData[$key];
+
+
+            $positions = [
+                'left' => $itemCanvas['left'],
+                'top' => $itemCanvas['top'],
+                'scaleX' => $itemCanvas['scaleX'],
+                'scaleY' => $itemCanvas['scaleY'],
+                'text' => $itemCanvas['text'],
+                'angle' => $itemCanvas['angle'],
+                'stroke' => $itemCanvas['stroke']
+            ];
+
+            $templatePositionDetails = TemplateLayoutPositions::updateOrCreate(
+              [
+                  'layout_id' => $request->canvasLayout,
+                  'template_id' => $request->templateId,
+                  'field_name' => $item['name'],
+
+              ],[
+                    'layout_id' => $request->canvasLayout,
+                    'template_id' => $request->templateId,
+                    'field_name' => $item['name'],
+                    'positions' => $positions,
+                ]
+            );
+        }
+
+        return 'hello';
     }
 }
