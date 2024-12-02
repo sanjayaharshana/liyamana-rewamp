@@ -14,9 +14,10 @@
                         <input class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
                     </div>
                 @endif
-
-
             @endforeach
+            <br>
+
+
 
 
         </div>
@@ -59,7 +60,17 @@
     document.getElementById('{{$key}}{{ removeUnderscores($fieldItem->name) }}').addEventListener('input', function() {
         {{$key}}{{ removeUnderscores($fieldItem->name) }}.set('text', this.value);
         {{$key}}canvas.renderAll(); // Re-render the canvas to apply changes
+
     });
+
+
+
+
+
+
+
+
+
     @endforeach
 
     // Set the background image from the URL
@@ -79,6 +90,15 @@
         // Set the background image of the canvas
         {{$key}}canvas.setBackgroundImage(img, {{$key}}canvas.renderAll.bind({{$key}}canvas));
     });
+
+
+    saveDataButton.addEventListener("click", function() {
+        const {{$key}}canvasJSON = JSON.stringify({{$key}}canvas.toJSON());
+        const {{$key}}_page_data = document.getElementById('{{$key}}_page_data');
+        {{$key}}_page_data.value = {{$key}}canvasJSON;
+    });
+
+
 
 
 </script>

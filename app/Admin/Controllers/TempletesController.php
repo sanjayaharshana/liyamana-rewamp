@@ -100,7 +100,6 @@ class TempletesController extends AdminController
     {
         $form = new Form(new Templetes());
 
-
         $form->tab('Basic', function ($form) {
             $form->text('name', __('Name'))->required();;
             $form->textarea('description', __('Description'))->required();;
@@ -115,8 +114,6 @@ class TempletesController extends AdminController
             $form->text('slug', __('Slug'));
             $form->switch('status', __('Status'))->default(1);
             $form->switch('is_active', __('Is active'))->default(1);
-
-
 
         })->tab('Selling', function ($form) {
 
@@ -151,9 +148,6 @@ class TempletesController extends AdminController
             $form->slug = str_slug($form->input('name'));
         });
 
-
-
-
         $form->saving(function (Form $form) {
             $form->category_ids = $form->input('category_ids');
             $form->slug = str_slug($form->input('name'));
@@ -164,7 +158,6 @@ class TempletesController extends AdminController
     public function templateFEditor($slug,Content $content)
     {
         $templateDetails = Templetes::where('slug',$slug)->first();
-
         return $content
             ->css_file(Admin::asset("open-admin/css/pages/dashboard.css"))
             ->title('Dashboard')
@@ -175,8 +168,6 @@ class TempletesController extends AdminController
     public function storeTemplateFEditor(\Illuminate\Http\Request $request)
     {
         $templateSlug = Templetes::where('slug',$request->template_slug)->first();
-
-
         $layoutArray = $templateSlug->layouts;
         foreach ($layoutArray as $key => $layout) {
 

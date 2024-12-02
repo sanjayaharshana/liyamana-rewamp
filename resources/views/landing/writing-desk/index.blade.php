@@ -14,9 +14,13 @@
 
 
     <div class="container">
+        <form method="post" action="{{route('landing.writing-desk.store',$template->slug)}}">
+
+            {{csrf_field()}}
         <nav>
 
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
                 @foreach($template->layouts as $key => $layoutItem)
                     @if($loop->first)
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
@@ -26,10 +30,24 @@
                         <button class="nav-link" id="nav-{{$key}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
                     @endif
 
+
+                    <input type="hidden" name="{{$key}}_page" id="{{$key}}_page_data">
+
                 @endforeach
+
+
+                    <button id="save-and-next-button" class="btn btn-default" style="background: #a71d1d;color: white;border-color: white;border-width: 10px;border-radius: 15px;"> Save and Next
+                        <i class="bi bi-arrow-right" style="margin-right: 10px"></i>
+                    </button>
+
             </div>
         </nav>
 
+        </form>
+
+        <script>
+            const saveDataButton = document.getElementById('save-and-next-button');
+        </script>
 
         <div class="tab-content" id="nav-tabContent">
             @foreach($template->layouts as $key => $layoutItem)
@@ -44,6 +62,8 @@
                     </div>
                 @endif
             @endforeach
+
+
         </div>
     </div>
 @endsection

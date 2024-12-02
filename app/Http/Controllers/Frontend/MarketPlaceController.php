@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderedDesign;
 use App\Models\Templetes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -65,5 +66,21 @@ class MarketPlaceController extends Controller
         return view('landing.writing-desk.index',[
             'template' => $templates,
         ]);
+    }
+
+    public function writingDeskStore($slug,Request $request)
+    {
+        $pageDetails = $request->all();
+        unset($pageDetails['_token']);
+
+        $arrayOutput = [];
+        foreach ($pageDetails as $key => $item)
+        {
+            $arrayOutput[$key] = json_decode($item);
+        }
+        $orderDesign = new OrderedDesign();
+        $orderDesign->design = json_encode($arrayOutput);
+        $orderDesign->user_id = 1;
+        $orderDesign->save();
     }
 }
