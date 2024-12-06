@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('price')->nullable();
             $table->json('design')->nullable();
             $table->string('status')->default('pending');
-            $table->text('user_id');
+            $table->text('user_id')->nullable();
             $table->longText('order_details')->nullable();
             $table->timestamps();
         });

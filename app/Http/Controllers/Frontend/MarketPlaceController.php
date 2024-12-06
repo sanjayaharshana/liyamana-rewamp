@@ -68,6 +68,13 @@ class MarketPlaceController extends Controller
         ]);
     }
 
+
+    public function createOrderAsGuest($slug, $request)
+    {
+
+    }
+
+
     public function writingDeskStore($slug,Request $request)
     {
         $pageDetails = $request->all();
