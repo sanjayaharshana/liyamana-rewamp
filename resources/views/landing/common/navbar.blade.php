@@ -37,7 +37,12 @@
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <a class="btn-getstarted" href="#about">Get Started</a>
+        @auth()
+            <a class="btn-getstarted" href="#about">{{auth()->user()->name}}</a>
+        @else
+            <a class="btn-getstarted" href="#about">Get Started</a>
+        @endauth
+
 
     </div>
 </header>

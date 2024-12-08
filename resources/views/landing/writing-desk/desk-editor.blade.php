@@ -1,31 +1,50 @@
+<style>
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+        background: #b4261c;
+        color: white;
+        border-style: none;
+    }
+    .form-control::placeholder {
+        color: #cccccc;
+        opacity: 1; /* Firefox */
+    }
+
+    .form-control::-ms-input-placeholder { /* Edge 12 -18 */
+        color: #cbcbcb;
+    }
+</style>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            @foreach(json_decode($layoutItem['form_data']) as $fieldItem)
-                @if($fieldItem->type == 'textarea')
-                    <div class="form-group">
-                        <label for="textInput">{{$fieldItem->label}}:</label>
-                        <textarea class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
+
+            <div class="col-md-4" style="background: #b5261c;color: white;padding-top: 20px;">
+                @foreach(json_decode($layoutItem['form_data']) as $fieldItem)
+                    @if($fieldItem->type == 'textarea')
+                        <div class="form-group">
+                            <label for="textInput">{{$fieldItem->label}}:</label>
+                            <textarea style="
+    background-color: #8f0606;
+    border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
                         </textarea>
-                    </div>
-                @else
-                    <div class="form-group">
-                        <label for="textInput">{{$fieldItem->label}}:</label>
-                        <input class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
-                    </div>
-                @endif
-            @endforeach
-            <br>
+                        </div>
+                    @else
+                        <div class="form-group">
+                            <label for="textInput">{{$fieldItem->label}}:</label>
+                            <input style="background-color: #8f0606;border-style: none;color: white;" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
+                        </div>
+                    @endif
+                @endforeach
+                <br>
+            </div>
 
-
-
-
-        </div>
 
         <div class="col-md-8">
-            <div style="width: 70%;">
-                <canvas id="{{$key}}canvas" width="800" height="600"></canvas>
+            <div style="background: url('{{url('grid.jpg')}}');padding-top: 20px;padding-bottom: 20px;background-size:281px;">
+                <div style="width: 70%;">
+                    <canvas id="{{$key}}canvas" width="800" height="600"></canvas>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

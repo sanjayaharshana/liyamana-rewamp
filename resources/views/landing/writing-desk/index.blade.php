@@ -35,8 +35,9 @@
 
                 @endforeach
 
-
-                    <button id="save-and-next-button" class="btn btn-default" style="background: #a71d1d;color: white;border-color: white;border-width: 10px;border-radius: 15px;"> Save and Next
+                    <button id="save-and-next-button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Explorer Poems</button>
+                    <button id="save-and-next-button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Letter Attachment</button>
+                    <button id="save-and-next-button" class="btn btn-primary btn-sm float-right" style="background: #a71d1d;color: white;border-color: white;margin-bottom: 7px"> Save and Next
                         <i class="bi bi-arrow-right" style="margin-right: 10px"></i>
                     </button>
 
