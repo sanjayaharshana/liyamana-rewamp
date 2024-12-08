@@ -14,7 +14,8 @@
 
 
     <div class="container">
-        <form method="post" action="{{route('landing.writing-desk.store',$template->slug)}}">
+        <form method="post" action="{{route('landing.writing-desk.store',[
+        $template->slug,$order_details->id])}}">
 
             {{csrf_field()}}
         <nav>

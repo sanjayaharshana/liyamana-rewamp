@@ -117,7 +117,7 @@ class MarketPlaceController extends Controller
     }
 
 
-    public function writingDeskStore($slug,Request $request)
+    public function writingDeskStore($slug,Request $request, $order_id)
     {
         $pageDetails = $request->all();
         unset($pageDetails['_token']);
@@ -131,5 +131,16 @@ class MarketPlaceController extends Controller
         $orderDesign->design = json_encode($arrayOutput);
         $orderDesign->user_id = 1;
         $orderDesign->save();
+
+        return redirect()->route('landing.checkout',[
+            'slug' => $slug,
+            'order_id' => $order_id
+        ]);
+    }
+
+    public function checkoutPage($slug,$order_id)
+    {
+
+        return view('landing.checkout.index');
     }
 }
