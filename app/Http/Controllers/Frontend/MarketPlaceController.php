@@ -80,10 +80,16 @@ class MarketPlaceController extends Controller
         $template = Templetes::where('slug',$slug)->first();
 
         $orderedDesign = new OrderedDesign();
-        $orderedDesign->address = json_encode([
+        $orderedDesign->address = [
             'from_address' => $request->from_adress,
             'to_address' => $request->to_address
-        ]);
+        ];
+        $orderedDesign->order_details = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone_number' => $request->phone,
+        ];
         $orderedDesign->price = number_format($template->price,2);
         $orderedDesign->status = 'pending';
 
@@ -119,17 +125,21 @@ class MarketPlaceController extends Controller
 
     public function writingDeskStore($slug,Request $request, $order_id)
     {
+        dd($request);
         $pageDetails = $request->all();
         unset($pageDetails['_token']);
 
         $arrayOutput = [];
         foreach ($pageDetails as $key => $item)
         {
-            $arrayOutput[$key] = json_decode($item);
+            $arrayOutput[$key] = $item;
         }
-        $orderDesign = new OrderedDesign();
-        $orderDesign->design = json_encode($arrayOutput);
-        $orderDesign->user_id = 1;
+
+        $orderDesign =  OrderedDesign::where('id', $order_id)->first();
+
+        $orderDesign->design = $arrayOutput;
+        $orderDesign->user_id = auth()->user()->id ?? null;
+
         $orderDesign->save();
 
         return redirect()->route('landing.checkout',[
@@ -140,7 +150,12 @@ class MarketPlaceController extends Controller
 
     public function checkoutPage($slug,$order_id)
     {
+        $orderDetails = OrderedDesign::where('id',$order_id)->first();
+        $templateDetails = Templetes::where('slug', $slug)->first();
 
-        return view('landing.checkout.index');
+        return view('landing.checkout.index',[
+            'order_details' => $orderDetails,
+            'template_details' => $templateDetails
+        ]);
     }
 }

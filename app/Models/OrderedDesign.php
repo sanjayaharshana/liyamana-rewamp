@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class OrderedDesign extends Model
 {
     use HasFactory;
+    protected $casts =[
+        'order_details' => 'json',
+        'address' => 'json',
+        'design' => 'json'
+    ];
+
 }
