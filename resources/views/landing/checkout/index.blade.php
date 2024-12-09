@@ -50,7 +50,12 @@
                                     <input type="hidden" name="city" value="Colombo">
                                     <input type="hidden" name="country" value="Sri Lanka">
                                     <input type="hidden" name="hash" value="098F6BCD4621D373CADE4E832627B4F6">    <!-- Replace with generated hash -->
-                                    <button class="btn btn-primary" style="background: #8a262f;border-style: none" type="submit">Checkout your Mail</button>
+
+                                    <div style="background: #e9e9e9;padding-top: 10px;padding-bottom: 10px;padding-left: 10px;padding-right: 10px;border-radius: 8px;margin-top: 20px;">
+                                        <button class="btn btn-primary" style="background: #8a262f;border-style: none" type="submit">Checkout your Mail</button>
+                                        <a target="_blank" style="background: #8a262f;border-style: none" href="{{route('preview_design',['slug' => $template_details->slug,'order_id' => $order_details->id])}}" class="btn btn-primary">Preview design</a>
+                                    </div>
+
                                 </div>
 
                             </div>

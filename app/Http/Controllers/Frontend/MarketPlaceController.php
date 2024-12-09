@@ -125,14 +125,13 @@ class MarketPlaceController extends Controller
 
     public function writingDeskStore($slug,Request $request, $order_id)
     {
-        dd($request);
         $pageDetails = $request->all();
         unset($pageDetails['_token']);
 
         $arrayOutput = [];
         foreach ($pageDetails as $key => $item)
         {
-            $arrayOutput[$key] = $item;
+            $arrayOutput[$key] = json_decode($item);
         }
 
         $orderDesign =  OrderedDesign::where('id', $order_id)->first();
@@ -156,6 +155,24 @@ class MarketPlaceController extends Controller
         return view('landing.checkout.index',[
             'order_details' => $orderDetails,
             'template_details' => $templateDetails
+        ]);
+    }
+
+    public function previewDesign($slug, $order_id)
+    {
+        $orderDetails = OrderedDesign::where('id',$order_id)->first();
+
+        $templateDetails = Templetes::where('slug', $slug)->first();
+
+        $objectsData =  $orderDetails->design['new_4_page'];
+
+
+
+
+        return view('landing.editor.preview_design',[
+            'order_details' => $orderDetails,
+            'template_details' => $templateDetails,
+            'object_data' => $objectsData
         ]);
     }
 }

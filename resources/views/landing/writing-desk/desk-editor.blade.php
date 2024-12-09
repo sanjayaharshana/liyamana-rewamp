@@ -22,9 +22,7 @@
                     @if($fieldItem->type == 'textarea')
                         <div class="form-group">
                             <label for="textInput">{{$fieldItem->label}}:</label>
-                            <textarea style="
-    background-color: #8f0606;
-    border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
+                            <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
                         </textarea>
                         </div>
                     @else
@@ -77,18 +75,11 @@
 
     // Handle text input change
     document.getElementById('{{$key}}{{ removeUnderscores($fieldItem->name) }}').addEventListener('input', function() {
+
         {{$key}}{{ removeUnderscores($fieldItem->name) }}.set('text', this.value);
         {{$key}}canvas.renderAll(); // Re-render the canvas to apply changes
 
     });
-
-
-
-
-
-
-
-
 
     @endforeach
 
