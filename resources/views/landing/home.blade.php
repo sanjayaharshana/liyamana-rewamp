@@ -93,18 +93,17 @@
 
                 <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                    At Liyamana, we believe in the power of words to bridge distances, foster connections, and create lasting memories. In an age dominated by instant communication, we’re here to bring back the art of letter writing — a timeless tradition that speaks directly to the heart.
                     </p>
                     <ul>
-                        <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                        <li><i class="bi bi-check2-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                        <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo</span></li>
+                        <li><i class="bi bi-check2-circle"></i> <span><b>Connection:</b> Building bridges through authentic communication.</span></li>
+                        <li><i class="bi bi-check2-circle"></i> <span><b>Creativity:</b> Helping you personalize each letter to make it truly special.</span></li>
+                        <li><i class="bi bi-check2-circle"></i> <span><b>Commitment:</b> Ensuring every letter is handled with precision and respect.</span></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+                    <p>Our mission is to make it simple and delightful for anyone to share their thoughts, emotions, and stories in the form of heartfelt letters. Whether it’s a love note, a message of gratitude, or a story you want to preserve, Liyamana ensures your words reach their destination with care and creativity.</p>
                     <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
                 </div>
 
@@ -122,7 +121,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Services</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+            <p>Connecting Through Words, One Letter at a Time</p>
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -131,33 +130,33 @@
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-item position-relative">
-                        <div class="icon"><i class="bi bi-activity icon"></i></div>
-                        <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                        <div class="icon"><i class="bi bi-heart icon"></i></div>
+                        <h4><a href="" class="stretched-link">Letters to Friends and Loved Ones</a></h4>
+                        <p>Express your emotions, celebrate milestones, or simply let someone know you’re thinking of them. Our platform makes it easy to craft heartfelt messages for the people who matter most.</p>
                     </div>
                 </div><!-- End Service Item -->
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-item position-relative">
-                        <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
-                        <h4><a href="" class="stretched-link">Sed ut perspici</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                        <div class="icon"><i class="bi bi-briefcase icon"></i></div>
+                        <h4><a href="" class="stretched-link">Commercial Letter Platform</a></h4>
+                        <p>Streamline professional communication with our tailored solutions for businesses. From client outreach to internal announcements, Liyamana ensures your letters make the right impression.</p>
                     </div>
                 </div><!-- End Service Item -->
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-item position-relative">
-                        <div class="icon"><i class="bi bi-calendar4-week icon"></i></div>
-                        <h4><a href="" class="stretched-link">Magni Dolores</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                        <div class="icon"><i class="bi bi-people icon"></i></div>
+                        <h4><a href="" class="stretched-link">Pen Pal Connections</a></h4>
+                        <p>Rediscover the joy of building friendships through letters. Connect with like-minded individuals across the globe and share your stories, cultures, and experiences.</p>
                     </div>
                 </div><!-- End Service Item -->
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
                     <div class="service-item position-relative">
-                        <div class="icon"><i class="bi bi-broadcast icon"></i></div>
-                        <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                        <div class="icon"><i class="bi bi-gift icon"></i></div>
+                        <h4><a href="" class="stretched-link">Letters for Special Occasions</a></h4>
+                        <p>Mark birthdays, anniversaries, or any special moment with a personalized letter. Create keepsakes that recipients will treasure for years to come.</p>
                     </div>
                 </div><!-- End Service Item -->
 
@@ -176,11 +175,11 @@
 
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
                 <div class="col-xl-9 text-center text-xl-start">
-                    <h3>Call To Action</h3>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <h3>Make Someone’s Day with a Letter</h3>
+                    <p>In a world of fleeting messages, your words can create lasting memories. Start writing today and let your letters spread love, joy, and connection.</p>
                 </div>
                 <div class="col-xl-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" href="#">Call To Action</a>
+                    <a class="cta-btn align-middle" href="#">Get Started</a>
                 </div>
             </div>
 
@@ -194,7 +193,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Portfolio</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+            <p>Bringing Connection to Life, One Letter at a Time</p>
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -314,7 +313,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Team</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+            <p>Bringing Connection to Life, One Letter at a Time</p>
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -401,7 +400,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Pricing</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+            <p>Choose the Perfect Plan to Share Your Words with the World</p>
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -465,7 +464,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Testimonials</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+            <p>Real Stories of Connection and Heartfelt Communication with Liyamana</p>
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -582,7 +581,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Frequently Asked Questions</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+            <p>Explore everything you need to know about Liyamana and how we make letter-sending simple, meaningful, and memorable.</p>
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -654,7 +653,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Contact</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+            <p>We’re here to help! Reach out for any questions or support, and we’ll be happy to assist you.</p>
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -668,7 +667,7 @@
                             <i class="bi bi-geo-alt flex-shrink-0"></i>
                             <div>
                                 <h3>Address</h3>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <p>Colombo, Sri Lanka</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -676,7 +675,7 @@
                             <i class="bi bi-telephone flex-shrink-0"></i>
                             <div>
                                 <h3>Call Us</h3>
-                                <p>+1 5589 55488 55</p>
+                                <p>+94 71 953 7841</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -684,7 +683,7 @@
                             <i class="bi bi-envelope flex-shrink-0"></i>
                             <div>
                                 <h3>Email Us</h3>
-                                <p>info@example.com</p>
+                                <p>support@liyamana.com</p>
                             </div>
                         </div><!-- End Info Item -->
 
