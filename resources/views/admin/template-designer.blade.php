@@ -71,8 +71,8 @@
                         img.scaleToWidth({{$key}}canvas.width);
                         img.scaleToHeight({{$key}}canvas.height);
                         img.set({
-                            left: {{$key}}canvas.width / 2 - img.getScaledWidth() / 2,
-                            top: {{$key}}canvas.height / 2 - img.getScaledHeight() / 2,
+                            {{--left: {{$key}}canvas.width / 2 - img.getScaledWidth() / 2,--}}
+                            {{--top: {{$key}}canvas.height / 2 - img.getScaledHeight() / 2,--}}
                             originX: 'left',
                             originY: 'top'
                         });

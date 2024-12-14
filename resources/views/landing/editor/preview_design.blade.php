@@ -8,8 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
-<input type="text" id="canvas_data" value="{{ json_encode($object_data) }}">
-<canvas id="fabricCanvas" width="827" height="1167"></canvas>
+<input type="hidden" id="canvas_data" value="{{ json_encode($object_data) }}">
+<canvas id="fabricCanvas" width="450" height="600"></canvas>
 <button id="generatePDF">Generate PDF</button>
 
 <script>
@@ -29,7 +29,7 @@
         // Export canvas content to an image
         const dataURL = canvas.toDataURL({
             format: 'png',
-            multiplier: 1 // Export at the same resolution as the canvas
+            multiplier: 3 // Export at the same resolution as the canvas
         });
 
         console.log(dataURL);
@@ -37,10 +37,10 @@
         const pdf = new jsPDF('p', 'pt', 'a4'); // Create A4-sized PDF
 
         // Use exact canvas dimensions for PDF to avoid resizing
-        const canvasWidth = canvas.getWidth();
-        const canvasHeight = canvas.getHeight();
+        // const canvasWidth = canvas.getWidth();
+        // const canvasHeight = canvas.getHeight();
 
-        pdf.addImage(dataURL, 'PNG', 0, 0, 1240, 1754);
+        pdf.addImage(dataURL, 'PNG', 0, 0, 1240, 900);
 
         pdf.save('fabricjs-full-a4.pdf'); // Save PDF
     });

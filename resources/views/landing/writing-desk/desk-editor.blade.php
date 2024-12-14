@@ -38,8 +38,8 @@
 
         <div class="col-md-8">
             <div style="background: url('{{url('grid.jpg')}}');padding-top: 20px;padding-bottom: 20px;background-size:281px;">
-                <div style="width: 70%;">
-                    <canvas id="{{$key}}canvas" width="800" height="600"></canvas>
+                <div style="width: 70%;margin-left: 21%;">
+                    <canvas id="{{$key}}canvas" width="800" height="600" style=""></canvas>
                 </div>
             </div>
 
@@ -91,8 +91,8 @@
         img.scaleToHeight({{$key}}canvas.height);
 
         img.set({
-            left: {{$key}}canvas.width / 2 - img.getScaledWidth() / 2,
-            top: {{$key}}canvas.height / 2 - img.getScaledHeight() / 2,
+            {{--left: {{$key}}canvas.width / 2 - img.getScaledWidth() / 2,--}}
+            {{--top: {{$key}}canvas.height / 2 - img.getScaledHeight() / 2,--}}
             originX: 'left',
             originY: 'top'
         });
