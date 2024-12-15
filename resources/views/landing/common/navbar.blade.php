@@ -17,7 +17,7 @@
                     <a href="#"><span>Most Trending Categories</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         @foreach($templateCategories as $categoryItem)
-                            <li><a href="#">{{$categoryItem->category_name}}</a></li>
+                            <li><a href="{{url('/')}}/market-place?&category={{$categoryItem->slug}}">{{$categoryItem->category_name}}</a></li>
                         @endforeach
                     </ul>
                 </li>
