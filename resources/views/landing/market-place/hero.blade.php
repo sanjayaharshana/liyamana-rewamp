@@ -16,7 +16,9 @@
                             <select class="form-select" name="category" style="border-style: none;background: #5f1b21;color: #c39898;border-radius: 20px;">
                                 <option value="">None</option>
                                 @foreach($templateCategories as $item)
-                                    <option value="{{$item->slug}}" {{$item['']}}>{{$item->category_name}}</option>
+                                    <option  value="{{$item->slug}}"
+                                        {{ (isset($query['category']) && $query['category'] == $item->slug) ? 'selected' : '' }}>
+                                        {{$item->category_name}}</option>
                                 @endforeach
                             </select>
                         </div>

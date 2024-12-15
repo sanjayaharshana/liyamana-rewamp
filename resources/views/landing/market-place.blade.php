@@ -38,20 +38,7 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <div class="col-md-6">
-                            <form action="{{url('market-place')}}" method="get">
-                                <div class="input-group mb-3">
-                                    <label style="padding-top: 6px;padding-right: 20px;">Sort By: </label>
-                                    <select type="text" class="form-select" placeholder="Search" name="search">
-                                        <option value="price">Price</option>
-                                        <option value="last">Latest</option>
-                                        <option value="older">Older</option>
-                                        <option value="name">Name</option>
-                                        <option value="pages">Pages</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
+
                     </div>
                     <div class="col-md-6">
                         <div class="row">
@@ -85,7 +72,7 @@
                         <div class="col-md-3">
                             <a href="{{url('market-place/'.$templeteItem->slug)}}">
 
-                                <div class="card {{$templeteItem->is_trending ? "card-label" : "" }}" style="margin-bottom: 20px;">
+                                <div class="card {{$templeteItem->is_trending ? "card-label" : "" }}" style="">
 
                                 <div style="background: url('{{url('storage/'.$templeteItem->feature_image)}}');height: 200px;background-size: cover;background-repeat: no-repeat;z-index: 0"></div>
                                     <div class="card-body">
