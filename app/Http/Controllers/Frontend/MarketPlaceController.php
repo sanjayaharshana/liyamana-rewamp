@@ -205,8 +205,9 @@ class MarketPlaceController extends Controller
     {
         $orderDetails = OrderedDesign::where('id',$order_id)->first();
         $templateDetails = Templetes::where('slug', $slug)->first();
-        $objectsData =  $orderDetails->design['new_4_page'];
-        return view('landing.editor.preview_design',[
+        $objectsData =  $orderDetails->design;
+
+        return view('landing.print-studio.print-studio',[
             'order_details' => $orderDetails,
             'template_details' => $templateDetails,
             'object_data' => $objectsData

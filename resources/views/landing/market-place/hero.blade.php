@@ -38,7 +38,7 @@
 
 </div>
 
-<div style="background: url('http://localhost:8000/landing_pages/banding/banners1.png');height: 323px;margin-bottom: 0px;background-position: center;padding-left: 0px;padding-right: 0px;">
+<div style="background: url('http://localhost:8000/landing_pages/banding/banners1.png');height: 204px;margin-bottom: 0px;background-position: center;padding-left: 0px;padding-right: 0px;">
 
     <div class="container">
         <div class="row">

@@ -75,7 +75,19 @@ class TempleteCategoriesController extends AdminController
 
         $form->textarea('category_name', __('Category name'));
         $form->text('slug', __('Slug'));
-        $form->text('icon', __('Icon'));
+        $form->select('icon', __('Icon'))->options([
+            'bi bi-alarm icon' => 'Alarm Icon',
+            'bi bi-envelope-open icon' => 'Envelope Open Icon',
+            'bi bi-hard-drive icon' => 'Hard Drive Icon',
+            'bi bi-headset icon' => 'Headset Icon',
+            'bi bi-laptop icon' => 'Laptop Icon',
+            'bi bi-mouse icon' => 'Mouse Icon',
+            'bi bi-phone icon' => 'Phone Icon',
+            'bi bi-printer icon' => 'Printer Icon',
+            'bi bi-tablet icon' => 'Tablet Icon',
+            'bi bi-tv icon' => 'TV Icon',
+            'bi bi-watch icon' => 'Watch Icon',
+        ]);
         $form->image('image', __('Image'));
         $form->textarea('category_description', __('Category description'));
         $form->textarea('seo_description', __('Seo description'));

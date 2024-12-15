@@ -10,8 +10,8 @@ class TemplateCategoryComposer
     public function compose(View $view)
     {
         // Retrieve data you want to share with the view
-        $templateCategories = TempleteCategories::latest()->take(10)
-            ->select('category_name','slug')
+        $templateCategories = TempleteCategories::latest()->take(12)
+            ->select('category_name','slug', 'category_description','icon')
             ->get();
         // Bind data to the view
         $view->with('templateCategories', $templateCategories);
