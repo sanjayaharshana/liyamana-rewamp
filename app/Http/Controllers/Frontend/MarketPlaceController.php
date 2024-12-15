@@ -14,13 +14,56 @@ use Illuminate\Support\Facades\Hash;
 
 class MarketPlaceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $requestAllData = $request->all();
+        unset($requestAllData['_token']);
         $templateCategories = TempleteCategories::where('status', 1)->get();
-        $templates = Templetes::where('status', 1)->get();
+        $templates = Templetes::where('status', 1);
+
+
+        if(key_exists('category',$requestAllData))
+        {
+            if($requestAllData['category'])
+            {
+                $templateCategoriesFromId = TempleteCategories::where('slug', $requestAllData['category'])
+                    ->first();
+                $stringId = (string)$templateCategoriesFromId->id;
+                $templates->whereJsonContains('category_ids', $stringId);
+            }
+        }
+
+        if(key_exists('search_keyword',$requestAllData))
+        {
+            if($requestAllData['search_keyword'])
+            {
+                $templates->where('name', 'like', '%'.$requestAllData['search_keyword'].'%');
+            }
+        }
+
+        if(key_exists('sort_by',$requestAllData))
+        {
+            if($requestAllData['sort_by'])
+            {
+                if($requestAllData['sort_by'] == 'price_high_to_low'){
+                    $templates->orderBy('price', 'desc');
+                }else if($requestAllData['sort_by'] == 'price_low_to_high'){
+                    $templates->orderBy('price', 'asc');
+                }else if($requestAllData['sort_by'] == 'newest'){
+                    $templates->orderBy('created_at', 'desc');
+                }else if($requestAllData['sort_by'] == 'oldest'){
+                    $templates->orderBy('created_at', 'asc');
+                }
+            }
+        }
+
+
+
+
         return view('landing.market-place',[
             'templateCategories' => $templateCategories,
-            'templates' => $templates,
+            'templates' => $templates->get(),
+            'query' => $requestAllData
         ]);
     }
 
@@ -161,14 +204,8 @@ class MarketPlaceController extends Controller
     public function previewDesign($slug, $order_id)
     {
         $orderDetails = OrderedDesign::where('id',$order_id)->first();
-
         $templateDetails = Templetes::where('slug', $slug)->first();
-
         $objectsData =  $orderDetails->design['new_4_page'];
-
-
-
-
         return view('landing.editor.preview_design',[
             'order_details' => $orderDetails,
             'template_details' => $templateDetails,

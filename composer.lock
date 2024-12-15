@@ -4,8 +4,84 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a033ce58019f8a27b7e2a7662fb90a5",
+    "content-hash": "ea67303ad58db642bf0c660be345471d",
     "packages": [
+        {
+            "name": "binafy/laravel-cart",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/binafy/laravel-cart.git",
+                "reference": "0f42a4d1c589c5d1c1050f0658cca5e0b1de5ce5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/binafy/laravel-cart/zipball/0f42a4d1c589c5d1c1050f0658cca5e0b1de5ce5",
+                "reference": "0f42a4d1c589c5d1c1050f0658cca5e0b1de5ce5",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.5",
+                "orchestra/testbench": "^7.0|^8.0|^9.0",
+                "pestphp/pest-plugin-laravel": "^1.4.0|^2.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Binafy\\LaravelCart\\Providers\\LaravelCartServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Binafy\\LaravelCart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "milwad-dev",
+                    "email": "milwad.dev@gmail.com",
+                    "homepage": "https://github.com/milwad-dev",
+                    "role": "author"
+                },
+                {
+                    "name": "binafy",
+                    "homepage": "https://github.com/binafy",
+                    "role": "owner"
+                }
+            ],
+            "description": "Laravel Cart is a customizable package for adding shopping cart functionality to Laravel applications",
+            "homepage": "https://github.com/binafy/laravel-cart",
+            "keywords": [
+                "Laravel Basket",
+                "Laravel cart",
+                "binafy",
+                "cart",
+                "framework",
+                "laravel",
+                "laravel cart package",
+                "laravel e-commerce",
+                "laravel package",
+                "laravel-cart",
+                "laravel-cart-shop",
+                "laravel-shop",
+                "milwad"
+            ],
+            "support": {
+                "issues": "https://github.com/binafy/laravel-cart/issues",
+                "source": "https://github.com/binafy/laravel-cart/tree/v1.1.0"
+            },
+            "time": "2024-12-06T17:01:57+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.12.1",
