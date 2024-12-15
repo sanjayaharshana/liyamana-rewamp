@@ -24,6 +24,7 @@ Route::post('market-place/{slug}/writing-desk/{order_id}',[\App\Http\Controllers
 Route::get('market-place/{slug}/writing-desk/{order_id}/checkout',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'checkoutPage'])->name('landing.checkout');
 
 Route::get('preview-design/{slug}/{order_id}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'previewDesign'])->name('preview_design');
+Route::post('preview-design/{slug}/{order_id}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'previewDesignStore'])->name('preview_design_store');
 
 Route::post('create-order/{slug}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'createOrderAsGuest'])->name('landing.create-order');
 

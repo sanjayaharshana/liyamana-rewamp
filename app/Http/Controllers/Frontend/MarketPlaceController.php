@@ -207,10 +207,17 @@ class MarketPlaceController extends Controller
         $templateDetails = Templetes::where('slug', $slug)->first();
         $objectsData =  $orderDetails->design;
 
+
         return view('landing.print-studio.print-studio',[
             'order_details' => $orderDetails,
             'template_details' => $templateDetails,
             'object_data' => $objectsData
         ]);
+    }
+
+    public function previewDesignStore(Request $request)
+    {
+        dd($request);
+
     }
 }

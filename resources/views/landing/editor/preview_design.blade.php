@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
-<input type="hidden" id="canvas_data" value="{{ json_encode($object_data) }}">
+<input type="text" id="canvas_data" value="{{ json_encode($object_data) }}">
 <canvas id="fabricCanvas" width="450" height="600"></canvas>
 <button id="generatePDF">Generate PDF</button>
 
