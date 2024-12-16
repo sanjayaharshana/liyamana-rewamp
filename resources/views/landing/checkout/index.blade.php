@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div style="background: ghostwhite;border-style: solid;border-width: 1px;border-radius: 10px;border-color: #d5d5d5;padding-top: 20px;padding-bottom: 20px;">
+                <div style="background: ghostwhite;border-style: solid;border-width: 1px;border-radius: 10px;border-color: #ffffff;padding-top: 20px;padding-bottom: 20px;">
                     <div class="row">
                         <div class="col-md-4">
                             <div style="background:url('{{url('storage/'.$template_details->feature_image)}}');height: 120px;background-position: center;background-size: contain;background-repeat: no-repeat;"></div>
@@ -27,9 +27,13 @@
                             <div>
                                  LKR {{number_format($template_details->price,2)}}
                             </div>
+
+                        </div>
+                        <div style="padding: 10px;background: #ffedbe;color: #161616;font-size: 11px;margin-top: 20px;border-radius: 11px;">
+                            You're one step away from sending your heartfelt letter through Liyamana, the trusted online letter-sending platform
                         </div>
                     </div>
-                    <form method="post" action="https://sandbox.payhere.lk/pay/checkout">
+                    <form id="checkout-form" method="post" action="https://sandbox.payhere.lk/pay/checkout">
 
                         <div class="row">
                             <div class="col-md-12">
@@ -51,9 +55,38 @@
                                     <input type="hidden" name="country" value="Sri Lanka">
                                     <input type="hidden" name="hash" value="098F6BCD4621D373CADE4E832627B4F6">    <!-- Replace with generated hash -->
 
-                                    <div style="background: #e9e9e9;padding-top: 10px;padding-bottom: 10px;padding-left: 10px;padding-right: 10px;border-radius: 8px;margin-top: 20px;">
-                                        <button class="btn btn-primary" style="background: #8a262f;border-style: none" type="submit">Checkout your Mail</button>
-                                        <a target="_blank" style="background: #8a262f;border-style: none" href="{{route('preview_design',['slug' => $template_details->slug,'order_id' => $order_details->id])}}" class="btn btn-primary">Preview design</a>
+                                    <div style="padding-top: 10px;padding-bottom: 10px;padding-left: 10px;padding-right: 10px;border-radius: 8px;margin-top: 20px;">
+
+                                        <div class="row">
+
+
+                                            <div class="col-md-4">
+                                                <div onclick="document.getElementById('checkout-form').submit()" style="border-style: none" type="submit">
+                                                    <div class="card">
+                                                        <div class="card-body" style="text-align: center">
+                                                            <i class="bi bi-credit-card-2-front" style="font-size: 30px;"></i>
+                                                            <div style="font-size: 10px">Checkout and Send Your Letter</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="{{route('preview_design',['slug' => $template_details->slug,'order_id' => $order_details->id])}}">
+                                                    <div class="card">
+                                                        <div class="card-body" style="text-align: center">
+                                                            <i class="bi bi-envelope-open" style="font-size: 30px;"></i>
+                                                            <div style="font-size: 10px">Edit your letter design</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div>
+                                        <br>
+
+
                                     </div>
 
                                 </div>

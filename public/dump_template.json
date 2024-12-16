@@ -1,0 +1,48 @@
+{
+    "harry_potter": {
+        "name": "Harry Potter",
+        "description": "Harry Potter themed templates",
+        "feature_image": "images/harry_potter_feature.jpg",
+        "price": 10,
+        "images": [
+            "feature.jpg",
+            "back_side.jpg",
+            "front_side.jpg"
+        ],
+        "layouts": {
+            "new_4": {
+                "name": "Letter Front Side",
+                "image": "images/115b6f0126bb5c48cad148336a1d3f0c_13.jpg",
+                "form_data": [
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Text Field",
+                        "className": "form-control",
+                        "name": "text-1724620622477-0",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "sdasd"
+            },
+            "new_5": {
+                "name": "Letter Back Side",
+                "image": "images/115b6f0126bb5c48cad148336a1d3f0c_13.jpg",
+                "form_data": [
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Text Field",
+                        "className": "form-control",
+                        "name": "text-1724620622477-0",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "sdasd"
+            }
+        }
+    }
+}
+

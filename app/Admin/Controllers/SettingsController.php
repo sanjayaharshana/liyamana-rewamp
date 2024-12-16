@@ -81,9 +81,9 @@ class SettingsController extends AdminController
             });
         }
         $form->saving(function (Form $form) use ($getAllSettings) {
-            dd($form);
             foreach ($getAllSettings as $key => $settingItems) {
                 foreach ($settingItems as $settingItem) {
+                    dd($settingItem->key);
                     $form->model()->where('key', $settingItem->key)->update(['value' => $form->input($settingItem->key)]);
                 }
             }

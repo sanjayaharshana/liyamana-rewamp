@@ -58,6 +58,17 @@ class MenuSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
 
+//            [
+//                'parent_id' => 0,
+//                'order' => 4,
+//                'title' => 'Inquiries',
+//                'icon' => 'icon-align-justify',
+//                'uri' => 'inquiries',
+//                'permission' => 'inquiries',
+//                'created_at' => Carbon::now()->subMinutes(1),
+//                'updated_at' => Carbon::now(),
+//            ],
+
 
         ]);
 
