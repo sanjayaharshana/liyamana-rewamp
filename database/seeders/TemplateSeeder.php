@@ -16,6 +16,39 @@ class TemplateSeeder extends Seeder
         $dumpJson = file_get_contents(public_path('dump_template.json'));
         $dumpJson = json_decode($dumpJson, true);
         foreach ($dumpJson as $keyName => $value) {
+
+            $imageSourceFolder = database_path('seeders/images/'.$keyName);
+            $imageDestinationFolder = public_path('storage');
+
+            $imagesToCopy = [
+                'feature.jpg',
+                'back_page.jpg',
+                'front_page.jpg',
+            ];
+
+            foreach ($imagesToCopy as $image) {
+                $source = $imageSourceFolder . '/' . $image;
+                $destination = $imageDestinationFolder . '/' . $keyName.'_'.$image;
+
+                if (file_exists($source)) {
+                    copy($source, $destination);
+                }
+            }
+
+            // Ensure the destination folder exists
+            if (!is_dir($imageDestinationFolder)) {
+                mkdir($imageDestinationFolder, 0755, true);
+            }
+
+
+
+
+            $layouts = $value['layouts'];
+
+            foreach ($layouts as $key => $layoutItem){
+                $layouts[$key]['form_data'] = json_encode($layoutItem['form_data']);
+            }
+
             $templates = DB::table('templetes')->insert([
                 'name' => $value['name'],
                 'description' => $value['description'],
@@ -32,12 +65,11 @@ class TemplateSeeder extends Seeder
                 'is_top_rated' => rand(0, 1),
                 'images' => json_encode($value['images']),
                 'seo_description' => $value['description'],
-                'layouts' => json_encode($value['layouts']),
+                'layouts' => json_encode($layouts),
+                'feature_image' => $keyName.'_feature.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
-           dd($templates);
         }
-        dd($dumpJson);
     }
 }

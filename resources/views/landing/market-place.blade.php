@@ -72,7 +72,7 @@
                         <div class="col-md-3">
                             <a href="{{url('market-place/'.$templeteItem->slug)}}">
 
-                                <div class="card {{$templeteItem->is_trending ? "card-label" : "" }}" style="">
+                                <div class="card {{$templeteItem->is_trending ? "card-label" : "" }}" style="margin-bottom: 30px">
 
                                 <div style="background: url('{{url('storage/'.$templeteItem->feature_image)}}');height: 200px;background-size: cover;background-repeat: no-repeat;z-index: 0"></div>
                                     <div class="card-body">

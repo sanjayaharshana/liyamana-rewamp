@@ -1,25 +1,79 @@
 {
     "harry_potter": {
         "name": "Harry Potter",
-        "description": "Harry Potter themed templates",
-        "feature_image": "images/harry_potter_feature.jpg",
+        "description": "The Liyamana letter is crafted with an elegant and timeless design, evoking the charm of magical correspondence. Printed on parchment-like paper with a textured finish, it carries an air of authenticity and wonder. The envelope features the official Liyamana crest, embossed in gold, symbolizing excellence and prestige.\n\nInside, the letter is written in a calligraphic font, reminiscent of hand-penned wizardry. The header proudly displays the Liyamana emblem, and the content is a blend of welcoming words and an invitation to explore a world of limitless possibilities. A personal touch is added with the recipient's name neatly addressed at the top.\n\nThis letter promises not just an invitation but an experience—one that feels as magical as receiving your acceptance to a school of wizardry.",
+        "feature_image": "harry_potter_feature.jpg",
         "price": 10,
         "images": [
-            "feature.jpg",
-            "back_side.jpg",
-            "front_side.jpg"
+            "harry_potter_feature.jpg",
+            "harry_potter_back_page.jpg",
+            "harry_potter_front_page.jpg"
         ],
         "layouts": {
             "new_4": {
                 "name": "Letter Front Side",
-                "image": "images/115b6f0126bb5c48cad148336a1d3f0c_13.jpg",
+                "image": "harry_potter_front_page.jpg",
                 "form_data": [
                     {
                         "type": "text",
                         "required": false,
-                        "label": "Text Field",
+                        "label": "Salutation",
                         "className": "form-control",
                         "name": "text-1724620622477-0",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Introduction",
+                        "className": "form-control",
+                        "name": "text-1724620622477-1",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Body (Letter Content)",
+                        "className": "form-control",
+                        "name": "text-1724620622477-2",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Closing",
+                        "className": "form-control",
+                        "name": "text-1724620622477-3",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Signature",
+                        "className": "form-control",
+                        "name": "text-1724620622477-4",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Your Name",
+                        "className": "form-control",
+                        "name": "text-1724620622477-5",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Your Role or Title",
+                        "className": "form-control",
+                        "name": "text-1724620622477-6",
                         "access": false,
                         "subtype": "text"
                     }
@@ -28,19 +82,361 @@
             },
             "new_5": {
                 "name": "Letter Back Side",
-                "image": "images/115b6f0126bb5c48cad148336a1d3f0c_13.jpg",
+                "image": "harry_potter_back_page.jpg",
                 "form_data": [
                     {
-                        "type": "text",
+                        "type": "textarea",
                         "required": false,
-                        "label": "Text Field",
+                        "label": "Thank you Message",
                         "className": "form-control",
-                        "name": "text-1724620622477-0",
+                        "name": "text-1724620622477-7",
                         "access": false,
                         "subtype": "text"
                     }
                 ],
                 "description": "sdasd"
+            }
+        }
+    },
+    "clock_base": {
+        "name": "Clock Base",
+        "description": "A timeless template featuring a classic clock design with intricate details. Perfect for adding a sense of elegance to your correspondence.",
+        "feature_image": "clock_base_feature.jpg",
+        "price": 12,
+        "images": [
+            "clock_base_feature.jpg",
+            "clock_base_back_page.jpg",
+            "clock_base_front_page.jpg"
+        ],
+        "layouts": {
+            "new_4": {
+                "name": "Letter Front Side",
+                "image": "clock_base_front_page.jpg",
+                "form_data": [
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Salutation",
+                        "className": "form-control",
+                        "name": "text-1724620622477-0",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Introduction",
+                        "className": "form-control",
+                        "name": "text-1724620622477-1",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Body (Letter Content)",
+                        "className": "form-control",
+                        "name": "text-1724620622477-2",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Closing",
+                        "className": "form-control",
+                        "name": "text-1724620622477-3",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Signature",
+                        "className": "form-control",
+                        "name": "text-1724620622477-4",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Your Name",
+                        "className": "form-control",
+                        "name": "text-1724620622477-5",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Your Role or Title",
+                        "className": "form-control",
+                        "name": "text-1724620622477-6",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "Elegant front layout for the letter."
+            },
+            "new_5": {
+                "name": "Letter Back Side",
+                "image": "clock_base_back_page.jpg",
+                "form_data": [
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Thank you Message",
+                        "className": "form-control",
+                        "name": "text-1724620622477-7",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "Elegant back layout for the letter."
+            }
+        }
+    },
+    "old_love": {
+        "name": "Old Love",
+        "description": "An antique design filled with romance and nostalgia, perfect for heartfelt letters.",
+        "feature_image": "old_love_feature.jpg",
+        "price": 15,
+        "images": [
+            "old_love_feature.jpg",
+            "old_love_back_page.jpg",
+            "old_love_front_page.jpg"
+        ],
+        "layouts": {
+            "new_4": {
+                "name": "Letter Front Side",
+                "image": "old_love_front_page.jpg",
+                "form_data": [
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Salutation",
+                        "className": "form-control",
+                        "name": "text-1724620622477-0",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Introduction",
+                        "className": "form-control",
+                        "name": "text-1724620622477-1",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Body (Letter Content)",
+                        "className": "form-control",
+                        "name": "text-1724620622477-2",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Closing",
+                        "className": "form-control",
+                        "name": "text-1724620622477-3",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Signature",
+                        "className": "form-control",
+                        "name": "text-1724620622477-4",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "Romantic front layout for the letter."
+            },
+            "new_5": {
+                "name": "Letter Back Side",
+                "image": "old_love_back_page.jpg",
+                "form_data": [
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Thank you Message",
+                        "className": "form-control",
+                        "name": "text-1724620622477-7",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "Romantic back layout for the letter."
+            }
+        }
+    },
+    "paris_1900": {
+        "name": "Paris 1900",
+        "description": "Inspired by the elegance of Paris in the early 1900s, this design captures the charm of a bygone era.",
+        "feature_image": "paris_1900_feature.jpg",
+        "price": 18,
+        "images": [
+            "paris_1900_feature.jpg",
+            "paris_1900_back_page.jpg",
+            "paris_1900_front_page.jpg"
+        ],
+        "layouts": {
+            "new_4": {
+                "name": "Letter Front Side",
+                "image": "paris_1900_front_page.jpg",
+                "form_data": [
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Salutation",
+                        "className": "form-control",
+                        "name": "text-1724620622477-0",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Introduction",
+                        "className": "form-control",
+                        "name": "text-1724620622477-1",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Body (Letter Content)",
+                        "className": "form-control",
+                        "name": "text-1724620622477-2",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Closing",
+                        "className": "form-control",
+                        "name": "text-1724620622477-3",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Signature",
+                        "className": "form-control",
+                        "name": "text-1724620622477-4",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "Vintage Paris-themed front layout."
+            },
+            "new_5": {
+                "name": "Letter Back Side",
+                "image": "paris_1900_back_page.jpg",
+                "form_data": [
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Thank you Message",
+                        "className": "form-control",
+                        "name": "text-1724620622477-7",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "Vintage Paris-themed back layout."
+            }
+        }
+    },
+    "vintage_alumini": {
+        "name": "Vintage Alumini",
+        "description": "A sophisticated vintage design for alumni correspondence and celebratory messages.",
+        "feature_image": "vintage_alumini_feature.jpg",
+        "price": 20,
+        "images": [
+            "vintage_alumini_feature.jpg",
+            "vintage_alumini_back_page.jpg",
+            "vintage_alumini_front_page.jpg"
+        ],
+        "layouts": {
+            "new_4": {
+                "name": "Letter Front Side",
+                "image": "vintage_alumini_front_page.jpg",
+                "form_data": [
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Salutation",
+                        "className": "form-control",
+                        "name": "text-1724620622477-0",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Introduction",
+                        "className": "form-control",
+                        "name": "text-1724620622477-1",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Body (Letter Content)",
+                        "className": "form-control",
+                        "name": "text-1724620622477-2",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Closing",
+                        "className": "form-control",
+                        "name": "text-1724620622477-3",
+                        "access": false,
+                        "subtype": "text"
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Signature",
+                        "className": "form-control",
+                        "name": "text-1724620622477-4",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "Elegant alumni-themed front layout."
+            },
+            "new_5": {
+                "name": "Letter Back Side",
+                "image": "vintage_alumini_back_page.jpg",
+                "form_data": [
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Thank you Message",
+                        "className": "form-control",
+                        "name": "text-1724620622477-7",
+                        "access": false,
+                        "subtype": "text"
+                    }
+                ],
+                "description": "Elegant alumni-themed back layout."
             }
         }
     }
