@@ -77,7 +77,7 @@
                         <li><i class="bi bi-chevron-right"></i> <a href="{{url('market-place')}}">Market Place</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="{{url('services')}}">Services</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="{{url('terms-and-conditions')}}">Terms and Conditions</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="{{url('privacy-policy')}}">Privacy Polichy</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="{{url('refund-policy')}}">Refund Policy</a></li>
                     </ul>
                 </div>
