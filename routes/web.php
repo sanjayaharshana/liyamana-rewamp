@@ -19,6 +19,12 @@ Route::get('/about-us',[\App\Http\Controllers\Frontend\AboutUsController::class,
 Route::get('/terms-and-conditions', function () {
     return view('landing.terms-and-conditions'); 
 })->name('terms.conditions');
+Route::get('/privacy-policy', function () {
+    return view('landing.privacy-policy'); 
+})->name('privacy.policy');
+Route::get('/refund-policy', function () {
+    return view('landing.refund-policy'); 
+})->name('refund.policy');
 Route::get('offline',[\App\Http\Controllers\Frontend\HomeController::class,'offline'])->name('landing.offline');
 Route::get('market-place',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'index'])->name('landing.home');
 Route::get('market-place/{slug}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'show'])->name('landing.home');
