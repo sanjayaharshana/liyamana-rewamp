@@ -64,8 +64,8 @@
         <h2>8. Contact Information</h2>
         <p>If you have any questions or concerns regarding this Refund Policy, please contact us:</p>
         <p>Email: <a href="mailto:support@liyamana.com">support@liyamana.com</a></p>
-        <p>Phone: +[Your Phone Number]</p>
-        <p>Address: [Your Business Address]</p>
+        <p>Phone: +94761306338</p>
+        <p>Address: Wellawaya, Sri Lanka</p>
     </div>
      </section>
      <!-- /Content -->
