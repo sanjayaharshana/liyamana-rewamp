@@ -24,7 +24,7 @@
                         </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: white;margin-top: 9px;margin-bottom: 9px;/* background: url('https://img.freepik.com/premium-photo/full-frame-shot-red-leather-background_23-2147951258.jpg'); */">
+                        <a class="nav-link" href="{{$writingDeskLink ?? "#" }}" style="color: white;margin-top: 9px;margin-bottom: 9px;/* background: url('https://img.freepik.com/premium-photo/full-frame-shot-red-leather-background_23-2147951258.jpg'); */">
                             Writing Desk
                         </a>
                     </li>
@@ -38,7 +38,7 @@
                         </li>
                 @else
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color: white;margin-top: 9px;margin-bottom: 9px;/* background: url('https://img.freepik.com/premium-photo/full-frame-shot-red-leather-background_23-2147951258.jpg'); */">
+                            <a class="nav-link" href="{{$checkoutLink ?? "#"}}" style="color: white;margin-top: 9px;margin-bottom: 9px;/* background: url('https://img.freepik.com/premium-photo/full-frame-shot-red-leather-background_23-2147951258.jpg'); */">
                                 Checkout
                             </a>
                         </li>

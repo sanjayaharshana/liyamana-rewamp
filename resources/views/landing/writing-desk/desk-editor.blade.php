@@ -14,21 +14,22 @@
     }
 </style>
 
+
 <div class="container">
     <div class="row">
 
             <div class="col-md-4" style="background: #b5261c;color: white;padding-top: 20px;">
-                @foreach(json_decode($layoutItem['form_data']) as $fieldItem)
+                @foreach(json_decode($layoutItem['form_data']) as $keyItem =>$fieldItem)
+
                     @if($fieldItem->type == 'textarea')
                         <div class="form-group">
                             <label for="textInput">{{$fieldItem->label}}:</label>
-                            <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
-                        </textarea>
+                            <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">{{$design[$key.'_page']['objects'][$keyItem]['text'] ?? null}}</textarea>
                         </div>
                     @else
                         <div class="form-group">
                             <label for="textInput">{{$fieldItem->label}}:</label>
-                            <input style="background-color: #8f0606;border-style: none;color: white;" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
+                            <input style="background-color: #8f0606;border-style: none;color: white;" value="{{$design[$key.'_page']['objects'][$keyItem]['text'] ?? null}}" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
                         </div>
                     @endif
                 @endforeach
@@ -48,6 +49,10 @@
 </div>
 
 <script>
+
+
+
+
     // Helper function to remove underscores from field names
     function removeUnderscores(str) {
         return str.replace(/_/g, '');
@@ -57,18 +62,35 @@
     const {{$key}}canvas = new fabric.Canvas('{{$key}}canvas');
 
     // Add a text element to the canvas for each fieldItem
-    @foreach(json_decode($layoutItem['form_data']) as $fieldItem)
+    @foreach(json_decode($layoutItem['form_data']) as $keyField => $fieldItem)
 
-    const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Text(`{!! getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? 'Default Text' !!}`, {
-        left: {{getTemplatePositions($template->id,$key,$fieldItem->name)['left'] ?? 100}},
-        top: {{getTemplatePositions($template->id,$key,$fieldItem->name)['top'] ?? 100}},
-        width: 400,
-        height: 1000,
-        scaleX: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleX'] ?? 100}},
-        scaleY: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleY'] ?? 100}},
-        fontSize: 30,
-        fill: 'black',
-    });
+    @if($design[$key.'_page'] ?? null)
+
+        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Text(`{{$design[$key.'_page']['objects'][$keyField]['text'] ?? 'Default Text'}}`, {
+            left: {{$design[$key.'_page']['objects'][$keyField]['left'] ?? 100}},
+            top: {{$design[$key.'_page']['objects'][$keyField]['top'] ?? 100}},
+            width: 400,
+            height: 1000,
+            scaleX: {{  $design[$key.'_page']['objects'][$keyField]['scaleX'] ?? 100}},
+            scaleY: {{  $design[$key.'_page']['objects'][$keyField]['scaleY'] ?? 100}},
+            fontSize: 30,
+            fill: 'black',
+        });
+    @else
+        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Text(`{!! getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? 'Default Text' !!}`, {
+            left: {{getTemplatePositions($template->id,$key,$fieldItem->name)['left'] ?? 100}},
+            top: {{getTemplatePositions($template->id,$key,$fieldItem->name)['top'] ?? 100}},
+            width: 400,
+            height: 1000,
+            scaleX: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleX'] ?? 100}},
+            scaleY: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleY'] ?? 100}},
+            fontSize: 30,
+            fill: 'black',
+        });
+    @endif
+
+
+
 
     // Add the text element to the canvas
     {{$key}}canvas.add({{$key}}{{ removeUnderscores($fieldItem->name) }});

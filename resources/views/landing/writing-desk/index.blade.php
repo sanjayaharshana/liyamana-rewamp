@@ -6,7 +6,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
-
+    <script src="https://unpkg.com/intro.js/intro.js"></script>
+    <link href="https://unpkg.com/intro.js/introjs.css" rel="stylesheet">
 
 
     @include('landing.single-product.navigration_tab',[
@@ -36,8 +37,8 @@
 
                 @endforeach
 
-                    <button class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Explorer Poems</button>
-                    <button class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Letter Attachment</button>
+                    <button id="expolore_poem_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Explorer Poems</button>
+                    <button id="letter_attachment_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Letter Attachment</button>
                     <button id="save-and-next-button" class="btn btn-primary btn-sm float-right" style="background: #a71d1d;color: white;border-color: white;margin-bottom: 7px"> Save and Next
                         <i class="bi bi-arrow-right" style="margin-right: 10px"></i>
                     </button>
@@ -68,4 +69,23 @@
 
         </div>
     </div>
+
+    <script>
+        introJs().setOptions({
+            steps: [
+                {
+                element: document.querySelector('#expolore_poem_button'),
+                intro: "The Poem Explorer allows you to easily browse, discover, and add beautiful poems to your letters."
+                },
+                {
+                    element: document.querySelector('#letter_attachment_button'),
+                    intro: "Add a personal touch to your letter by attaching a thoughtful gift item."
+                },
+                {
+                    element: document.querySelector('#save-and-next-button'),
+                    intro: "Click Save and Next to securely save your current details and proceed to the next step of checkout."
+                }
+            ]
+        }).start();
+    </script>
 @endsection

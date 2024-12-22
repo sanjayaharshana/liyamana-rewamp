@@ -111,9 +111,11 @@ class MarketPlaceController extends Controller
     {
         $templates = Templetes::where('slug',$slug)->first();
         $orderDetails = OrderedDesign::where('id',$order_id)->first();
+
         return view('landing.writing-desk.index',[
             'template' => $templates,
-            'order_details' => $orderDetails
+            'order_details' => $orderDetails,
+            'design' => $orderDetails->design ?? null
         ]);
     }
 

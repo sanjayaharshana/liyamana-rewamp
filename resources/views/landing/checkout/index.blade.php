@@ -10,7 +10,9 @@
 
 
     @include('landing.single-product.navigration_tab',[
-    'activeTab'=>'checkout'])
+    'activeTab'=>'checkout',
+    'writingDeskLink'=> url('market-place/'.$template_details->slug.'/writing-desk/'.$order_details->id),
+    ])
 
 
     <div class="container">

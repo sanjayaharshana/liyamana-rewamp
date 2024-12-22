@@ -30,7 +30,5 @@
         @else
             <a class="btn-getstarted" href="{{route('landing.loginPage')}}">Get Started</a>
         @endauth
-
-
     </div>
 </header>
