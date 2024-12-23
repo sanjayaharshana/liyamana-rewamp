@@ -27,6 +27,10 @@ Route::get('/refund-policy', function () {
     return view('landing.refund-policy');
 })->name('refund.policy');
 
+Route::get('/test', function () {
+    return view('welcome');
+})->name('welcome');
+
 Route::get('offline',[\App\Http\Controllers\Frontend\HomeController::class,'offline'])->name('landing.offline');
 Route::get('market-place',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'index'])->name('landing.home');
 Route::get('market-place/{slug}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'show'])->name('landing.home');

@@ -13,6 +13,7 @@
     @include('landing.single-product.navigration_tab',[
     'activeTab'=>'writing-desk'])
 
+    @include('landing.writing-desk.modals.letter-attachment')
 
     <div class="container">
         <form method="post" action="{{route('landing.writing-desk.store',[
@@ -38,7 +39,7 @@
                 @endforeach
 
                     <button id="expolore_poem_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Explorer Poems</button>
-                    <button id="letter_attachment_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Letter Attachment</button>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" id="letter_attachment_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Letter Attachment</a>
                     <button id="save-and-next-button" class="btn btn-primary float-right" style="background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Next
                         <i class="bi bi-arrow-right" style="margin-right: 10px"></i>
                     </button>
