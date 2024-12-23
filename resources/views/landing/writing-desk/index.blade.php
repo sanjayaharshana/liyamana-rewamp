@@ -39,7 +39,7 @@
 
                     <button id="expolore_poem_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Explorer Poems</button>
                     <button id="letter_attachment_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Letter Attachment</button>
-                    <button id="save-and-next-button" class="btn btn-primary btn-sm float-right" style="background: #a71d1d;color: white;border-color: white;margin-bottom: 7px"> Save and Next
+                    <button id="save-and-next-button" class="btn btn-primary float-right" style="background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Next
                         <i class="bi bi-arrow-right" style="margin-right: 10px"></i>
                     </button>
 
