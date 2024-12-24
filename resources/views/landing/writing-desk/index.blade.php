@@ -14,9 +14,10 @@
     'activeTab'=>'writing-desk'])
 
     @include('landing.writing-desk.modals.letter-attachment')
+    @include('landing.writing-desk.modals.summery-modal')
 
     <div class="container">
-        <form method="post" action="{{route('landing.writing-desk.store',[
+        <form id="mainform" method="post" action="{{route('landing.writing-desk.store',[
         $template->slug,$order_details->id])}}">
 
             {{csrf_field()}}
@@ -38,11 +39,12 @@
 
                 @endforeach
 
-                    <button id="expolore_poem_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Explorer Poems</button>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" id="expolore_poem_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Explorer Poems</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" id="letter_attachment_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Letter Attachment</a>
-                    <button id="save-and-next-button" class="btn btn-primary float-right" style="background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Next
+                    <a href="#"  data-bs-toggle="modal" data-bs-target="#finalizemodal" id="save-and-next-button" class="btn btn-primary float-right" style="background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Next
                         <i class="bi bi-arrow-right" style="margin-right: 10px"></i>
-                    </button>
+                    </a>
+
 
             </div>
         </nav>
