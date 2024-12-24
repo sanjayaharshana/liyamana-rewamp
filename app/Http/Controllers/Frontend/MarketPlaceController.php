@@ -112,6 +112,7 @@ class MarketPlaceController extends Controller
         $templates = Templetes::where('slug',$slug)->first();
         $orderDetails = OrderedDesign::where('id',$order_id)->first();
 
+
         return view('landing.writing-desk.index',[
             'template' => $templates,
             'order_details' => $orderDetails,
@@ -127,7 +128,7 @@ class MarketPlaceController extends Controller
         $orderedDesign = new OrderedDesign();
         $orderedDesign->address = [
             'from_address' => $request->from_adress,
-            'to_address' => $request->to_address
+            'to_address' => $request->to_adress
         ];
         $orderedDesign->order_details = [
             'first_name' => $request->first_name,
@@ -151,6 +152,8 @@ class MarketPlaceController extends Controller
 
            $userDetails = User::create([
                 'name' => $request->first_name.' '. $request->last_name,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);

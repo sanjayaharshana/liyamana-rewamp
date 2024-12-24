@@ -24,51 +24,57 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <div style="padding: 30px;">
+                        <div style="">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 style="color: white">Sender's Details</h3>
-                                    <div style="font-size: 11px;margin-bottom: -4px;padding: 10px;">Enter your information as the sender of the letter. These details will appear on the envelope and be used to identify you in case of delivery issues. Make sure all fields are accurate</div>
-                                    <div class="row" style="color: white;padding: 10px;">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;">
+                                    <div style="background: #3e0303;padding: 30px;border-radius: 10px 170px 12px 20px;">
+                                        <h3 style="color: white">Sender's Details</h3>
+                                        <div style="font-size: 11px;margin-bottom: -4px;padding: 10px;">Enter your information as the sender of the letter. These details will appear on the envelope and be used to identify you in case of delivery issues. Make sure all fields are accurate</div>
+                                        <div class="row" style="color: white;padding: 10px;">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    <input type="text" class="form-control" value="{{$order_details->order_details['first_name'] ?? auth()->user()->name}}" style="background: #6b0000;border-style: none;color: white;" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input type="text" class="form-control" value="{{$order_details->order_details['last_name']}}" style="background: #6b0000;border-style: none;color: white;" required>
+                                                </div>
+                                            </div>
+                                            <div style="font-size: 11px;padding-top: 10px;margin-bottom: 0px;">Your full name as it should appear on the envelope</div>
+
+                                        </div>
+                                        <div class="row" style="padding: 10px;">
+                                            <div class="col-md-12">
+                                                <div class="form-group" style="margin-top: 0px;">
+                                                    <label>Address</label>
+                                                    <textarea type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;" rows="3" required>{{$order_details->address['from_address'] ?? null}}</textarea>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;">
+                                        <div class="row" style="padding: 10px;">
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="margin-top: 10px">
+                                                    <label>Country</label>
+                                                    <select class="form-select" style="background: #6b0000;border-style: none;" required>
+                                                        <option value="Sri Lanka">Sri Lanka</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="margin-top: 10px">
+                                                    <label>City</label>
+                                                    <input type="text" class="form-control" style="background: #6b0000;border-style: none;" required>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div style="font-size: 11px;padding-top: 10px;margin-bottom: 0px;">Your full name as it should appear on the envelope</div>
 
                                     </div>
-                                    <div class="row" style="padding: 10px;">
-                                        <div class="col-md-12">
-                                            <div class="form-group" style="margin-top: 0px;">
-                                                <label>Address</label>
-                                                <textarea type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding: 10px;">
-                                        <div class="col-md-6">
-                                            <div class="form-group" style="margin-top: 10px">
-                                                <label>Country</label>
-                                                <select class="form-select" style="background: #6b0000;border-style: none;">
-                                                    <option value="Sri Lanka">Sri Lanka</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group" style="margin-top: 10px">
-                                                <label>City</label>
-                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;">
-                                            </div>
-                                        </div>
-                                    </div>
+
+
 
                                 </div>
                                 <div class="col-md-6">
@@ -78,13 +84,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>First Name</label>
-                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;">
+                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;" value="" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Last Name</label>
-                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;">
+                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;" required>
                                             </div>
                                         </div>
                                         <div style="font-size: 11px;padding-top: 10px;margin-bottom: 0px;">Your full name as it should appear on the envelope</div>
@@ -94,7 +100,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group" style="margin-top: 0px;">
                                                 <label>Address</label>
-                                                <textarea type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;" rows="3"></textarea>
+                                                <textarea type="text" class="form-control" style="background: #6b0000;border-style: none;color: white;" rows="3" required>{{$order_details->address['to_address'] ?? null}}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -102,7 +108,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group" style="margin-top: 10px">
                                                 <label>Country</label>
-                                                <select class="form-select" style="background: #6b0000;border-style: none;">
+                                                <select class="form-select" style="background: #6b0000;border-style: none;" required>
                                                     <option value="Sri Lanka">Sri Lanka</option>
                                                 </select>
                                             </div>
@@ -110,7 +116,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group" style="margin-top: 10px">
                                                 <label>City</label>
-                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;">
+                                                <input type="text" class="form-control" style="background: #6b0000;border-style: none;" required>
                                             </div>
                                         </div>
                                     </div>
@@ -123,7 +129,7 @@
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
                 </div>
 
-                <button onclick="document.getElementById('mainform').submit();" type="submit" class="btn btn-primary pull-right" style="background: #a90303;border-style: none;background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Checkout</button>
+                <button type="submit" class="btn btn-primary pull-right" style="background: #a90303;border-style: none;background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Checkout</button>
             </div>
 
 

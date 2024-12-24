@@ -14,14 +14,16 @@
     'activeTab'=>'writing-desk'])
 
     @include('landing.writing-desk.modals.letter-attachment')
-    @include('landing.writing-desk.modals.summery-modal')
 
     <div class="container">
         <form id="mainform" method="post" action="{{route('landing.writing-desk.store',[
         $template->slug,$order_details->id])}}">
 
             {{csrf_field()}}
-        <nav>
+
+            @include('landing.writing-desk.modals.summery-modal')
+
+            <nav>
 
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
@@ -74,21 +76,27 @@
     </div>
 
     <script>
-        introJs().setOptions({
-            steps: [
-                {
-                element: document.querySelector('#expolore_poem_button'),
-                intro: "The Poem Explorer allows you to easily browse, discover, and add beautiful poems to your letters."
-                },
-                {
-                    element: document.querySelector('#letter_attachment_button'),
-                    intro: "Add a personal touch to your letter by attaching a thoughtful gift item."
-                },
-                {
-                    element: document.querySelector('#save-and-next-button'),
-                    intro: "Click Save and Next to securely save your current details and proceed to the next step of checkout."
-                }
-            ]
-        }).start();
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!localStorage.getItem('introShown')) {
+                introJs().setOptions({
+                    steps: [
+                        {
+                            element: document.querySelector('#expolore_poem_button'),
+                            intro: "The Poem Explorer allows you to easily browse, discover, and add beautiful poems to your letters."
+                        },
+                        {
+                            element: document.querySelector('#letter_attachment_button'),
+                            intro: "Add a personal touch to your letter by attaching a thoughtful gift item."
+                        },
+                        {
+                            element: document.querySelector('#save-and-next-button'),
+                            intro: "Click Save and Next to securely save your current details and proceed to the next step of checkout."
+                        }
+                    ]
+                }).start();
+                localStorage.setItem('introShown', 'true'); // Set flag to indicate intro was shown
+            }
+        });
     </script>
+
 @endsection

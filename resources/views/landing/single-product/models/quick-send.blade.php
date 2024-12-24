@@ -41,32 +41,34 @@
                                 {{csrf_field()}}
 
 
-                                <div class="row">
-                                    <didv class="col-md-6">
-                                        <label style="padding-bottom: 10px;">First Name</label>
-                                        <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" style="margin-bottom: 20px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
-                                    </didv>
-                                    <didv class="col-md-6">
-                                        <label style="padding-bottom: 10px;">Last Name</label>
-                                        <input type="text" name="last_name" value="{{old('last_name')}}" class="form-control" style="margin-bottom: 20px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
-                                    </didv>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label style="padding-bottom: 10px;">What is your Email Address</label>
-                                        <input type="text" name="email" class="form-control" {{ old('email')}} style="margin-bottom: 20px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label style="padding-bottom: 10px;">Phone Number</label>
-                                        <input type="tel" name="phone" class="form-control" {{old('phone')}} style="margin-bottom: 20px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
-                                    </div>
-                                </div>
 
                                 @auth()
 
 
                                 @else
+                                    <div class="row">
+                                        <didv class="col-md-6">
+                                            <label style="padding-bottom: 10px;">First Name</label>
+                                            <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" style="margin-bottom: 20px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
+                                        </didv>
+                                        <didv class="col-md-6">
+                                            <label style="padding-bottom: 10px;">Last Name</label>
+                                            <input type="text" name="last_name" value="{{old('last_name')}}" class="form-control" style="margin-bottom: 20px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
+                                        </didv>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label style="padding-bottom: 10px;">What is your Email Address</label>
+                                            <input type="text" name="email" class="form-control" {{ old('email')}} style="margin-bottom: 20px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label style="padding-bottom: 10px;">Phone Number</label>
+                                            <input type="tel" name="phone" class="form-control" {{old('phone')}} style="margin-bottom: 20px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
+                                        </div>
+                                    </div>
+
                                     <div style="background: #650303;border-radius: 10px;margin-top: 10px">
                                         <div class="form-check form-switch" style="padding-left: 50px;padding-top: 20px;padding-bottom: 20px;font-size: 13px;margin-bottom: -10px;">
                                             <input class="form-check-input" name="register_account" type="checkbox" id="flexSwitchCheckDefault" checked>
@@ -93,24 +95,16 @@
                                                         style="margin-bottom:10px;background: #670000;border-style: unset;border-radius: 10px;color: white;">
                                                 </div>
                                                 <div id="password-strength" style="display: none; margin-top: 5px;font-size: 14px;color: #f50000;background: #ec3131;padding-top: 6px;padding-bottom: 6px;border-radius: 0px 0px 10px 10px;background: #eaeaea;font-weight: 700;"></div>
-
                                             </div>
-
-
                                         </div>
                                     </div>
                                 @endauth()
 
 
                                 @auth()
-                                    <div style="margin-top: 20px">
-                                        <label style=";">From Address</label>
-                                        <textarea class="form-control"name="from_adress" rows="2" style="margin-bottom: 10px; background: #670000;border-style: unset;border-radius: 10px;color: white;" spellcheck="false">{{old('from_adress')}}</textarea>
-                                    </div>
-                                    <div style="margin-top: 20px">
-                                        <label style=";">To Address</label>
-                                        <textarea class="form-control" name="to_adress" rows="2" style="margin-bottom: 10px; background: #670000;border-style: unset;border-radius: 10px;color: white;" spellcheck="false"></textarea>
-                                    </div>
+
+                                    <input type="hidden" class="form-control"name="from_adress" rows="2" style="margin-bottom: 10px; background: #670000;border-style: unset;border-radius: 10px;color: white;" spellcheck="false">{{old('from_adress')}}</input>
+                                    <input type="hidden" class="form-control" name="to_adress" rows="2" style="margin-bottom: 10px; background: #670000;border-style: unset;border-radius: 10px;color: white;" spellcheck="false"></input>
                                 @elseauth()
                                     <div class="row">
                                         <div class="col-md-6">

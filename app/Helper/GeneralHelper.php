@@ -90,3 +90,11 @@ if(!function_exists('getTemplatePositions')) {
     }
 }
 
+
+if(!function_exists('getSettings')) {
+
+    function getSetting($settingSlug) {
+
+    }
+}
+
