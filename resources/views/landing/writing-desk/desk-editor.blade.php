@@ -66,10 +66,10 @@
 
     @if($design[$key.'_page'] ?? null)
 
-        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Text(`{{$design[$key.'_page']['objects'][$keyField]['text'] ?? 'Default Text'}}`, {
+        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Textbox(`{{$design[$key.'_page']['objects'][$keyField]['text'] ?? 'Default Text'}}`, {
             left: {{$design[$key.'_page']['objects'][$keyField]['left'] ?? 100}},
             top: {{$design[$key.'_page']['objects'][$keyField]['top'] ?? 100}},
-            width: 400,
+            width: 800,
             height: 1000,
             scaleX: {{  $design[$key.'_page']['objects'][$keyField]['scaleX'] ?? 100}},
             scaleY: {{  $design[$key.'_page']['objects'][$keyField]['scaleY'] ?? 100}},
@@ -77,10 +77,10 @@
             fill: 'black',
         });
     @else
-        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Text(`{!! getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? 'Default Text' !!}`, {
+        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Textbox(`{!! getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? 'Default Text' !!}`, {
             left: {{getTemplatePositions($template->id,$key,$fieldItem->name)['left'] ?? 100}},
             top: {{getTemplatePositions($template->id,$key,$fieldItem->name)['top'] ?? 100}},
-            width: 400,
+            width: 800,
             height: 1000,
             scaleX: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleX'] ?? 100}},
             scaleY: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleY'] ?? 100}},

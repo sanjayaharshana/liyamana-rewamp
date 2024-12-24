@@ -1,9 +1,6 @@
-<!-- Modal -->
 <div class="modal fade" id="finalizemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" style="
-">
-        <div class="modal-content" style="
-">
+    <div class="modal-dialog modal-xl" style="">
+        <div class="modal-content" style="">
             <div style="padding: 30px;background: radial-gradient(#c90909, #620202);color: white;">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -71,11 +68,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
-
-
                                 </div>
                                 <div class="col-md-6">
                                     <h3 style="color: white">Receipt's Details</h3>
@@ -128,16 +121,8 @@
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
                 </div>
-
                 <button type="submit" class="btn btn-primary pull-right" style="background: #a90303;border-style: none;background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Checkout</button>
             </div>
-
-
         </div>
     </div>
 </div>
-
-<script>
-
-
-</script>
