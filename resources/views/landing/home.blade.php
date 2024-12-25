@@ -6,10 +6,6 @@
 @section('meta_keywords', 'Liyamana, send letters online, heartfelt letters, pen pals, personalized communication, write letters, commercial letters, connect with friends')
 
 @section('content')
-
-
-
-
     <!-- Hero Section -->
     @include('landing.home.sections.hero')
 

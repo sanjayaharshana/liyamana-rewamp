@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>@yield('title', 'Default Title')</title>
-    <meta name="description" content="@yield('meta_description', 'Default description')">
-    <meta name="keywords" content="@yield('meta_keywords', 'Default, Keywords')">
+    <title>@yield('title', 'Liyamana Online Platform - World leading online platform for custom letters')</title>
+    <meta name="description" content="@yield('meta_description', 'Liyamana - A unique platform to send heartfelt letters to friends, loved ones, and connect with pen pals worldwide. Personalize your communication and revive the magic of handwritten messages.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'Liyamana, send letters online, heartfelt letters, pen pals, personalized communication, write letters, commercial letters, connect with friends')">
 
     <!-- Favicons -->
     <link href="{{url('landing_pages/assets/img/favicon.ico')}}" rel="icon">

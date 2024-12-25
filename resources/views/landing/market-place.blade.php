@@ -1,5 +1,10 @@
 @extends('landing.common.app')
 
+@section('title', 'Liyamana - Letter Marketplace | Buy & Sell Personalized Letter Templates')
+@section('meta_description', 'Discover Liyamana, the premier letter marketplace for buying and selling personalized letter templates. Perfect for business, personal, and creative communication needs.')
+@section('meta_keywords', 'Liyamana, letter marketplace, letter templates, buy letter templates, sell letter templates, personalized letters, business letter templates, creative letter designs, online letter platform')
+
+
 @section('content')
 
     @include('landing.market-place.hero')

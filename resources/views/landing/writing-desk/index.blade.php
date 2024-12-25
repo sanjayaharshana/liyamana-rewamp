@@ -18,36 +18,25 @@
     <div class="container">
         <form id="mainform" method="post" action="{{route('landing.writing-desk.store',[
         $template->slug,$order_details->id])}}">
-
             {{csrf_field()}}
-
             @include('landing.writing-desk.modals.summery-modal')
-
             <nav>
-
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
                 @foreach($template->layouts as $key => $layoutItem)
                     @if($loop->first)
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
-
                     @else
                         <!-- Other items -->
                         <button class="nav-link" id="nav-{{$key}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
                     @endif
-
-
                     <input type="hidden" name="{{$key}}_page" id="{{$key}}_page_data">
-
                 @endforeach
-
                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" id="expolore_poem_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Explorer Poems</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" id="letter_attachment_button" class="btn btn-primary btn-sm" style="background: #a71d1d;color: white;border-color: white;margin: 7px;">Letter Attachment</a>
                     <a href="#"  data-bs-toggle="modal" data-bs-target="#finalizemodal" id="save-and-next-button" class="btn btn-primary float-right" style="background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Next
                         <i class="bi bi-arrow-right" style="margin-right: 10px"></i>
                     </a>
-
-
             </div>
         </nav>
 

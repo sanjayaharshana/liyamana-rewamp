@@ -1,5 +1,12 @@
 @extends('landing.common.app')
 
+@section('title', 'Liyamana - Online Letter Sending Platform | Fast & Secure')
+
+@section('meta_description', 'Liyamana offers a secure and eco-friendly platform for sending letters online. Experience hassle-free communication with fast delivery and encrypted privacy.')
+@section('meta_keywords', 'Liyamana, online letter-sending platform, send letters online, digital letters, eco-friendly communication, secure letter service, online communication platform')
+
+
+
 @section('content')
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background" style="background: url('{{url('landing_pages/banding/banner_theme.png')}}');background-position: right;background-size: contain;background-repeat: no-repeat;background-color: #55060e;">
