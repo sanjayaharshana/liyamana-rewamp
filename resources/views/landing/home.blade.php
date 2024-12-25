@@ -2,8 +2,8 @@
 
 @section('title', 'Liyamana Online Platform - World leading online platform for custom letters')
 
-@section('meta_description', 'This is a custom page description.')
-@section('meta_keywords', 'custom, page, keywords')
+@section('meta_description', 'Liyamana - A unique platform to send heartfelt letters to friends, loved ones, and connect with pen pals worldwide. Personalize your communication and revive the magic of handwritten messages.')
+@section('meta_keywords', 'Liyamana, send letters online, heartfelt letters, pen pals, personalized communication, write letters, commercial letters, connect with friends')
 
 @section('content')
 
