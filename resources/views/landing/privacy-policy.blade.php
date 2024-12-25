@@ -1,5 +1,12 @@
 @extends('landing.common.app')
 
+@section('title', 'Privacy Policy | Liyamana - Secure & Transparent Letter Marketplace')
+
+@section('meta_description', 'Read Liyamana Privacy Policy to learn how we handle your data securely and transparently. Protecting your privacy is our priority')
+@section('meta_keywords', 'Liyamana Privacy Policy, data privacy, secure platform, privacy practices, user data protection, letter marketplace privacy, transparent policies')
+
+
+
 @section('content')
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background" style="background: url('{{url('landing_pages/banding/banner_theme.png')}}');background-position: right;background-size: contain;background-repeat: no-repeat;background-color: #55060e;">
