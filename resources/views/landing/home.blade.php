@@ -1,6 +1,15 @@
 @extends('landing.common.app')
 
+@section('title', 'Liyamana Online Platform - World leading online platform for custom letters')
+
+@section('meta_description', 'This is a custom page description.')
+@section('meta_keywords', 'custom, page, keywords')
+
 @section('content')
+
+
+
+
     <!-- Hero Section -->
     @include('landing.home.sections.hero')
 
