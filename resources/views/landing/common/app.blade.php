@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Liyamana - Online Letter Platform</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <title>@yield('title', 'Default Title')</title>
+    <meta name="description" content="@yield('meta_description', 'Default description')">
+    <meta name="keywords" content="@yield('meta_keywords', 'Default, Keywords')">
 
     <!-- Favicons -->
     <link href="{{url('landing_pages/assets/img/favicon.png')}}" rel="icon">
