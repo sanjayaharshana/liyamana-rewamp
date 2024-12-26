@@ -11,6 +11,7 @@
     <!-- Favicons -->
     <link href="{{url('landing_pages/assets/img/favicon.ico')}}" rel="icon">
     <link href="{{url('landing_pages/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+    <meta property="og:image" content="{{url('landing_pages/assets/img/link_cover.png')}}">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
