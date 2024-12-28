@@ -71,38 +71,41 @@
         circle,
         rgba(44, 2, 11, 0.3) 0%, /* Subtle dark red center */
         rgba(153, 26, 26, 0.2) 50%, /* Muted red for modern contrast */
-        rgba(11, 11, 44, 0.4) 100% /* Deep blue-black outer glow */
+        rgba(71, 0, 0, 0.8) 100% /* Deep blue-black outer glow */
     );
     backdrop-filter: blur(15px); /* Glassy blur effect */
     -webkit-backdrop-filter: blur(15px); /* Ensures Safari compatibility */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Light translucent border */
     animation: colorShift 3s infinite alternate; /* Smooth color animation */
-    transition: background 0.2s ease-in-out; /* Smooth transition effect */
+    transition: all 0.3s ease, background 0.3s ease;
 }
+/* Scrolled state */
+
+
 
 @keyframes colorShift {
     0% {
         background: radial-gradient(
             circle,
-            rgba(69, 10, 10, 0.3) 0%, /* Rich dark red center */
-            rgba(140, 26, 26, 0.3) 50%, /* Highlighted red */
-            rgba(11, 11, 44, 0.4) 100% /* Dark, modern blue-black */
+            rgba(140, 26, 26, 0.8)0%,
+            rgba(140, 26, 26, 0.7) 50%,
+            rgba(119, 1, 1, 0.8) 100%
         );
     }
     50% {
         background: radial-gradient(
             circle,
-            rgba(44, 2, 11, 0.3) 0%, /* Deep red tint */
-            rgba(153, 26, 26, 0.25) 50%, /* Muted red gradient */
-            rgba(10, 10, 30, 0.4) 100% /* Subtle darker glow */
+            rgba(153, 26, 26, 0.8) 0%,
+            rgba(153, 26, 26, 0.7) 50%,
+            rgba(71, 0, 0, 0.8) 100%
         );
     }
     100% {
         background: radial-gradient(
             circle,
-            rgba(11, 2, 11, 0.3) 0%, /* Dark maroon-red center */
-            rgba(140, 26, 26, 0.3) 50%, /* Modern red balance */
-            rgba(11, 11, 44, 0.4) 100% /* Deep blue-black */
+            rgba(140, 26, 26, 0.8) 0%,
+            rgba(140, 26, 26, 0.7) 50%,
+            rgba(119, 1, 1, 0.8) 100%
         );
     }
 }
@@ -427,7 +430,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const megaMenuTrigger = document.querySelector('.mega-menu-trigger');
-    const megaMenu = document.querySelector('.has-mega-menu');
+    const megaMenu = document.querySelector('.mega-menu');
     const mobileNav = document.querySelector('.mobile-nav-toggle');
     const navMenu = document.querySelector('.navmenu');
 
@@ -444,17 +447,27 @@ document.addEventListener('DOMContentLoaded', function() {
         megaMenu.classList.toggle('menu-active');
     }
 
+    // Scroll handler for background change
+    function handleScroll() {
+        const scrollPosition = window.scrollY;
+        if (scrollPosition > 100) { // Change background after 100px scroll
+            megaMenu.classList.add('scrolled');
+        } else {
+            megaMenu.classList.remove('scrolled');
+        }
+    }
+
+    // Event listeners
+    window.addEventListener('scroll', handleScroll);
     mobileNav.addEventListener('click', toggleMobileMenu);
     megaMenuTrigger.addEventListener('click', toggleMegaMenu);
 
-    // Close mega menu when clicking outside
     document.addEventListener('click', function(e) {
         if (!megaMenu.contains(e.target)) {
             megaMenu.classList.remove('menu-active');
         }
     });
 
-    // Reset on window resize
     window.addEventListener('resize', function() {
         if (window.innerWidth > 991) {
             megaMenu.classList.remove('menu-active');
@@ -464,7 +477,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
 </script>
 @stack('footer-js')
 <!-- Main JS File -->
