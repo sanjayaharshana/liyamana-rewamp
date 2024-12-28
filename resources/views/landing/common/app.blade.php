@@ -36,6 +36,277 @@
             --nav-color: #ffffff;
             background: #8b262f;
         }
+
+.has-mega-menu {
+    position: relative;
+}
+
+.mega-menu-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    color: #333;
+    cursor: pointer;
+}
+
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: -160px; /* Changed from right: 0 to left: 50% */
+    width: 100vw;
+    max-height: 80vh;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    transform: translateX(-50%);
+    background: radial-gradient(
+        circle,
+        rgba(44, 2, 11, 0.3) 0%, /* Subtle dark red center */
+        rgba(153, 26, 26, 0.2) 50%, /* Muted red for modern contrast */
+        rgba(11, 11, 44, 0.4) 100% /* Deep blue-black outer glow */
+    );
+    backdrop-filter: blur(15px); /* Glassy blur effect */
+    -webkit-backdrop-filter: blur(15px); /* Ensures Safari compatibility */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light translucent border */
+    animation: colorShift 10s infinite alternate; /* Smooth color animation */
+    transition: background 0.2s ease-in-out; /* Smooth transition effect */
+}
+
+@keyframes colorShift {
+    0% {
+        background: radial-gradient(
+            circle,
+            rgba(69, 10, 10, 0.3) 0%, /* Rich dark red center */
+            rgba(140, 26, 26, 0.3) 50%, /* Highlighted red */
+            rgba(11, 11, 44, 0.4) 100% /* Dark, modern blue-black */
+        );
+    }
+    50% {
+        background: radial-gradient(
+            circle,
+            rgba(44, 2, 11, 0.3) 0%, /* Deep red tint */
+            rgba(153, 26, 26, 0.25) 50%, /* Muted red gradient */
+            rgba(10, 10, 30, 0.4) 100% /* Subtle darker glow */
+        );
+    }
+    100% {
+        background: radial-gradient(
+            circle,
+            rgba(11, 2, 11, 0.3) 0%, /* Dark maroon-red center */
+            rgba(140, 26, 26, 0.3) 50%, /* Modern red balance */
+            rgba(11, 11, 44, 0.4) 100% /* Deep blue-black */
+        );
+    }
+}
+
+.mega-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    min-width: 100%;
+}
+
+.mega-menu-inner {
+    padding: 25px;
+    width: 100%; /* Added to ensure full width */
+}
+
+.mega-menu-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mega-menu-item {
+    position: relative;
+}
+
+.mega-menu-item a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: #f1f1f1;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.1s ease;
+    -webkit-backdrop-filter: blur(5px);
+    font-size: 12px;
+    min-height: 50px;
+    margin-top: -17px;
+}
+
+.mega-menu-item a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: rgba(247, 73, 73, 1);
+    font-weight: bold; /* Makes the text bold */
+    transform: translateX(5px);
+    font-size: 12px;
+    text-shadow: #000 1px 0 5px;
+    letter-spacing: 1px; /* Adds letter spacing */
+}
+
+.mega-menu-item .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    background: rgba(255, 255, 255, 0.2); /* Match the glassy look */
+    border-radius: 6px;
+    -webkit-backdrop-filter: blur(5px);
+}
+.mega-menu-item .text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    line-height: 1.2;
+}
+.has-mega-menu:hover .mega-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Custom Scrollbar */
+.mega-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mega-menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.mega-menu::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+/* Responsive Styles */
+/* Add/Update these mobile-specific styles */
+@media (max-width: 1200px) {
+    .mega-menu-grid {
+        gap: 10px;
+    }
+
+    .mega-menu-item a {
+        font-size: 11px;
+    }
+}
+@media (max-width: 991px) {
+    .navmenu.active {
+        display: block !important;
+    }
+    .mega-menu {
+        position: fixed;
+        top: 40px; /* Adjust based on your header height */
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 40px);
+        transform: translateX(-100%);
+        opacity: 1;
+        visibility: visible;
+        transition: transform 0.3s ease-in-out;
+        border-radius: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .menu-active .mega-menu {
+        transform: translateX(0);
+    }
+
+    .mega-menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+    }
+
+    .mega-menu-inner {
+        padding: 15px;
+    }
+
+    .mega-menu-item a {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .mobile-nav-toggle.bi-x {
+        display: block !important;
+    }
+
+    .mega-menu-trigger {
+        padding: 12px 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .has-mega-menu {
+        position: static;
+    }
+
+    /* Enhanced touch interactions */
+    .mega-menu-item a {
+        padding: 15px 20px;
+        margin: 5px 0;
+    }
+
+    /* Improved mobile animations */
+    .menu-active .mega-menu-item {
+        animation: slideInRight 0.3s forwards;
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 576px) {
+    .mega-menu {
+        top: 60px; /* Adjust for smaller screens */
+        height: calc(100vh - 60px);
+    }
+
+    .mega-menu-inner {
+        padding: 10px;
+    }
+
+    .mega-menu-item a {
+        padding: 12px 15px;
+        font-size: 16px;
+    }
+    .mega-menu-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Stagger animation for menu items */
+.mega-menu-item:nth-child(1) { animation-delay: 0.1s; }
+.mega-menu-item:nth-child(2) { animation-delay: 0.15s; }
+.mega-menu-item:nth-child(3) { animation-delay: 0.2s; }
+.mega-menu-item:nth-child(4) { animation-delay: 0.25s; }
+.mega-menu-item:nth-child(5) { animation-delay: 0.3s; }
     </style>
 
 </head>
@@ -153,6 +424,48 @@
 
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const megaMenuTrigger = document.querySelector('.mega-menu-trigger');
+    const megaMenu = document.querySelector('.has-mega-menu');
+    const mobileNav = document.querySelector('.mobile-nav-toggle');
+    const navMenu = document.querySelector('.navmenu');
+
+    function toggleMobileMenu(e) {
+        e.preventDefault();
+        navMenu.classList.toggle('active');
+        mobileNav.classList.toggle('bi-list');
+        mobileNav.classList.toggle('bi-x');
+    }
+
+    function toggleMegaMenu(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        megaMenu.classList.toggle('menu-active');
+    }
+
+    mobileNav.addEventListener('click', toggleMobileMenu);
+    megaMenuTrigger.addEventListener('click', toggleMegaMenu);
+
+    // Close mega menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!megaMenu.contains(e.target)) {
+            megaMenu.classList.remove('menu-active');
+        }
+    });
+
+    // Reset on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 991) {
+            megaMenu.classList.remove('menu-active');
+            navMenu.classList.remove('active');
+            mobileNav.classList.remove('bi-x');
+            mobileNav.classList.add('bi-list');
+        }
+    });
+});
+
+</script>
 @stack('footer-js')
 <!-- Main JS File -->
 <script src="{{url('landing_pages/assets/js/main.js')}}"></script>
