@@ -145,7 +145,7 @@
 
 .mega-menu-item a:hover {
     background: rgba(255, 255, 255, 0.3);
-    color: rgba(247, 73, 73, 1);
+    color: #fff;
     font-weight: bold; /* Makes the text bold */
     transform: translateX(5px);
     font-size: 12px;
