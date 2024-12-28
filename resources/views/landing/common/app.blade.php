@@ -76,7 +76,7 @@
     backdrop-filter: blur(15px); /* Glassy blur effect */
     -webkit-backdrop-filter: blur(15px); /* Ensures Safari compatibility */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Light translucent border */
-    animation: colorShift 10s infinite alternate; /* Smooth color animation */
+    animation: colorShift 3s infinite alternate; /* Smooth color animation */
     transition: background 0.2s ease-in-out; /* Smooth transition effect */
 }
 
