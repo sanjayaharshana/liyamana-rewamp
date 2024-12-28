@@ -80,16 +80,9 @@
     transition: all 0.3s ease, background 0.3s ease;
 }
 /* Scrolled state */
-.mega-menu.scrolled {
-    background: radial-gradient(
-        circle,
-        rgba(44, 2, 11, 0.8) 0%,
-        rgba(153, 26, 26, 0.7) 50%,
-        rgba(119, 1, 1, 0.8) 100%
-    );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
+
+
+
 @keyframes colorShift {
     0% {
         background: radial-gradient(
