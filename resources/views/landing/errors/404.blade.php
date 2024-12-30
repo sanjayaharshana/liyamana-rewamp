@@ -2,135 +2,102 @@
 
 @section('content')
     <!-- Hero Section -->
-
-    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Pacifico", cursive;
+        /*======================
+    404 page
+=======================*/
+
+
+        .page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
         }
 
-        .center, .envelope-wrapper .letter, .container {
-            display: grid;
-            place-items: center;
+        .page_404  img{ width:100%;}
+
+        .four_zero_four_bg{
+
+            background-image: url({{url('dribbble_1.gif')}});
+            height: 400px;
+            background-position: center;
         }
 
-        .container {
-            height: 100vh;
+
+        .four_zero_four_bg h1{
+            font-size:80px;
         }
 
-        .envelope-wrapper {
-            position: relative;
-            cursor: pointer;
-            outline: none;
-            background-color: #500101;
-            box-shadow: 0 0 10px #999;
+        .four_zero_four_bg h3{
+            font-size:80px;
         }
-        .envelope-wrapper .envelope {
-            width: 300px;
-            height: 200px;
-            position: relative;
-            border-top: calc(200px / 2) solid transparent;
-            border-bottom: calc(200px / 2) solid #ce2e2e;
-            border-right: calc(300px / 2) solid #6e0b0b;
-            border-left: calc(300px / 2) solid #8c1313;
-            z-index: 2;
-        }
-        .envelope-wrapper .opened-envelope {
-            width: 0;
-            height: 0;
-            position: absolute;
-            border-top: calc(300px / 2.5) solid #b70606;
-            border-bottom: none;
-            border-right: calc(300px / 2) solid transparent;
-            border-left: calc(300px / 2) solid transparent;
-            z-index: 3;
-        }
-        .envelope-wrapper .letter {
-            position: absolute;
-            margin: 10px;
-            width: calc(300px - 20px);
-            height: calc(200px - 20px);
-            color: #420202;
-            font-size: 22px;
-            font-style: italic;
-            z-index: 1;
-            background-color: #fff;
-            box-shadow: 0 0 20px #9999998f;
-        }
-        .envelope-wrapper .letter ion-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
+
+        .link_404{
+            color: #fff!important;
+            padding: 10px 20px;
+            background: #500101;
+            margin: 20px 0;
+            display: inline-block;}
+        .contant_box_404{ margin-top:-50px;}
     </style>
 
-    </head>
-    <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="envelope-wrapper">
-                    <div class="opened-envelope"></div>
-                    <div class="letter">
-                        Page not found
-                        <ion-icon class="close-icon" name="close"></ion-icon>
+    <section class="page_404">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div class="" style="padding: 60px;text-align: center;">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">404</h1>
+
+
+                        </div>
+
+                        <div class="contant_box_404">
+                            <h3 class="h2">
+                                Look like you're lost
+                            </h3>
+
+                            <p>the page you are looking for not avaible!</p>
+
+                            <a href="" class="link_404">Go to Home</a>
+                        </div>
                     </div>
-                    <div class="envelope"></div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <h3>Page not found guys!</h3>
-                <p>Handle the 404 in Laravel: Laravel automatically renders the 404.blade.php file when a NotFoundHttpException occurs. To customize the behavior, you can define it in the render method in the App\Exceptions\Handler class.</p>
-
-            </div>
         </div>
-
-    </div>
-    <!-- partial -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/CSSRulePlugin.min.js'></script>
+    </section>
 
 
     <script>
-        var openLetter = gsap.timeline({ paused: true });
-
-        openLetter
-            .to(".opened-envelope", {
-                duration: 0.5,
-                ease: "back",
-                rotateX: 180,
-                transformOrigin: "top",
-                zIndex: 0
-            })
-            .set(".opened-envelope", { cssRule: { marginTop: "-10px" } })
-            .to(".letter", {
-                duration: 1,
-                ease: "back",
-                translateY: -200
-            })
-            .set(".letter", { zIndex: 99 })
-            .to(".letter", {
-                duration: 0.7,
-                ease: "back",
-                translateY: 0,
-                scale: 1.5
-            });
-
-        $(".envelope-wrapper").click(() => {
-            event.stopPropagation();
-            openLetter.play();
-        });
-
-        $(".close-icon").click(() => {
-            event.stopPropagation();
-            openLetter.reverse();
+        var parallax = function(e) {
+                var windowWidth = $(window).width();
+                if (windowWidth < 768) return;
+                var halfFieldWidth = $(".parallax").width() / 2,
+                    halfFieldHeight = $(".parallax").height() / 2,
+                    fieldPos = $(".parallax").offset(),
+                    x = e.pageX,
+                    y = e.pageY - fieldPos.top,
+                    newX = (x - halfFieldWidth) / 30,
+                    newY = (y - halfFieldHeight) / 30;
+                $('.parallax [class*="wave"]').each(function(index) {
+                    $(this).css({
+                        transition: "",
+                        transform:
+                            "translate3d(" + index * newX + "px," + index * newY + "px,0px)"
+                    });
+                });
+            },
+            stopParallax = function() {
+                $('.parallax [class*="wave"]').css({
+                    transform: "translate(0px,0px)",
+                    transition: "all .7s"
+                });
+                $timeout(function() {
+                    $('.parallax [class*="wave"]').css("transition", "");
+                }, 700);
+            };
+        $(document).ready(function() {
+            $(".not-found").on("mousemove", parallax);
+            $(".not-found").on("mouseleave", stopParallax);
         });
     </script>
-
 @endsection
 
 
