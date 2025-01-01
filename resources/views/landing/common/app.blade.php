@@ -53,8 +53,8 @@
 .mega-menu {
     position: absolute;
     top: 100%;
-    left: -160px; /* Changed from right: 0 to left: 50% */
-    width: 100vw;
+    left: -160px;
+    width: 110vw;
     max-height: 80vh;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -78,6 +78,10 @@
     border: 1px solid rgba(255, 255, 255, 0.2); /* Light translucent border */
     animation: colorShift 3s infinite alternate; /* Smooth color animation */
     transition: all 0.3s ease, background 0.3s ease;
+}
+
+.has-mega-menu {
+    position: relative;
 }
 /* Scrolled state */
 
