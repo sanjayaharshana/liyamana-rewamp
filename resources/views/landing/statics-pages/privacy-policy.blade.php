@@ -4,35 +4,13 @@
 
 @section('meta_description', 'Read Liyamana Privacy Policy to learn how we handle your data securely and transparently. Protecting your privacy is our priority')
 @section('meta_keywords', 'Liyamana Privacy Policy, data privacy, secure platform, privacy practices, user data protection, letter marketplace privacy, transparent policies')
-
-
-
 @section('content')
-
     @include('landing.common.page-heading-hero', ['hero_title' => 'Privacy Policy', 'hero_sub_title' => 'privacy policy'])
-
 
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Quick Links</h5>
-                        <ul>
-                            <li><a href="#information-we-collect">1. Information We Collect</a></li>
-                            <li><a href="#how-we-use-your-information">2. How We Use Your Information</a></li>
-                            <li><a href="#sharing-your-information">3. Sharing Your Information</a></li>
-                            <li><a href="#cookies-and-tracking-technologies">4. Cookies and Tracking Technologies</a></li>
-                            <li><a href="#data-retention">5. Data Retention</a></li>
-                            <li><a href="#security-of-your-information">6. Security of Your Information</a></li>
-                            <li><a href="#your-rights">7. Your Rights</a></li>
-                            <li><a href="#third-party-links">8. Third-Party Links</a></li>
-                            <li><a href="#changes-to-this-privacy-policy">9. Changes to This Privacy Policy</a></li>
-                            <li><a href="#contact-us">10. Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-
+                @include('landing.statics-pages.sections.quick_links')
             </div>
             <div class="col-md-8">
                 <div class="card shadow-lg p-3 mb-5 bg-white rounded">
@@ -99,7 +77,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StaticPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,15 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->name('landing.home');
 Route::get('/about-us',[\App\Http\Controllers\Frontend\AboutUsController::class,'index'])->name('landing.about-us');
 
-Route::get('/terms-and-conditions', function () {
-    return view('landing.terms-and-conditions');
-})->name('terms.conditions');
-Route::get('/privacy-policy', function () {
-    return view('landing.privacy-policy');
-})->name('privacy.policy');
-Route::get('/refund-policy', function () {
-    return view('landing.refund-policy');
-})->name('refund.policy');
+
+Route::get('/terms-and-conditions',[StaticPageController::class,'termsAndConditions'])->name('terms.conditions');
+Route::get('/privacy-policy',[StaticPageController::class,'privacyPolicy'])->name('privacy.policy');
+Route::get('/refund-policy',[StaticPageController::class,'refundPolicy'])->name('refund.policy');
+Route::get('cookie-policy',[StaticPageController::class,'cookiePolicy'])->name('cookie.policy');
+
 
 Route::get('/test', function () {
     return view('welcome');
