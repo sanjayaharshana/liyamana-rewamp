@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\PostCardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->name('landing.home');
 Route::get('/about-us',[\App\Http\Controllers\Frontend\AboutUsController::class,'index'])->name('landing.about-us');
+Route::get('/post-card',[PostCardController::class,'index'])->name('landing.post-card');
+
 
 Route::get('/terms-and-conditions', function () {
     return view('landing.terms-and-conditions');

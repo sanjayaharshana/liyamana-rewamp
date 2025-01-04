@@ -731,5 +731,7 @@
 
     </section><!-- /Contact Section -->
 @endsection
+
+
 @section('footer')
 @endsection

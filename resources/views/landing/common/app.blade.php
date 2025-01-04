@@ -17,6 +17,9 @@
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="{{url('landing_pages/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -24,6 +27,7 @@
     <link href="{{url('landing_pages/assets/vendor/aos/aos.css')}}" rel="stylesheet">
     <link href="{{url('landing_pages/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
     <link href="{{url('landing_pages/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
 
     @stack('head-css')
     @stack('head-js')
@@ -53,8 +57,8 @@
 .mega-menu {
     position: absolute;
     top: 100%;
-    left: -160px; /* Changed from right: 0 to left: 50% */
-    width: 100vw;
+    left: -160px;
+    width: 110vw;
     max-height: 80vh;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -79,6 +83,11 @@
     animation: colorShift 3s infinite alternate; /* Smooth color animation */
     transition: all 0.3s ease, background 0.3s ease;
 }
+
+.has-mega-menu {
+    position: relative;
+}
+
 /* Scrolled state */
 
 
@@ -312,6 +321,7 @@
 .mega-menu-item:nth-child(5) { animation-delay: 0.3s; }
     </style>
 
+
 </head>
 
 <body class="index-page">
@@ -413,6 +423,7 @@
 <script src="{{url('landing_pages/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
 <script src="{{url('landing_pages/assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
 
+
 <script>
     // Register the service worker
     if ('serviceWorker' in navigator) {
@@ -424,7 +435,6 @@
             });
         });
     }
-
 </script>
 
 <script>
