@@ -92,6 +92,14 @@
                </div>
            </div>
        </div>
+
+
+        @include('landing.single-product.review_section')
+
+
+
+
+
     </div>
 
     <!-- Modal -->

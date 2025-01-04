@@ -14,6 +14,8 @@
     @include('landing.home.sections.call_to_action')
     <!-- Faq 2 Section -->
     @include('landing.home.sections.services')
+
+    @include('landing.home.popups.cookies_policy')
 @endsection
 
 @section('footer')

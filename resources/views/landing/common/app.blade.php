@@ -87,7 +87,10 @@
 .has-mega-menu {
     position: relative;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
 /* Scrolled state */
 
 
