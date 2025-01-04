@@ -1,74 +1,74 @@
 @extends('landing.common.app')
 
-@section('content')
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background" style="background: url('{{url('landing_pages/banding/banner_theme.png')}}');background-position: right;background-size: contain;background-repeat: no-repeat;background-color: #55060e;">
-        <div class="container">
-            <h1 style="color: white;">Terms and Conditions</h1>
-            <small style="color: white;">Terms and conditions will apply to our services</small>
-        </div>
-    </section>
-    <!-- /Hero Section -->
+@section('title', 'Terms and Conditions | Liyamana - Online Letter Sending Platform')
+@section('meta_description', 'Read the terms and conditions for using Liyamana, an online letter-sending platform. Learn about your rights, responsibilities, and the scope of our services.')
+@section('meta_keywords', 'Liyamana Terms and Conditions, online letter service, user agreement, service policies')
 
-    <!-- Content -->
-     <section class="section light-background">
-        <div class="container">
-            <h6>Welcome to Liyamana! These Terms and Conditions ("Terms") govern your access to and use of our platform, services, and tools. By accessing or using Liyamana, you agree to comply with these Terms. Please read them carefully before proceeding.</h6>
-            
-            <h2>1. Acceptance of Terms</h2>
-            <p>By using Liyamana, you confirm that you are at least 18 years old and have the legal capacity to enter into these Terms. If you do not agree to any part of these Terms, you must discontinue use of our platform immediately.</p>
-            
-            <h2>2. Use of the Platform</h2>
-            <ul>
-                <li>You may use Liyamana only for lawful purposes and in accordance with these Terms.</li>
-                <li>You agree not to misuse our platform by transmitting harmful, offensive, or inappropriate content.</li>
-                <li>You are responsible for maintaining the confidentiality of your account credentials and accept responsibility for all activities under your account.</li>
-                <li>We reserve the right to suspend or terminate your account if we suspect a breach of these Terms or any unlawful activity.</li>
-            </ul>
-            
-            <h2>3. Orders and Payments</h2>
-            <ul>
-                <li>By placing an order through Liyamana, you are making an offer to purchase our services. All orders are subject to acceptance and availability.</li>
-                <li>Prices for services are displayed on our website and may change without prior notice. Promotional offers are subject to additional terms.</li>
-                <li>Payments must be made through our approved methods, and you agree to provide accurate and valid payment information.</li>
-                <li>We partner with trusted third-party payment processors to securely handle your transactions.</li>
-            </ul>
-            
-            <h2>4. Delivery of Services</h2>
-            <ul>
-                <li>We will make every reasonable effort to deliver your letters or content within the stated timeframe. However, delays may occur due to factors beyond our control.</li>
-                <li>Digital and physical deliveries are subject to their respective terms outlined during the order process.</li>
-            </ul>
-            
-            <h2>5. Intellectual Property Rights</h2>
-            <p>All content and materials on Liyamana, including text, images, graphics, and logos, are the property of Liyamana or its licensors and are protected by intellectual property laws. You may not use, reproduce, or distribute any of our materials without prior written consent.</p>
-            
-            <h2>6. User-Generated Content</h2>
-            <ul>
-                <li>When submitting content through Liyamana (e.g., letters or messages), you grant us a non-exclusive, royalty-free license to use, reproduce, or modify the content as necessary to deliver our services.</li>
-                <li>You represent and warrant that your submitted content does not violate any applicable laws or infringe on the rights of others.</li>
-            </ul>
-            
-            <h2>7. Refund and Cancellation Policy</h2>
-            <p>Our refund and cancellation policies are outlined in our <a href="refund-policy.html">Refund Policy</a>. Please review it for detailed information regarding eligible refunds and cancellation processes.</p>
-            
-            <h2>8. Limitation of Liability</h2>
-            <p>To the fullest extent permitted by law, Liyamana and its affiliates shall not be liable for any indirect, incidental, or consequential damages resulting from your use of our platform or services. This includes, but is not limited to, loss of profits, data, or goodwill.</p>
-            
-            <h2>9. Privacy</h2>
-            <p>Your use of our platform is subject to our <a href="privacy-policy.html">Privacy Policy</a>, which explains how we collect, use, and protect your information.</p>
-            
-            <h2>10. Changes to the Terms</h2>
-            <p>We may update or modify these Terms at any time without prior notice. It is your responsibility to review these Terms periodically for any changes. Continued use of our platform signifies your acceptance of the updated Terms.</p>
-            
-            <h2>11. Governing Law</h2>
-            <p>These Terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction]. Any disputes arising out of or in connection with these Terms shall be resolved exclusively in the courts of [Your Jurisdiction].</p>
-            
-            <h2>12. Contact Information</h2>
-            <p>If you have any questions or concerns about these Terms, please contact us at <a href="mailto:support@liyamana.com">support@liyamana.com</a>.</p>
+
+@section('content')
+    @include('landing.common.page-heading-hero', ['hero_title' => 'Terms and Conditions', 'hero_sub_title' => 'Terms and Conditions'])
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                @include('landing.statics-pages.sections.quick_links')
+            </div>
+            <div class="col-md-8">
+                    <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+                            <div class="container">
+                                <h5 id="introduction">1. Introduction</h5>
+                                <p>Welcome to Liyamana, an online platform that facilitates sending physical letters via post. By using our services, you agree to comply with and be bound by these Terms and Conditions. Please read them carefully before accessing or using our platform.</p>
+
+                                <h5 id="acceptance">2. Acceptance of Terms</h5>
+                                <p>By registering, accessing, or using Liyamana, you accept these Terms and Conditions in full. If you disagree with any part of these terms, you must not use our services.</p>
+
+                                <h5 id="scope-of-services">3. Scope of Services</h5>
+                                <p>Liyamana provides a platform to create, manage, and send letters via postal services. While we ensure secure processing and timely dispatch, delivery times may vary based on the postal service provider. We are not responsible for delays or losses caused by third-party postal providers.</p>
+
+                                <h5 id="user-responsibilities">4. User Responsibilities</h5>
+                                <p>By using Liyamana, you agree to:</p>
+                                <ul>
+                                    <li>Provide accurate and complete information, including recipient addresses.</li>
+                                    <li>Ensure that the content of your letters complies with applicable laws and does not contain any prohibited material, such as hate speech, fraudulent content, or offensive language.</li>
+                                    <li>Maintain the confidentiality of your account credentials.</li>
+                                </ul>
+
+                                <h5 id="payments-and-fees">5. Payments and Fees</h5>
+                                <p>All payments for services must be made in advance. Prices are displayed clearly on the platform and may vary based on the type of service selected. Users are responsible for ensuring sufficient funds in their account to cover service costs.</p>
+
+                                <h5 id="cancellations">6. Cancellations and Refunds</h5>
+                                <p>Cancellation requests can only be made before the letter is dispatched. Refunds will be processed according to our <a href="/refund-policy">Refund Policy</a>.</p>
+
+                                <h5 id="limitations">7. Limitations of Liability</h5>
+                                <p>While we take all reasonable measures to ensure the accuracy and security of our services, Liyamana shall not be held liable for:</p>
+                                <ul>
+                                    <li>Delays caused by third-party postal services.</li>
+                                    <li>Loss or damage of letters after they have been dispatched.</li>
+                                    <li>Incorrect delivery due to user-provided errors.</li>
+                                </ul>
+                                <p>Our liability is limited to the cost of the service provided.</p>
+
+                                <h5 id="privacy">8. Privacy</h5>
+                                <p>We value your privacy and handle your data in accordance with our <a href="/privacy-policy">Privacy Policy</a>. By using our platform, you consent to the collection and processing of your personal data as outlined in our privacy terms.</p>
+
+                                <h5 id="modifications">9. Modifications to Terms</h5>
+                                <p>Liyamana reserves the right to modify these Terms and Conditions at any time. Changes will be effective upon posting on this page. Continued use of the platform after changes signifies acceptance of the updated terms.</p>
+
+                                <h5 id="contact-us">10. Contact Us</h5>
+                                <p>If you have any questions or concerns about these Terms and Conditions, please contact us:</p>
+                                <p>Email: <a href="mailto:support@liyamana.com">support@liyamana.com</a></p>
+                                <p>Phone: +94761306338</p>
+                                <p>Address: Wellawaya, Sri Lanka</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-     </section>
-     <!-- /Content -->
+    </div>
 @endsection
 
 @section('footer')
