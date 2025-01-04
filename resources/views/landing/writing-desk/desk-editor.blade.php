@@ -66,7 +66,7 @@
 
     @if($design[$key.'_page'] ?? null)
 
-        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Textbox(`{{$design[$key.'_page']['objects'][$keyField]['text'] ?? 'Default Text'}}`, {
+        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.{{$fieldItem->type  == 'text'? 'Text' : 'Textbox' }}(`{{$design[$key.'_page']['objects'][$keyField]['text'] ?? 'Default Text'}}`, {
             left: {{$design[$key.'_page']['objects'][$keyField]['left'] ?? 100}},
             top: {{$design[$key.'_page']['objects'][$keyField]['top'] ?? 100}},
             width: 800,
@@ -75,9 +75,10 @@
             scaleY: {{  $design[$key.'_page']['objects'][$keyField]['scaleY'] ?? 100}},
             fontSize: 30,
             fill: 'black',
+            editable: false,
         });
     @else
-        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.Textbox(`{!! getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? 'Default Text' !!}`, {
+        const {{$key}}{{ removeUnderscores($fieldItem->name) }} =  new fabric.{{$fieldItem->type  == 'text'? 'Text' : 'Textbox' }}(`{!! getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? 'Default Text' !!}`, {
             left: {{getTemplatePositions($template->id,$key,$fieldItem->name)['left'] ?? 100}},
             top: {{getTemplatePositions($template->id,$key,$fieldItem->name)['top'] ?? 100}},
             width: 800,
@@ -86,6 +87,7 @@
             scaleY: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleY'] ?? 100}},
             fontSize: 30,
             fill: 'black',
+            editable: false,
         });
     @endif
 
@@ -111,12 +113,14 @@
         // Scale the image to fit the canvas
         img.scaleToWidth({{$key}}canvas.width);
         img.scaleToHeight({{$key}}canvas.height);
-
         img.set({
             {{--left: {{$key}}canvas.width / 2 - img.getScaledWidth() / 2,--}}
             {{--top: {{$key}}canvas.height / 2 - img.getScaledHeight() / 2,--}}
             originX: 'left',
-            originY: 'top'
+            originY: 'top',
+            format: 'png',
+
+
         });
 
         // Set the background image of the canvas
