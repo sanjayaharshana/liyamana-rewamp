@@ -32,5 +32,7 @@ Route::group([
     $router->resource('inquiries', \App\Admin\Controllers\InquiriesController::class);
     $router->resource('help-and-support-articles', HelpAndSupportArticleController::class);
 
+    $router->resource('page-sizes', \App\Admin\Controllers\PageSizesController::class);
+
     $router->resource('blog-posts', BlogPostsController::class);
 });

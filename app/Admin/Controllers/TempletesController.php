@@ -101,7 +101,11 @@ class TempletesController extends AdminController
         $form = new Form(new Templetes());
 
         $form->tab('Basic', function ($form) {
-            $form->text('name', __('Name'))->required();;
+            $form->text('name', __('Name'))->required();
+            $form->select('type', 'Type')->options([
+                'PostCard' => 'PostCard',
+                'Letter' => 'Letter',
+            ])->required();
             $form->textarea('description', __('Description'))->required();;
             $form->image('feature_image', __('Feature image'));
             $form->multipleImage('images', __('Images'))->removable()->sortable();
@@ -114,6 +118,8 @@ class TempletesController extends AdminController
             $form->text('slug', __('Slug'));
             $form->switch('status', __('Status'))->default(1);
             $form->switch('is_active', __('Is active'))->default(1);
+
+
 
         })->tab('Selling', function ($form) {
 

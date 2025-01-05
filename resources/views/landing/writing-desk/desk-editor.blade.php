@@ -33,7 +33,8 @@
                         </div>
                     @endif
                 @endforeach
-                <br>
+
+                    <br>
             </div>
 
 
@@ -49,10 +50,6 @@
 </div>
 
 <script>
-
-
-
-
     // Helper function to remove underscores from field names
     function removeUnderscores(str) {
         return str.replace(/_/g, '');
@@ -92,10 +89,12 @@
     @endif
 
 
-
+    {{$key}}canvas.setWidth(600);
+    {{$key}}canvas.setHeight(300);
 
     // Add the text element to the canvas
     {{$key}}canvas.add({{$key}}{{ removeUnderscores($fieldItem->name) }});
+
 
     // Handle text input change
     document.getElementById('{{$key}}{{ removeUnderscores($fieldItem->name) }}').addEventListener('input', function() {

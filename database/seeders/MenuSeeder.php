@@ -67,19 +67,26 @@ class MenuSeeder extends Seeder
                 'created_at' => Carbon::now()->subMinutes(1),
                 'updated_at' => Carbon::now(),
             ],
-
-//            [
-//                'parent_id' => 0,
-//                'order' => 4,
-//                'title' => 'Inquiries',
-//                'icon' => 'icon-align-justify',
-//                'uri' => 'inquiries',
-//                'permission' => 'inquiries',
-//                'created_at' => Carbon::now()->subMinutes(1),
-//                'updated_at' => Carbon::now(),
-//            ],
-
-
+            [
+                'parent_id' => 0,
+                'order' => 6,
+                'title' => 'Blog Posts',
+                'icon' => 'icon-newspaper',
+                'uri' => 'blog-posts',
+                'permission' => 'blog-posts',
+                'created_at' => Carbon::now()->subMinutes(1),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'parent_id' => 10,
+                'order' => 7,
+                'title' => 'Page Sizes',
+                'icon' => 'icon-ruler',
+                'uri' => 'page-sizes',
+                'permission' => 'page-sizes',
+                'created_at' => Carbon::now()->subMinutes(1),
+                'updated_at' => Carbon::now(),
+            ],
         ]);
 
     }
