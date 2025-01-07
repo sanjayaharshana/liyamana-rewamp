@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique();
-            $table->string('value');
+            $table->string('value')->nullable();
             $table->string('type');
             $table->string('options')->nullable()->comment('options for select type, json format');
             $table->string('label')->nullable();

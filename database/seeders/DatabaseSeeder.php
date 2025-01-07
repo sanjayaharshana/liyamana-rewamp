@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
            PermissionSeeeder::class,
+           PageSizesSeeder::class,
            MenuSeeder::class,
            SettingsSeeder::class,
            TemplateCategorySeeder::class,

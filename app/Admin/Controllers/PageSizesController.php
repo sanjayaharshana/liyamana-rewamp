@@ -76,7 +76,7 @@ class PageSizesController extends AdminController
             'rem' => 'rem',
             'vh' => 'vh',
         ])->required();
-        
+
         return $form;
     }
 }

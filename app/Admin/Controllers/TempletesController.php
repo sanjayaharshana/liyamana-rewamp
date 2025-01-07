@@ -108,6 +108,10 @@ class TempletesController extends AdminController
             ])->required();
             $form->textarea('description', __('Description'))->required();;
             $form->image('feature_image', __('Feature image'));
+
+            $pageSizes = \App\Models\PageSizes::all()->pluck('name','id');
+            $form->select('sizes', 'Size')->options($pageSizes)->required();
+
             $form->multipleImage('images', __('Images'))->removable()->sortable();
             $form->multipleSelect('category_ids', __('Category'))
                 ->options(\App\Models\TempleteCategories::all()

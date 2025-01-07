@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Open Admin',
+    'name' => 'Liyamana',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Open</b> Admin',
+    'logo' => '<b>Liyamana</b> Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>OA</b>',
+    'logo-mini' => '<b>ලි</b>',
 
     /*
     |--------------------------------------------------------------------------

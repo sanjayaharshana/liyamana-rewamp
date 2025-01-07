@@ -18,10 +18,14 @@ return new class extends Migration
             $table->string('slug');
             $table->boolean('status')->default(1);
             $table->text('user_id');
+            $table->integer('order')->default(0);
             $table->string('featured_image');
             $table->text('meta_title')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->text('meta_description')->nullable();
+            $table->json('related_articles')->nullable();
+            $table->json('tags')->nullable();
+            $table->json('categories')->nullable();
             $table->timestamps();
 
         });

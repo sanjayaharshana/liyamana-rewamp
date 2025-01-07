@@ -83,12 +83,12 @@ class SettingsController extends AdminController
         $form->saving(function (Form $form) use ($getAllSettings) {
             foreach ($getAllSettings as $key => $settingItems) {
                 foreach ($settingItems as $settingItem) {
-                    dd($settingItem->key);
-                    $form->model()->where('key', $settingItem->key)->update(['value' => $form->input($settingItem->key)]);
+                    Settings::where('key', $settingItem->key)
+                        ->update(['value' => $form->input($settingItem->key)]);
                 }
             }
+            return redirect('/admin/settings/create');
         });
-
         return $form;
     }
 

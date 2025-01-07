@@ -23,34 +23,11 @@ class SettingsSeeder extends Seeder
                 'group' => 'General',
                 'label' => 'Site Name',
                 'placeholder' => 'Site Name',
-                'rules' => 'required',
+                'rules' => null,
                 'options' => null,
                 'default' => 'Liyamana'
             ],
-            [
-                'key' => 'site_logo',
-                'value' => 'liyamana.png',
-                'type' => 'image',
-                'description' => 'Site Logo',
-                'group' => 'General',
-                'label' => 'Site Logo',
-                'placeholder' => 'Site Logo',
-                'rules' => 'required',
-                'options' => null,
-                'default' => null
-            ],
-            [
-                'key' => 'site_favicon',
-                'value' => 'favicon.png',
-                'type' => 'image',
-                'description' => 'Site Favicon',
-                'group' => 'General',
-                'label' => 'Site Favicon',
-                'placeholder' => 'Site Favicon',
-                'rules' => 'required',
-                'options' => null,
-                'default' => null
-            ],
+
             [
                 'key' => 'tagline',
                 'value' => 'Your Postal Mail, Modernized.',
@@ -105,18 +82,7 @@ class SettingsSeeder extends Seeder
                 ]),
                 'default' => 'Arial'
             ],
-            [
-                'key' => 'background_image',
-                'value' => 'background.jpg',
-                'type' => 'image',
-                'description' => 'Background Image for Site',
-                'group' => 'Appearance',
-                'label' => 'Background Image',
-                'placeholder' => 'Upload Background Image',
-                'rules' => null,
-                'options' => null,
-                'default' => null
-            ],
+
 
             // SEO Settings
             [
