@@ -42,6 +42,7 @@ Route::get('market-place/{slug}/writing-desk/{order_id}/checkout',[\App\Http\Con
 Route::get('/login',[\App\Admin\Controllers\AuthController::class,'loginPage'])->name('landing.loginPage');
 Route::get('/register',[\App\Admin\Controllers\AuthController::class,'registerPage'])->name('landing.registerPage');
 
+Route::get('dashboard',[\App\Http\Controllers\User\DashboardController::class,'index'])->name('user.dashboard');
 
 
 Route::get('preview-design/{slug}/{order_id}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'previewDesign'])->name('preview_design');
