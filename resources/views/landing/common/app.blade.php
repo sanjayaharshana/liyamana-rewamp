@@ -60,11 +60,11 @@
     left: -160px;
     width: 110vw;
     max-height: 80vh;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -76,24 +76,14 @@
         rgba(44, 2, 11, 0.3) 0%, /* Subtle dark red center */
         rgba(153, 26, 26, 0.2) 50%, /* Muted red for modern contrast */
         rgba(71, 0, 0, 0.8) 100% /* Deep blue-black outer glow */
-    );
-    backdrop-filter: blur(15px); /* Glassy blur effect */
-    -webkit-backdrop-filter: blur(15px); /* Ensures Safari compatibility */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Light translucent border */
-    animation: colorShift 3s infinite alternate; /* Smooth color animation */
+    ) !important;
+    animation: colorShift 3s infinite alternate !important; /* Smooth color animation */
     transition: all 0.3s ease, background 0.3s ease;
 }
 
 .has-mega-menu {
     position: relative;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
-/* Scrolled state */
-
-
 
 @keyframes colorShift {
     0% {
@@ -322,6 +312,9 @@
 .mega-menu-item:nth-child(3) { animation-delay: 0.2s; }
 .mega-menu-item:nth-child(4) { animation-delay: 0.25s; }
 .mega-menu-item:nth-child(5) { animation-delay: 0.3s; }
+
+
+
     </style>
 
 
