@@ -125,40 +125,62 @@
 .mega-menu {
     position: absolute;
     top: 100%;
-    left: -100px;
+    left: 50%;
     width: 60vw;
     max-height: 80vh;
     border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%);
+
+    /* Enhanced blur and background */
+    background: rgba(44, 2, 11, 0.75);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+
+    /* Improved shadow for depth */
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+    /* Performance optimizations */
+    will-change: transform, opacity;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+
+    /* Smooth transitions */
+    transition:
+        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Initial state */
     opacity: 0;
     visibility: hidden;
     z-index: 1000;
     overflow-y: auto;
-    transform: translateX(-50%);
-
-    /* Enhanced blur effect */
-    background: rgba(44, 2, 11, 0.75);
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-
-    /* Fallback for browsers that don't support backdrop-filter */
-    @supports not (backdrop-filter: blur(15px)) {
-        background: rgba(44, 2, 11, 0.95);
-    }
-
-    /* Glass effect border */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    /* Smooth transitions */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Add this class to make mega menu visible */
+/* Active state */
 .mega-menu.show {
     opacity: 1;
     visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
+/* Browser-specific optimizations */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .mega-menu {
+        -webkit-backdrop-filter: blur(15px) saturate(180%);
+        backdrop-filter: blur(15px) saturate(180%);
+    }
+}
+
+/* Firefox specific */
+@-moz-document url-prefix() {
+    .mega-menu {
+        background: rgba(44, 2, 11, 0.90);
+    }
+}
 /* Additional layer for enhanced blur effect */
 .mega-menu::before {
     content: '';
