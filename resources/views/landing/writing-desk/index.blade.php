@@ -16,10 +16,21 @@
     @include('landing.writing-desk.modals.letter-attachment')
 
     <div class="container">
-        <form id="mainform" method="post" action="{{route('landing.writing-desk.store',[
+        @if($order_details)
+            <form id="mainform" method="post" action="{{route('landing.writing-desk.store',[
         $template->slug,$order_details->id])}}">
+
+        @else
+                    <form id="mainform" method="post" action="#">
+        @endif
+
             {{csrf_field()}}
-            @include('landing.writing-desk.modals.summery-modal')
+
+                @if($order_details)
+                    @include('landing.writing-desk.modals.summery-modal')
+                @endif
+
+                    @include('landing.writing-desk.modals.get-starting-bash')
             <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
 

@@ -89,8 +89,8 @@
     @endif
 
 
-    {{$key}}canvas.setWidth(600);
-    {{$key}}canvas.setHeight(300);
+{{--    {{$key}}canvas.setWidth(600);--}}
+{{--    {{$key}}canvas.setHeight(300);--}}
 
     // Add the text element to the canvas
     {{$key}}canvas.add({{$key}}{{ removeUnderscores($fieldItem->name) }});

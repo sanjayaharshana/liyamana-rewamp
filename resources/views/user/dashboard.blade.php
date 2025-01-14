@@ -7,9 +7,9 @@
 
 @section('content')
 
-    <link href="https://demos.creative-tim.com/bs3/paper-dashboard/assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="{{url('css/paper-dashboard.css')}}" rel="stylesheet"/>
 
-    <link href="https://demos.creative-tim.com/bs3/paper-dashboard/assets/css/demo.css" rel="stylesheet" />
+    <link href="{{url('css/main.css')}}" rel="stylesheet" />
 
 
     <div class="container">

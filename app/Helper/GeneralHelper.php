@@ -91,10 +91,12 @@ if(!function_exists('getTemplatePositions')) {
 }
 
 
-if(!function_exists('getSettings')) {
+if(!function_exists('getSetting')) {
 
-    function getSetting($settingSlug) {
-
+    function getSetting($key) {
+        $setting = \App\Models\Settings::where('key', $key)->first();
+        return $setting->value ?? null;
     }
 }
+
 
