@@ -30,10 +30,7 @@
                    LKR : {{number_format($template->price,2)}}
                </p>
 
-
-
-
-               <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#" style="background: maroon;border-style: none"><i class="bi bi-envelope" style="margin-right: 10px"></i> Quick Send</a>
+               <a class="btn btn-primary" href="{{url('market-place/'.$template->slug.'/writing-desk/no-order')}}" style="background: maroon;border-style: none"><i class="bi bi-envelope" style="margin-right: 10px"></i> Quick Send</a>
 
 
                <button class="btn btn-primary" style="background: maroon;border-style: none"><i class="bi bi-pen" style="margin-right: 10px"></i> Edit This Template</button>

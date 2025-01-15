@@ -1,9 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-lg" style="
-    width: 1020px;
-    max-width: fit-content;
-">
+    <div class="modal-dialog modal-lg" style="width: fit-content;max-width: fit-content;">
         <div class="modal-content">
             <div class="modal-body" style="background: #670000;">
                 <div class="row">
@@ -102,3 +99,57 @@
         });
     });
 </script>
+
+<script>
+    const passwordInput = document.getElementById('password');
+    const strengthIndicator = document.getElementById('password-strength');
+
+
+
+    passwordInput.addEventListener('input', function () {
+        const password = passwordInput.value;
+        let strength = getPasswordStrength(password);
+
+        // Update the UI based on strength
+        strengthIndicator.textContent = strength.message;
+        strengthIndicator.style.color = strength.color;
+    });
+
+    function getPasswordStrength(password) {
+        let score = 0;
+        strengthIndicator.style.display = 'block';
+
+        // Criteria for strength
+        if (password.length >= 8) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[a-z]/.test(password)) score++;
+        if (/[0-9]/.test(password)) score++;
+        if (/[\W_]/.test(password)) score++; // Special characters
+
+        // Determine the message and color
+        if (score <= 1) {
+            return { message: 'Very Weak', color: 'red' };
+        } else if (score === 2) {
+            return { message: 'Weak', color: 'orange' };
+        } else if (score === 3) {
+            return { message: 'Medium', color: 'yellow' };
+        } else if (score === 4) {
+            return { message: 'Strong', color: 'green' };
+        } else {
+            return { message: 'Very Strong', color: 'darkgreen' };
+        }
+    }
+</script>
+
+@push('footer-js')
+    <script>
+        const flexSwitchCheckDefault = document.getElementById('flexSwitchCheckDefault');
+        flexSwitchCheckDefault.addEventListener('change',function () {
+            if (flexSwitchCheckDefault.checked){
+                document.getElementById('password_section').style.display = 'block';
+            }else{
+                document.getElementById('password_section').style.display = 'none';
+            }
+        })
+    </script>
+@endpush
