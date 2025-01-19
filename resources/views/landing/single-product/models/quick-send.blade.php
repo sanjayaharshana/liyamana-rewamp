@@ -123,7 +123,7 @@
                                 @endauth
                                 <div style="margin-top: 30px">
                                     <button type="submit" class="btn btn-primary" style="background: #830505;border-style: none;">Create with this design</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #830505;border-style: none;">Close</button>
+                                    <a href="{{url('market-place/'.$template->slug)}}" class="btn btn-secondary"  style="background: #830505;border-style: none;">Back to Product</a>
                                 </div>
                             </form>
                         </div>

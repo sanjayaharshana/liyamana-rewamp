@@ -21,16 +21,17 @@
         $template->slug,$order_details->id])}}">
 
         @else
-                    <form id="mainform" method="post" action="#">
+{{--                    <form id="mainform" method="post" action="#">--}}
         @endif
 
             {{csrf_field()}}
 
                 @if($order_details)
                     @include('landing.writing-desk.modals.summery-modal')
-                @endif
+                @else
 
                     @include('landing.writing-desk.modals.get-starting-bash')
+                @endif
             <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
 

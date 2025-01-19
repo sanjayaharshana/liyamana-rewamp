@@ -13,7 +13,7 @@
                             <input type="text" class="form-control" style="background-color: #450404;border-style: unset;color: white;">
                             <p style="text-align: left;padding-top: 20px;"> And your Password &gt;</p>
                             <input type="text" class="form-control" style="background-color: #450404;border-style: unset;color: #ffffff;">
-                            <a href="http://localhost:8000/password/forget">Forget Password? </a> <br>
+                            <a href="{{url('password/forget')}}">Forget Password? </a> <br>
                             <button class="btn btn-primary" style="background: #500101;border-style: none;margin-top: 20px;">Login as Liyamana Account</button>
 
                         </div>
@@ -70,7 +70,7 @@
 
                                 <div style="margin-top: 30px">
                                     <button type="submit" class="btn btn-primary" style="background: #830505;border-style: none;">Create with this design</button>
-                                    <a href="#" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #830505;border-style: none;">Close</a>
+                                    <a href="{{url('market-place/'.$template->slug)}}"  class="btn btn-secondary" style="background: #830505;border-style: none;">Back</a>
                                 </div>
                             </form>
                         </div>
