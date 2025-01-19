@@ -37,6 +37,7 @@ Route::get('market-place/{slug}',[\App\Http\Controllers\Frontend\MarketPlaceCont
 Route::get('market-place/{slug}/writing-desk/{order_id}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'writingDesk'])->name('landing.writing-desk');
 Route::post('market-place/{slug}/writing-desk/{order_id}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'writingDeskStore'])->name('landing.writing-desk.store');
 Route::get('market-place/{slug}/writing-desk/{order_id}/checkout',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'checkoutPage'])->name('landing.checkout');
+Route::post('market-place/{slug}/writing-desk-select',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'selectOrder'])->name('landing.selectOrder');
 
 
 Route::get('/login',[\App\Admin\Controllers\AuthController::class,'loginPage'])->name('landing.loginPage');

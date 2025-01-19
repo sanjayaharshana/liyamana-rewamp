@@ -57,9 +57,6 @@ class MarketPlaceController extends Controller
             }
         }
 
-
-
-
         return view('landing.market-place',[
             'templateCategories' => $templateCategories,
             'templates' => $templates->get(),
@@ -112,9 +109,14 @@ class MarketPlaceController extends Controller
         $templates = Templetes::where('slug',$slug)->first();
         $orderDetails = OrderedDesign::where('id',$order_id)->first();
 
-
+        if(auth()->user()){
+            $previousOrder = OrderedDesign::where('user_id',auth()->user()->id)
+                ->where('template_id',$templates->id)
+                ->get();
+        }
         return view('landing.writing-desk.index',[
             'template' => $templates,
+            'previousOrder' => $previousOrder ?? null,
             'order_details' => $orderDetails,
             'design' => $orderDetails->design ?? null
         ]);
@@ -138,9 +140,12 @@ class MarketPlaceController extends Controller
         ];
         $orderedDesign->price = number_format($template->price,2);
         $orderedDesign->status = 'pending';
+        $orderedDesign->template_id = $template->id;
 
-
-
+        if(auth()->user())
+        {
+            $orderedDesign->user_id = auth()->user()->id;
+        }
         if($request->register_account == 'on')
         {
             $request->validate([
@@ -158,13 +163,10 @@ class MarketPlaceController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-           $userDetails->user_id = $userDetails->id;
             Auth::login($userDetails);
          }
 
-
-
-
+        $orderedDesign->template_id = $template->id;
         $orderedDesign->save();
 
         return redirect()->route('landing.writing-desk',['slug' => $slug, 'order_id' => $orderedDesign->id]);
@@ -218,6 +220,18 @@ class MarketPlaceController extends Controller
             'template_details' => $templateDetails,
             'object_data' => $objectsData
         ]);
+    }
+
+    public function selectOrder($slug,Request $request)
+    {
+        $orderDetails = OrderedDesign::where('id',$request->navigate_order_id)->first();
+        $template  = Templetes::where('id', $orderDetails->template_id)->first();
+
+        return redirect()->route('landing.writing-desk',[
+            'slug' => $template->slug,
+            'order_id' => $request->navigate_order_id
+        ]);
+
     }
 
     public function previewDesignStore(Request $request)

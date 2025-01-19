@@ -44,7 +44,6 @@
                     <canvas id="{{$key}}canvas" width="800" height="600" style=""></canvas>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
