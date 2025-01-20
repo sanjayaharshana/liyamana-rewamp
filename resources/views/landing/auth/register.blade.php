@@ -60,8 +60,19 @@
                             <h3 style="color: white;">Register</h3>
                             <p class="text-muted" style="color: white !important;">Create your account</p>
                         </div>
-                        <form>
-                            <div class="mb-3">
+
+                        <form method="POST" action="{{ route('landing.register') }}">
+                        @csrf
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li style="list-style:none;">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                                <div class="mb-3">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="name" class="form-label">First Name</label>
@@ -77,12 +88,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required="" style="background-color: #5b1a20;border-style: inherit;">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required style="background-color: #5b1a20;border-style: inherit;">
 
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="phone" class="form-label">Email</label>
-                                        <input type="tel" class="form-control" id="phone" placeholder="Enter your Phone number" required="" style="background-color: #5b1a20;border-style: inherit;">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your Phone number" required style="background-color: #5b1a20;border-style: inherit;">
 
                                     </div>
                                 </div>
@@ -92,19 +103,19 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required="" style="background-color: #5b1a20;border-style: inherit;">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required style="background-color: #5b1a20;border-style: inherit;">
 
                                     </div>
                                     <div class="col-md-6">
                                         <label for="confirm-password" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" id="confirm-password" placeholder="Re-enter your password" required="" style="background-color: #5b1a20;border-style: inherit;">
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Re-enter your password" required style="background-color: #5b1a20;border-style: inherit;">
 
                                     </div>
                                 </div>
                                 </div>
                             <div class="d-flex justify-content-between mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="agreeTerms">
+                                    <input class="form-check-input" type="checkbox" value="" id="agreeTerms" required>
                                     <label class="form-check-label" for="agreeTerms">I agree to the <a href="#" class="text-primary text-decoration-none">Terms & Conditions</a></label>
                                 </div>
                             </div>

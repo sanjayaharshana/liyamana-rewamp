@@ -41,9 +41,15 @@ Route::post('market-place/{slug}/writing-desk-select',[\App\Http\Controllers\Fro
 
 
 Route::get('/login',[\App\Admin\Controllers\AuthController::class,'loginPage'])->name('landing.loginPage');
+Route::post('/login', [\App\Admin\Controllers\AuthController::class, 'login'])->name('landing.login');
 Route::get('/register',[\App\Admin\Controllers\AuthController::class,'registerPage'])->name('landing.registerPage');
+Route::post('/register', [\App\Admin\Controllers\AuthController::class, 'register'])->name('landing.register');
+Route::post('/logout', [\App\Admin\Controllers\AuthController::class, 'logout'])->name('landing.logout');
 
-Route::get('dashboard',[\App\Http\Controllers\User\DashboardController::class,'index'])->name('user.dashboard');
+Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])
+    ->name('user.dashboard')
+    ->middleware('auth');
+
 
 
 Route::get('preview-design/{slug}/{order_id}',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'previewDesign'])->name('preview_design');

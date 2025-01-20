@@ -57,23 +57,40 @@
 
                     </div>
                     <div class="col-md-6">
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
                         <div class="card p-4" style="background: #9e1c36;color: white;">
                             <div class="text-center mb-4" style="color: white;">
                                 <h3 style="color: white;">Login</h3>
                                 <p class="text-muted" style="color: white !important;!i;!;">Access your account</p>
                             </div>
-                            <form>
-                                <div class="mb-3">
+
+                            <form method="POST" action="{{ route('landing.login') }}">
+                            @csrf
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li style="list-style:none;">{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                                    <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required="" style="background-color: #5b1a20;border-style: inherit;">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required style="background-color: #5b1a20;border-style: inherit;">
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required="" style="background-color: #5b1a20;border-style: inherit;">
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required style="background-color: #5b1a20;border-style: inherit;">
                                 </div>
                                 <div class="d-flex justify-content-between mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember">
                                         <label class="form-check-label" for="rememberMe">Remember Me</label>
                                     </div>
                                     <a href="#" class="text-decoration-none">Forgot Password?</a>
