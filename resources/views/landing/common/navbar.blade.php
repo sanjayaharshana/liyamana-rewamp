@@ -42,7 +42,7 @@
         </nav>
 
         @auth()
-            <a class="btn-getstarted" href="#about">{{auth()->user()->name}}</a>
+            <a class="btn-getstarted" href="{{ route('user.dashboard') }}">{{auth()->user()->name}}</a>
         @else
             <a class="btn-getstarted" href="{{route('landing.loginPage')}}">Get Started</a>
         @endauth

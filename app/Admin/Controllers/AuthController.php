@@ -70,8 +70,15 @@ class AuthController extends BaseAuthController
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('landing.loginPage');
+        return redirect()->route('landing.loginPage')
+            ->with('success', 'You have been successfully logged out')
+            ->withHeaders([
+                'Cache-Control' => 'no-cache, no-store, must-revalidate',
+                'Pragma' => 'no-cache',
+                'Expires' => '0'
+            ]);
     }
+
 
     public function forgotPasswordPage()
     {

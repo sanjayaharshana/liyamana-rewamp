@@ -92,6 +92,16 @@
                                 <p>My Favorites (03)</p>
                             </a>
                         </li>
+                        <li class="{{ Request::is('dashboard/logout') ? 'active' : '' }}">
+                            <form method="POST" action="{{ route('landing.logout') }}" id="logout-form">
+                                @csrf
+                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <p>Logout</p>
+                                </a>
+                            </form>
+                        </li>
+
                     </ul>
 
 
@@ -101,9 +111,12 @@
 
         <!-- Updated Content Area -->
         <div class="col-md-9">
-            <div class="content-wrapper">
-                <div class="dashboard-header">
-                    <h2>Welcome to <span style="color: #8b262f">Panel</span></h2>
+            <div class="dashboard-header">
+                <h2 class="welcome-heading">
+                    Welcome &nbsp;
+                    <span class="user-name">{{ ucwords(auth()->user()->name) }}</span>
+                    <span class="greeting-emoji"> &nbsp;👋</span>
+                </h2>
                     <div class="corporate-mode-toggle">
                         <label class="switch">
                             <input type="checkbox" id="corporateMode">
@@ -526,6 +539,45 @@
         .content-wrapper {
             min-height: auto;
         }
+    }
+    .welcome-heading {
+        font-size: 1.8rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .user-name {
+        color: #8b262f;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 2px;
+    }
+
+    .greeting-emoji {
+        font-size: 1.5rem;
+        animation: wave 2s infinite;
+        transform-origin: 70% 70%;
+        display: inline-block;
+    }
+
+    .last-login {
+        font-size: 0.9rem;
+        color: #666;
+        margin-left: auto;
+    }
+
+    @keyframes wave {
+        0% { transform: rotate(0deg); }
+        10% { transform: rotate(14deg); }
+        20% { transform: rotate(-8deg); }
+        30% { transform: rotate(14deg); }
+        40% { transform: rotate(-4deg); }
+        50% { transform: rotate(10deg); }
+        60% { transform: rotate(0deg); }
+        100% { transform: rotate(0deg); }
     }
 
 </style>

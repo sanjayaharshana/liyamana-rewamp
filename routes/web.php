@@ -40,11 +40,17 @@ Route::get('market-place/{slug}/writing-desk/{order_id}/checkout',[\App\Http\Con
 Route::post('market-place/{slug}/writing-desk-select',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'selectOrder'])->name('landing.selectOrder');
 
 
-Route::get('/login',[\App\Admin\Controllers\AuthController::class,'loginPage'])->name('landing.loginPage');
-Route::post('/login', [\App\Admin\Controllers\AuthController::class, 'login'])->name('landing.login');
-Route::get('/register',[\App\Admin\Controllers\AuthController::class,'registerPage'])->name('landing.registerPage');
-Route::post('/register', [\App\Admin\Controllers\AuthController::class, 'register'])->name('landing.register');
-Route::post('/logout', [\App\Admin\Controllers\AuthController::class, 'logout'])->name('landing.logout');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [\App\Admin\Controllers\AuthController::class, 'loginPage'])->name('landing.loginPage');
+    Route::post('/login', [\App\Admin\Controllers\AuthController::class, 'login'])->name('landing.login');
+    Route::get('/register', [\App\Admin\Controllers\AuthController::class, 'registerPage'])->name('landing.registerPage');
+    Route::post('/register', [\App\Admin\Controllers\AuthController::class, 'register'])->name('landing.register');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [\App\Admin\Controllers\AuthController::class, 'logout'])->name('landing.logout');
+});
+
 
 Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])
     ->name('user.dashboard')
