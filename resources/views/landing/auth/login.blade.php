@@ -93,7 +93,7 @@
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember">
                                         <label class="form-check-label" for="rememberMe">Remember Me</label>
                                     </div>
-                                    <a href="#" class="text-decoration-none">Forgot Password?</a>
+                                    <a href="{{ route('password.request') }}" class="text-decoration-none">Forgot Password?</a>
                                 </div>
                                 <div class="d-grid">
                                     <button type="submit" class="btn login-btn" style="background: #520202;">Login</button>

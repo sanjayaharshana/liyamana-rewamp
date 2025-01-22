@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\PostCardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticPageController;
+use App\Admin\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,12 +41,21 @@ Route::get('market-place/{slug}/writing-desk/{order_id}/checkout',[\App\Http\Con
 Route::post('market-place/{slug}/writing-desk-select',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'selectOrder'])->name('landing.selectOrder');
 
 
+
+
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [\App\Admin\Controllers\AuthController::class, 'loginPage'])->name('landing.loginPage');
-    Route::post('/login', [\App\Admin\Controllers\AuthController::class, 'login'])->name('landing.login');
-    Route::get('/register', [\App\Admin\Controllers\AuthController::class, 'registerPage'])->name('landing.registerPage');
-    Route::post('/register', [\App\Admin\Controllers\AuthController::class, 'register'])->name('landing.register');
+    Route::get('/login', [AuthController::class, 'loginPage'])->name('landing.loginPage');
+    Route::post('/login', [AuthController::class, 'login'])->name('landing.login');
+    Route::get('/register', [AuthController::class, 'registerPage'])->name('landing.registerPage');
+    Route::post('/register', [AuthController::class, 'register'])->name('landing.register');
+
+    // Add these new routes
+    Route::get('/forgot-password', [AuthController::class, 'forgotPasswordPage'])->name('password.request');
+    Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+    Route::get('/reset-password/{token}', [AuthController::class, 'resetPasswordPage'])->name('password.reset');
+    Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [\App\Admin\Controllers\AuthController::class, 'logout'])->name('landing.logout');

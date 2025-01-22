@@ -408,9 +408,7 @@
     }
     /* Add to your existing styles */
     #corporateNavItems {
-        transition: all 0.3s ease-in-out;
-        height: 0;
-        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
         overflow: hidden;
     }
     #corporateNavItems.show {
@@ -431,6 +429,15 @@
             opacity: 1;
             transform: translateY(0);
         }
+    }
+    #corporateNavItems li {
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.3s ease-in-out;
+    }
+
+    #corporateNavItems.fade-in li {
+        animation: slideIn 0.3s ease-in-out forwards;
     }
 
     /* Optional: Add separator for corporate section */
@@ -583,26 +590,40 @@
 </style>
 
 <script>
-document.getElementById('corporateMode').addEventListener('change', function() {
-    const corporateNavItems = document.getElementById('corporateNavItems');
-    const sidebar = document.querySelector('.sidebar');
-    const contentWrapper = document.querySelector('.content-wrapper');
+    document.addEventListener('DOMContentLoaded', function() {
+        const corporateToggle = document.getElementById('corporateMode');
+        const corporateNavItems = document.getElementById('corporateNavItems');
 
-    if (this.checked) {
-        corporateNavItems.style.display = 'block';
-        sidebar.classList.add('corporate-active');
-        contentWrapper.classList.add('corporate-active');
-        setTimeout(() => {
-            corporateNavItems.classList.add('show');
-        }, 50);
-    } else {
-        corporateNavItems.classList.remove('show');
-        sidebar.classList.remove('corporate-active');
-        contentWrapper.classList.remove('corporate-active');
-        setTimeout(() => {
-            corporateNavItems.style.display = 'none';
-        }, 300);
-    }
-});
+        // Set initial state
+        corporateNavItems.style.display = 'none';
+
+        corporateToggle.addEventListener('change', function() {
+            if (this.checked) {
+                // Show corporate items
+                corporateNavItems.style.display = 'block';
+                corporateNavItems.style.opacity = '0';
+
+                // Trigger reflow for animation
+                void corporateNavItems.offsetWidth;
+
+                // Add animation
+                corporateNavItems.style.opacity = '1';
+                corporateNavItems.style.height = 'auto';
+
+                // Add fade-in class for smooth transition
+                corporateNavItems.classList.add('fade-in');
+            } else {
+                // Hide corporate items
+                corporateNavItems.style.opacity = '0';
+                corporateNavItems.classList.remove('fade-in');
+
+                // Wait for animation to complete before hiding
+                setTimeout(() => {
+                    corporateNavItems.style.display = 'none';
+                }, 300);
+            }
+        });
+    });
 </script>
+
 @endsection
