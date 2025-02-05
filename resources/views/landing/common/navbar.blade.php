@@ -8,9 +8,7 @@
             <ul class="main-nav">
                 <li><a href="{{url('/')}}" class="@if (Request::segment(1) == '') active @endif">Home</a></li>
                 <li><a href="{{url('market-place')}}" class="@if (Request::segment(1) == 'market-place') active @endif">Market Place</a></li>
-                <li><a href="{{url('help-and-support')}}" class="@if (Request::segment(1) == 'help-and-support') active @endif">Help and Support</a></li>
-                <li><a href="{{url('artistic-area')}}" class="@if (Request::segment(1) == 'artistic-area') active @endif">Artistic Area</a></li>
-                <li><a href="{{url('about-us')}}" class="@if (Request::segment(1) == 'about-us') active @endif">About Us</a></li>
+                <li><input type="text" class="form-control form-control-sm" style="background: #721f26;border-color: #860808;color: white;width: 410px;"></li>
                 <li><a href="{{url('post-card')}}" class="@if (Request::segment(1) == 'post-card') active @endif">Memento</a></li>
                 <li class="has-mega-menu dropdown">
                     <a href="#" class="mega-menu-trigger">
