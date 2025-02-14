@@ -4,6 +4,8 @@ use App\Http\Controllers\Frontend\PostCardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticPageController;
 use App\Admin\Controllers\AuthController;
+use App\Http\Controllers\User\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,7 +64,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])
+Route::get('dashboard', [DashboardController::class, 'index'])
     ->name('user.dashboard')
     ->middleware('auth');
 
@@ -75,3 +77,6 @@ Route::post('create-order/{slug}',[\App\Http\Controllers\Frontend\MarketPlaceCon
 
 Route::get('market-place/inc/json/settings.json',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'jsonSetting'])->name('landing.home');
 Route::get('market-place/dummy_data/products/load_products.json',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'jsonProducts'])->name('landing.home');
+
+Route::get('/dashboard/payment-history', [DashboardController::class, 'paymentHistory'])->name('dashboard.payment-history');
+
