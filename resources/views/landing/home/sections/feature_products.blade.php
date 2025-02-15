@@ -24,9 +24,25 @@
                                 {{$mostPopularTemplate_item->description}}
                             </p>
                             <div style="text-align: left">
-                                <button class="btn btn-primary" style="margin-top:10px;background: #940303;border-style: none">
-                                    LKR {{number_format($mostPopularTemplate_item->price,2)}}
-                                </button>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-6">
+                                               <div style="font-size: 10px">Liyamana</div>
+                                            </div>
+                                            <div class="col-6">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-6" style="text-align: right;">
+                                        <button class="btn btn-primary btn-sm" style="margin-top:10px;background: #5e0101;border-style: none">
+                                            LKR {{number_format($mostPopularTemplate_item->price,2)}}
+                                        </button>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

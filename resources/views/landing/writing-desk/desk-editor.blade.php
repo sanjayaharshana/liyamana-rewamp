@@ -1,7 +1,7 @@
 <style>
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
         background: #b4261c;
-        color: white;
+        color: white !important;
         border-style: none;
     }
     .form-control::placeholder {

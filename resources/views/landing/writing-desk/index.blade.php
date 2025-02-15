@@ -10,6 +10,25 @@
     <link href="https://unpkg.com/intro.js/introjs.css" rel="stylesheet">
 
 
+
+    <style>
+        .main_tab{
+            color: #232323 !important;
+        }
+
+        .nav-pills .main_tab.active, .nav-pills .show>.main_tab {
+            color: #fcfcfc !important;
+            background-color: #570707 ;
+        }
+
+        .main_tab:focus, .main_tab:hover{
+            text-decoration: none ;
+            background-color: rgba(87, 7, 7, 0) ;
+            color: #363636 ;
+        }
+    </style>
+
+
     @include('landing.single-product.navigration_tab',[
     'activeTab'=>'writing-desk'])
 
@@ -37,10 +56,10 @@
 
                 @foreach($template->layouts as $key => $layoutItem)
                     @if($loop->first)
-                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
+                        <button class="nav-link main_tab active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
                     @else
                         <!-- Other items -->
-                        <button class="nav-link" id="nav-{{$key}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
+                        <button style="" class="nav-link main_tab" id="nav-{{$key}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{$key}}" type="button" role="tab" aria-controls="nav-{{$key}}" aria-selected="true">{{$layoutItem['name']}}</button>
                     @endif
                     <input type="hidden" name="{{$key}}_page" id="{{$key}}_page_data">
                 @endforeach

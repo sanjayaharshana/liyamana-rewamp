@@ -134,7 +134,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                       <div class="row">
+                           <div class="col-md-6">
+                               <div style="background: url('{{url('landing_pages/print-service.png')}}');height: 390px;filter: invert(1);background-size: contain;background-repeat: no-repeat;background-position: center;">
+
+                               </div>
+
+                           </div>
+                           <div class="col-md-6">
+                               Customize your print settings before sending your letter! Adjust paper size, print color, and materials to ensure a professional and high-quality print.
+                                 <br><br>
+                               <label>Select Print Color:</label>
+                               <select name="print_color_type" class="form-select" style="background: maroon;border-style: solid;color: white;border-color: #be0000;">
+                                   <option value="1">Print in Black and White</option>
+                                   <option value="2">Print in Color</option>
+                               </select><br>
+
+                               <label>Paper Type</label>
+                               <select name="paper_type" class="form-select" style="background: maroon;border-style: solid;color: white;border-color: #be0000;">
+                                   <option value="1">Normal Paper</option>
+                                   <option value="2">Glossy Paper</option>
+                               </select><br>
+
+                               <label>Print Size</label>
+                               <select name="print_size" class="form-select" style="background: maroon;border-style: solid;color: white;border-color: #be0000;">
+                                   <option value="1">A4</option>
+                               </select>
+                           </div>
+                       </div>
+
+                    </div>
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
                 </div>
                 <button type="submit" class="btn btn-primary pull-right" style="background: #a90303;border-style: none;background: #a71d1d;color: white;border-color: white;margin-bottom: 7px;display: block;margin-left: auto;margin-right: 0;"> Save and Checkout</button>
