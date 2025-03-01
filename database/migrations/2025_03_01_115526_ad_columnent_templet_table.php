@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('templetes', function (Blueprint $table) {
+        Schema::table('templetes', function (Blueprint $table) {
+            $table->json('theme')->nullable();
         });
     }
 

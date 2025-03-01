@@ -67,6 +67,7 @@ class TemplateSeeder extends Seeder
                 'seo_description' => $value['description'],
                 'layouts' => json_encode($layouts),
                 'feature_image' => $keyName.'_feature.jpg',
+                'sizes' => "2",
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

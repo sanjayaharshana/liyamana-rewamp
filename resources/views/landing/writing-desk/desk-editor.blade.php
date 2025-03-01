@@ -88,8 +88,12 @@
     @endif
 
 
-{{--    {{$key}}canvas.setWidth(600);--}}
-{{--    {{$key}}canvas.setHeight(300);--}}
+    @if($template->sizes)
+    {{$key}}canvas.setWidth({{$template->sizes()->first()->width}});
+    {{$key}}canvas.setHeight({{$template->sizes()->first()->height}});
+
+    @endif
+
 
     // Add the text element to the canvas
     {{$key}}canvas.add({{$key}}{{ removeUnderscores($fieldItem->name) }});

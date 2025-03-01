@@ -49,4 +49,9 @@ class Templetes extends Model
     {
         return $this->hasMany(TemplateImages::class);
     }
+
+    public function sizes(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(PageSizes::class, 'sizes','id');
+    }
 }

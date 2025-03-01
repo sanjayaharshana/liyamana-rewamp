@@ -4,6 +4,7 @@
         "description": "The Liyamana letter is crafted with an elegant and timeless design, evoking the charm of magical correspondence. Printed on parchment-like paper with a textured finish, it carries an air of authenticity and wonder. The envelope features the official Liyamana crest, embossed in gold, symbolizing excellence and prestige.\n\nInside, the letter is written in a calligraphic font, reminiscent of hand-penned wizardry. The header proudly displays the Liyamana emblem, and the content is a blend of welcoming words and an invitation to explore a world of limitless possibilities. A personal touch is added with the recipient's name neatly addressed at the top.\n\nThis letter promises not just an invitation but an experience—one that feels as magical as receiving your acceptance to a school of wizardry.",
         "feature_image": "harry_potter_feature.jpg",
         "price": 10,
+        "sizes": 2,
         "images": [
             "harry_potter_feature.jpg",
             "harry_potter_back_page.jpg",
@@ -103,6 +104,7 @@
         "description": "A timeless template featuring a classic clock design with intricate details. Perfect for adding a sense of elegance to your correspondence.",
         "feature_image": "clock_base_feature.jpg",
         "price": 12,
+        "sizes": 2,
         "images": [
             "clock_base_feature.jpg",
             "clock_base_back_page.jpg",
@@ -202,6 +204,7 @@
         "description": "An antique design filled with romance and nostalgia, perfect for heartfelt letters.",
         "feature_image": "old_love_feature.jpg",
         "price": 15,
+        "sizes": 2,
         "images": [
             "old_love_feature.jpg",
             "old_love_back_page.jpg",
@@ -283,6 +286,7 @@
         "description": "Inspired by the elegance of Paris in the early 1900s, this design captures the charm of a bygone era.",
         "feature_image": "paris_1900_feature.jpg",
         "price": 18,
+        "sizes": 2,
         "images": [
             "paris_1900_feature.jpg",
             "paris_1900_back_page.jpg",
@@ -364,6 +368,7 @@
         "description": "A sophisticated vintage design for alumni correspondence and celebratory messages.",
         "feature_image": "vintage_alumini_feature.jpg",
         "price": 20,
+        "sizes": 2,
         "images": [
             "vintage_alumini_feature.jpg",
             "vintage_alumini_back_page.jpg",
@@ -445,6 +450,7 @@
         "description": "The White Love letter template is a heartfelt design that radiates elegance and intimacy, perfect for sharing moments of affection and sincerity. Printed on premium, soft-textured paper with a subtle ivory hue, it exudes warmth and tenderness, setting the tone for a cherished message.\n\nThe envelope is adorned with a minimalist yet romantic design—a delicate heart motif embossed in silver, symbolizing the purity of love. A fine satin ribbon, available in customizable colors, adds a touch of sophistication and personalization.\n\nInside, the letter features a flowing script font, emulating the beauty of handwritten notes. The header is graced with an elegant floral illustration, subtly framing the content. Each letter begins with a personalized salutation, ensuring every recipient feels the depth of thought and care behind the words.\n\nThe White Love template offers more than just a message—it’s a keepsake, crafted to celebrate love in its purest form and leave an everlasting impression.",
         "feature_image": "white_love_feature.jpg",
         "price": 10,
+        "sizes": 2,
         "images": [
             "white_love_feature.jpg",
             "white_love_back_page.jpg",
@@ -544,6 +550,7 @@
         "description": "The Bird Page letter template is a delightful celebration of freedom and grace, inspired by the enchanting world of birds. Printed on smooth, high-quality paper with a soft pastel backdrop, it brings a sense of lightness and serenity to every message.\n\nThe envelope is adorned with a charming illustration of soaring birds, embossed in shimmering silver or gold, symbolizing hope, inspiration, and the beauty of flight. A feather-shaped seal adds an elegant touch, creating an unforgettable unboxing experience.\n\nInside, the letter features a sophisticated serif font, mirroring the delicate elegance of a bird’s song. The header is beautifully illustrated with a flock in motion, gracefully transitioning into open skies, setting the tone for an uplifting and heartfelt message. Each letter begins with a personalized greeting, ensuring the recipient feels the warmth and thoughtfulness behind the words.",
         "feature_image": "white_love_feature.jpg",
         "price": 10,
+        "sizes": 2,
         "images": [
             "bird_page_feature.jpg",
             "bird_page_back_page.jpg",
@@ -643,6 +650,7 @@
         "description": "The Nature Poem letter template is a poetic ode to the beauty of the natural world, blending artistry with serenity. Printed on eco-friendly, textured paper that mimics the soft, organic feel of tree bark, it captures the essence of being one with nature.\n\nThe envelope features an intricate leaf motif, embossed in earthy green, symbolizing growth, harmony, and the timeless bond between humanity and the environment. A twine wrap with a pressed flower accent completes the rustic, natural aesthetic.\n\nInside, the letter is elegantly presented in a flowing, cursive font that evokes the rhythm of handwritten poetry. The header showcases a delicate watercolor illustration of a serene landscape—mountains, meadows, or forests—inviting the recipient into a world of tranquil beauty. Each message begins with a personalized salutation, ensuring a connection as unique as the elements of nature itself.",
         "feature_image": "white_love_feature.jpg",
         "price": 10,
+        "sizes": 2,
         "images": [
             "nature_poem_feature.jpg",
             "nature_poem_back_page.jpg",

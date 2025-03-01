@@ -106,8 +106,12 @@ class MarketPlaceController extends Controller
 
     public function writingDesk($slug, $order_id)
     {
-        $templates = Templetes::where('slug',$slug)->first();
-        $orderDetails = OrderedDesign::where('id',$order_id)->first();
+        $templates = Templetes::where('slug',$slug)
+            ->with('sizes')
+            ->first();
+
+        $orderDetails = OrderedDesign::where('id',$order_id)
+            ->first();
 
         if(auth()->user()){
             $previousOrder = OrderedDesign::where('user_id',auth()->user()->id)

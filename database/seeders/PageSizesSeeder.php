@@ -16,14 +16,14 @@ class PageSizesSeeder extends Seeder
         $sizes = [
             [
                 'name' => 'Post Card',
-                'width' => '600',
-                'height' => '300',
+                'width' => '700',
+                'height' => '275',
                 'unit' => 'px',
                 'created_at' => now(),
             ],[
                 'name' => 'Letter',
-                'width' => '600',
-                'height' => '800',
+                'width' => '800',
+                'height' => '600',
                 'unit' => 'px',
                 'created_at' => now(),
             ]

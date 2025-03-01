@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
            MenuSeeder::class,
            SettingsSeeder::class,
            TemplateCategorySeeder::class,
-           TemplateSeeder::class,
            TemplatePositionSeeder::class,
+           TemplateSeeder::class,
         ]);
 
     }

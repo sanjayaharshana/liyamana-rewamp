@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PageSizes extends Model
 {
     use HasFactory;
+
+    public function templates()
+    {
+        return $this->hasMany(Templetes::class);
+    }
 }
