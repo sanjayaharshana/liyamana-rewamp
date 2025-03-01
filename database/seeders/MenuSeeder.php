@@ -87,6 +87,26 @@ class MenuSeeder extends Seeder
                 'created_at' => Carbon::now()->subMinutes(1),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'parent_id' => 0,
+                'order' => 8,
+                'title' => 'Sales Order',
+                'icon' => 'icon-box',
+                'uri' => 'ordered-designs',
+                'permission' => 'ordered-designs',
+                'created_at' => Carbon::now()->subMinutes(1),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'parent_id' => 0,
+                'order' => 9,
+                'title' => 'Help and Support Articles',
+                'icon' => 'icon-book-reader',
+                'uri' => 'help-and-support-articles',
+                'permission' => 'help-and-support-articles',
+                'created_at' => Carbon::now()->subMinutes(1),
+                'updated_at' => Carbon::now(),
+            ],
         ]);
 
     }

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\PageSizes;
 use App\Models\TemplateLayoutPositions;
 use Illuminate\Support\Facades\Request;
 use OpenAdmin\Admin\Admin;
@@ -102,15 +103,8 @@ class TempletesController extends AdminController
 
         $form->tab('Basic', function ($form) {
             $form->text('name', __('Name'))->required();
-            $form->select('type', 'Type')->options([
-                'PostCard' => 'PostCard',
-                'Letter' => 'Letter',
-            ])->required();
             $form->textarea('description', __('Description'))->required();;
             $form->image('feature_image', __('Feature image'));
-
-            $pageSizes = \App\Models\PageSizes::all()->pluck('name','id');
-            $form->select('sizes', 'Size')->options($pageSizes)->required();
 
             $form->multipleImage('images', __('Images'))->removable()->sortable();
             $form->multipleSelect('category_ids', __('Category'))
@@ -149,6 +143,27 @@ class TempletesController extends AdminController
                 $table->text('form_data');
                 $table->image('image');
             });
+        })->tab('Update Options', function ($form) {
+            $getTypes = PageSizes::all()->pluck('name','id');
+            $form->select('sizes','Size')
+                ->options($getTypes)->required();
+
+            $form->select('type', 'Type')->options(
+                [
+                    'momento' => 'PostCard',
+                    'cards' => 'Cards',
+                    'letter' => 'Letter',
+                    'poster' => 'Poster',
+                    'flyer' => 'Flyer',
+                    'banner' => 'Banner',
+                    'invitation' => 'Invitation',
+                    'brochure' => 'Brochure',
+                    'menu' => 'Menu',
+                    'booklet' => 'Booklet',
+                    'magazine' => 'Magazine',
+                    'newspaper' => 'Newspaper',
+                ]
+            )->required();
         });
 
         $form->saving(function (Form $form) {
@@ -162,6 +177,7 @@ class TempletesController extends AdminController
             $form->category_ids = $form->input('category_ids');
             $form->slug = str_slug($form->input('name'));
         });
+
         return $form;
     }
 

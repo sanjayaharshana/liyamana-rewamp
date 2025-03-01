@@ -11,6 +11,10 @@ class Templetes extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'feature_image',
+    ];
+
     protected $casts = [
       'images' => 'array',
       'tags' => 'array',

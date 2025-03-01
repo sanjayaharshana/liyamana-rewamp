@@ -19,7 +19,7 @@
           </script>
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div style="background: url('{{url('storage/'.$template->feature_image)}}');height: 500px;background-size: cover;background-repeat: no-repeat;">
+                <div style="background: url('{{url('storage/'.$template->feature_image ?? null)}}');height: 500px;background-size: cover;background-repeat: no-repeat;">
 
                 </div>
             </div><!-- End testimonial item -->

@@ -7,7 +7,7 @@ use OpenAdmin\Admin\Facades\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\BlogPostsController;
 use App\Admin\Controllers\HelpAndSupportArticleController;
-
+use App\Admin\Controllers\OrderedDesignController;
 Admin::routes();
 
 Route::group([
@@ -35,4 +35,6 @@ Route::group([
     $router->resource('page-sizes', \App\Admin\Controllers\PageSizesController::class);
 
     $router->resource('blog-posts', BlogPostsController::class);
+
+    $router->resource('ordered-designs', OrderedDesignController::class);
 });
