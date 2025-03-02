@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\BlogPostsController;
 use App\Admin\Controllers\HelpAndSupportArticleController;
 use App\Admin\Controllers\OrderedDesignController;
+use App\Admin\Controllers\MomentosController;
 Admin::routes();
 
 Route::group([
@@ -37,4 +38,6 @@ Route::group([
     $router->resource('blog-posts', BlogPostsController::class);
 
     $router->resource('ordered-designs', OrderedDesignController::class);
+
+    $router->resource('momentos', MomentosController::class);
 });
