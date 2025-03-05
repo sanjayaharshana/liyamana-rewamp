@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\PostCardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticPageController;
 use App\Admin\Controllers\AuthController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\User\DashboardController;
 
 /*
@@ -42,7 +43,8 @@ Route::post('market-place/{slug}/writing-desk/{order_id}',[\App\Http\Controllers
 Route::get('market-place/{slug}/writing-desk/{order_id}/checkout',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'checkoutPage'])->name('landing.checkout');
 Route::post('market-place/{slug}/writing-desk-select',[\App\Http\Controllers\Frontend\MarketPlaceController::class,'selectOrder'])->name('landing.selectOrder');
 
-
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/callback', [GoogleAuthController::class, 'callbackGoogle']);
 
 
 Route::middleware('guest')->group(function () {
