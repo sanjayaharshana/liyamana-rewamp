@@ -326,8 +326,11 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    box-shadow:  rgb(36,33,33) 0px 5px 15px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border: 1.5px solid transparent; /* Transparent base */
+    border-image: linear-gradient(45deg, #04385d, #1e6091, #48cae4) 1;
+    border-radius: 10px; /* Optional: Rounded corners */
 }
+
 
 .card::before {
     content: "";
@@ -376,7 +379,7 @@
   width: 30px;
   height: 5px;
   border-radius: 99px;
-  background-color: #FFFFFFDD;
+  background: linear-gradient(90deg, #8e89af, #bf86e5) !important;
 }
 
 .details {
@@ -408,7 +411,7 @@
   width: 30px;
   height: 4px;
   border-radius: 99px;
-  background-color: white;
+  background: linear-gradient(90deg, #8e89af, #c3c0d5) !important;
 }
 .details .title-1,
 .details .title-2 {
@@ -640,7 +643,7 @@ nav > div:last-child > .active:after {
 }
 .pagination .progress-sub-foreground {
     height: 100%;
-    background-color: #ecad29;
+    background:   linear-gradient(90deg, #52459f, #bf86e5);
     border-radius: 3px;
     transition: width 0.3s ease;
 }

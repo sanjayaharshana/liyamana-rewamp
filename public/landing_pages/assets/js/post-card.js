@@ -43,6 +43,11 @@ const data = [
     },
 ]
 
+// Add this right here, after the data array
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
+
 // Add indicator element for transitions
 document.body.insertAdjacentHTML('beforeend', '<div class="indicator"></div>');
 
@@ -65,7 +70,6 @@ _('demo').innerHTML =  cards + cardContents
 _('slide-numbers').innerHTML =  sildeNumbers
 
 
-// Generate the 3-grid post cards
 function generatePostCards() {
     const postCardsGrid = document.getElementById('post-cards-grid');
     if (!postCardsGrid) return;
@@ -76,14 +80,14 @@ function generatePostCards() {
             <div class="post-card-content">
                 <div class="post-card-place">${item.place}</div>
                 <h3 class="post-card-title">${item.title} ${item.title2}</h3>
-                <p class="post-card-desc">${item.description}</p>
+                <p class="post-card-desc">${item.description.substring(0, 100)}...</p>
                 <div class="post-card-cta">
                     <button class="post-card-bookmark" aria-label="Bookmark">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                             <path fill-rule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clip-rule="evenodd"/>
                         </svg>
                     </button>
-                    <button class="post-card-discover">Discover </button>
+                    <button class="post-card-discover">Discover</button>
                 </div>
             </div>
         </div>
@@ -91,6 +95,8 @@ function generatePostCards() {
 
     postCardsGrid.innerHTML = postCardsHTML;
 }
+
+
 
 // Add this function after generatePostCards()
 
@@ -553,5 +559,57 @@ document.querySelector('.arrow-left').addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     start().then(() => {
         generatePostCards();
+    });
+});
+
+
+// Function to set up scroll animations
+function setupScrollAnimations() {
+    // Only set up animations if GSAP is available
+    if (typeof gsap !== 'undefined') {
+        // First, let's animate the section title
+        gsap.from('.section-header h2', {
+            scrollTrigger: {
+                trigger: '.section-header',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.out'
+        });
+
+        // Set initial state of post cards
+        const postCards = document.querySelectorAll('.post-card-item');
+        gsap.set(postCards, { opacity: 0, y: 80 });
+
+        // Then animate each post card with a staggered effect
+        gsap.to(postCards, {
+            scrollTrigger: {
+                trigger: '.post-cards-grid',
+                start: 'top 75%',
+                toggleActions: 'play none none none'
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power2.out'
+        });
+    }
+}
+
+
+// Update the DOMContentLoaded event handler
+document.addEventListener('DOMContentLoaded', () => {
+    start().then(() => {
+        generatePostCards();
+        setupPopupHandlers();
+
+        // Add a small delay to ensure cards are rendered before animations
+        setTimeout(() => {
+            setupScrollAnimations();
+        }, 100);
     });
 });

@@ -23,65 +23,132 @@
         display: block;
     }
 
-    /* Grid layout for post cards */
+    /* Modern Dark Glassy Post Cards */
+
+    .post-cards-section {
+        padding: 80px 0;
+        background: linear-gradient(to bottom, #343434, #121212, #1e1e1e, #343434, #6f6f6f);
+        position: relative;
+    }
+
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+        font-size: 42px;
+        font-weight: 700;
+        color: #ffffff;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 15px;
+    }
+
+    .section-header h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    }
+
     .post-cards-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        padding: 40px;
+        gap: 30px;
         max-width: 1200px;
         margin: 0 auto;
+        padding: 0 20px;
     }
 
     .post-card-item {
-        border-radius: 12px;
+        border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        background-color: #fff;
+        background: rgba(30, 30, 30, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
         height: 100%;
         display: flex;
         flex-direction: column;
+        position: relative;
     }
 
     .post-card-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        transform: translateY(10px) !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        border: 2px solid #04385d;
+    }
+
+    .post-card-item:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     }
 
     .post-card-image {
-        height: 220px;
+        height: 240px;
         background-size: cover;
         background-position: center;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .post-card-image:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        background: linear-gradient(to top, rgba(30, 30, 30, 0.9), transparent);
     }
 
     .post-card-content {
-        padding: 20px;
+        padding: 25px;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
+        position: relative;
+        z-index: 1;
     }
 
     .post-card-place {
         font-size: 12px;
-        color: #777;
+        color: #a3a3a3;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 8px;
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+        font-weight: 500;
     }
 
     .post-card-title {
         font-size: 22px;
         font-weight: 700;
-        margin-bottom: 12px;
-        line-height: 1.2;
+        margin-bottom: 15px;
+        line-height: 1.3;
+        color: #ffffff;
+        background: linear-gradient(90deg, #ffffff, #d4d4d8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     .post-card-desc {
         font-size: 14px;
-        color: #555;
-        line-height: 1.5;
-        margin-bottom: 15px;
+        color: #d4d4d8;
+        line-height: 1.6;
+        margin-bottom: 20px;
         flex-grow: 1;
     }
 
@@ -92,33 +159,209 @@
         margin-top: auto;
     }
 
-    .post-card-cta button {
-        border: none;
-        cursor: pointer;
-    }
-
     .post-card-bookmark {
-        background: transparent;
-        color: #333;
-        width: 36px;
-        height: 36px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #d4d4d8;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .post-card-bookmark:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+    }
+
+    .post-card-bookmark svg {
+        width: 20px;
+        height: 20px;
     }
 
     .post-card-discover {
-        background: #1a1a1a;
+        background: linear-gradient(90deg, #14274b, #27395b);
         color: white;
-        padding: 10px 16px;
-        border-radius: 6px;
+        padding: 12px 20px;
+        border-radius: 8px;
         font-size: 14px;
-        font-weight: 500;
-        transition: background 0.3s ease;
+        font-weight: 600;
+        border: none;
+        cursor: progress;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .post-card-discover:hover {
-        background: #333;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Popup styles */
+    .post-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        backdrop-filter: blur(5px);
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track (background of the scrollbar) */
+    ::-webkit-scrollbar-track {
+        background: #121212; /* Dark background */
+        border-radius: 2px;
+    }
+
+    /* Scrollbar thumb (the draggable part) */
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #02222e, #09736e, #022e2e);
+        border-radius: 5px;
+    }
+
+    /* Hover effect on the scrollbar thumb */
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #022e2e, #09736e, #02222e);
+    }
+
+    }
+
+    .post-popup.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .post-popup-content {
+        background: rgba(30, 30, 30, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        width: 90%;
+        max-width: 900px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        transform: translateY(30px);
+        transition: transform 0.5s ease;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .post-popup.active .post-popup-content {
+        transform: translateY(0);
+    }
+
+    .post-popup-header {
+        position: relative;
+        height: 350px;
+        overflow: hidden;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .post-popup-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .post-popup-header:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 150px;
+        background: linear-gradient(to top, rgba(30, 30, 30, 1), transparent);
+    }
+
+    .post-popup-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.3s ease;
+        color: white;
+    }
+
+    .post-popup-close:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .post-popup-body {
+        padding: 35px;
+        color: white;
+    }
+
+    .post-popup-place {
+        font-size: 14px;
+        color: #a3a3a3;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+
+    .post-popup-title {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        line-height: 1.2;
+        background: linear-gradient(90deg, #ffffff, #d4d4d8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .post-popup-description {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #d4d4d8;
+        margin-bottom: 30px;
+    }
+
+    .post-popup-cta {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .post-popup-button {
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        color: white;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    }
+
+    .post-popup-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
     }
 
     /* Responsive adjustments */
@@ -126,58 +369,86 @@
         .post-cards-grid {
             grid-template-columns: repeat(2, 1fr);
         }
+
+        .post-card-desc{
+            display: none !important;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .post-popup-header {
+            height: 250px;
+        }
+
+        .post-popup-title {
+            font-size: 28px;
+        }
+
+        .post-popup-body {
+            padding: 25px;
+        }
+
+        .post-cards-section {
+            padding: 60px 0;
+        }
+
+        .post-card-desc{
+            display: none !important;
+        }
     }
 
     @media (max-width: 576px) {
         .post-cards-grid {
             grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .post-card-image {
+            height: 200px;
+        }
+
+        .section-header h2 {
+            font-size: 30px;
+        }
+
+        .post-popup-button {
+            padding: 12px 20px;
+            font-size: 14px;
+        }
+        .post-card-desc{
+            display: none !important;
+        }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+        .post-cards-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .post-cards-grid {
+            grid-template-columns: 1fr !important;
             padding: 20px;
         }
     }
 
-    .post-cards-section {
-        padding: 60px 0;
-        background-color: #f8f9fa;
-    }
-
-    .post-cards-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .post-card-item {
-        background: #fff;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .post-card-item:hover {
-        transform: translateY(-5px);
-    }
-
-    .post-card-image {
-        height: 240px;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
 
     @media (max-width: 1024px) {
         .post-cards-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr) !important;
         }
     }
 
     @media (max-width: 768px) {
         .post-cards-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px;
         }
 
         .post-card-image {
@@ -185,31 +456,8 @@
         }
     }
 
-    .section-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
 
-    .section-header h2 {
-        font-size: 36px;
-        font-weight: 700;
-        color: #1a1a1a;
-    }
 
-    .post-cards-section {
-        padding: 40px 0;
-        background-color: #f8f9fa;
-        margin-top: 60px;
-    }
-
-    .post-cards-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
 
     /* Essential slider styles */
     .card {
@@ -400,127 +648,6 @@
         z-index: 70;
     }
 
-    /* Popup styles */
-    .post-popup {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .post-popup.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .post-popup-content {
-        background-color: white;
-        border-radius: 12px;
-        width: 90%;
-        max-width: 900px;
-        max-height: 90vh;
-        overflow-y: auto;
-        position: relative;
-        transform: translateY(20px);
-        transition: transform 0.4s ease;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .post-popup.active .post-popup-content {
-        transform: translateY(0);
-    }
-
-    .post-popup-header {
-        position: relative;
-        height: 300px;
-        overflow: hidden;
-        border-radius: 12px 12px 0 0;
-    }
-
-    .post-popup-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .post-popup-close {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: rgba(255, 255, 255, 0.8);
-        border: none;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 10;
-        transition: background 0.2s ease;
-    }
-
-    .post-popup-close:hover {
-        background: white;
-    }
-
-    .post-popup-body {
-        padding: 30px;
-    }
-
-    .post-popup-place {
-        font-size: 14px;
-        color: #777;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 10px;
-    }
-
-    .post-popup-title {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        line-height: 1.2;
-    }
-
-    .post-popup-description {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #444;
-        margin-bottom: 25px;
-    }
-
-    .post-popup-cta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .post-popup-button {
-        background: #1a1a1a;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 6px;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-
-    .post-popup-button:hover {
-        background: #333;
-    }
-
     body.popup-open {
         overflow: hidden;
     }
@@ -571,7 +698,7 @@
                 />
               </svg>
             </button>
-            <button class="discover">Discover Location</button>
+
           </div>
         </div>
 
@@ -598,7 +725,7 @@
                 />
               </svg>
             </button>
-            <button class="discover">Discover Location</button>
+
           </div>
         </div>
 
@@ -678,6 +805,7 @@
 
 @push('footer-js')
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js'></script>
     <script src="{{ asset('landing_pages/assets/js/post-card.js') }}"></script>
 @endpush
 
