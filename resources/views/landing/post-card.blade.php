@@ -197,7 +197,7 @@
 
     .post-card-discover:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,rgba(39, 122, 162, 0.8) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     }
 
     /* Popup styles */
@@ -518,7 +518,7 @@
 
     .details .desc {
         color: white;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.6;
         margin-bottom: 30px;
         max-width: 400px;
@@ -685,19 +685,7 @@
             Tucked away in the Switzerland Alps, Saint Antönien offers an idyllic retreat for those seeking tranquility and adventure alike. It's a hidden gem for backcountry skiing in winter and boasts lush trails for hiking and mountain biking during the warmer months.
           </div>
           <div class="cta">
-            <button class="bookmark">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
+
 
           </div>
         </div>
@@ -712,19 +700,7 @@
             Tucked away in the Switzerland Alps, Saint Antönien offers an idyllic retreat for those seeking tranquility and adventure alike. It's a hidden gem for backcountry skiing in winter and boasts lush trails for hiking and mountain biking during the warmer months.
           </div>
           <div class="cta">
-            <button class="bookmark">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
+
 
           </div>
         </div>
