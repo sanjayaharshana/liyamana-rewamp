@@ -29,13 +29,14 @@ class HomeController extends Controller
         $templates = Templetes::where('name', 'LIKE', "%{$query}%")
             ->orWhere('description', 'LIKE', "%{$query}%")
             ->take(5)
-            ->get(['id', 'name', 'feature_image', 'slug'])
+            ->get(['id', 'name', 'description', 'feature_image', 'slug'])
             ->map(function($template) {
                 return [
                     'id' => $template->id,
                     'name' => $template->name,
+                    'description' => \Illuminate\Support\Str::limit($template->description, 50),
                     'feature_image' => asset('storage/' . $template->feature_image),
-                    'url' => route('landing.home', ['slug' => $template->slug])
+                    'slug' => $template->slug
                 ];
             });
 

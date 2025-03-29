@@ -11,13 +11,14 @@
                 <li class="search-container">
                     <div class="search-wrapper">
                         <input type="text" id="templateSearch" class="form-control form-control-sm" 
-                               style="background: #721f26;border-color: #860808;color: white;width: 410px;"
+                               style="background: #721f26;border-color: #860808;color: white;width: 300px;"
                                placeholder="Search templates...">
                         <div id="searchResults" class="search-results" style="display: none;">
                             <div class="search-results-content"></div>
                         </div>
                     </div>
                 </li>
+                <li class="nav-spacer"></li>
                 <li><a href="{{url('post-card')}}" class="@if (Request::segment(1) == 'post-card') active @endif">Memento</a></li>
                 <li class="has-mega-menu dropdown">
                     <a href="#" class="mega-menu-trigger">

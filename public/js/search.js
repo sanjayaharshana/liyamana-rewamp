@@ -24,9 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
 
                     searchResultsContent.innerHTML = data.map(template => `
-                        <a href="${template.url}" class="search-result-item">
+                        <a href="/market-place/${template.slug}" class="search-result-item">
                             <img src="${template.feature_image}" alt="${template.name}" class="search-result-thumbnail">
-                            <span class="search-result-name">${template.name}</span>
+                            <div class="search-result-info">
+                                <span class="search-result-name">${template.name}</span>
+                                <span class="search-result-description">${template.description}</span>
+                            </div>
                         </a>
                     `).join('');
 
