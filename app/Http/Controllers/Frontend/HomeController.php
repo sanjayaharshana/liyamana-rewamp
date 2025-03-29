@@ -21,4 +21,24 @@ class HomeController extends Controller
     {
         return view('landing.offline');
     }
+
+    public function searchTemplates(Request $request)
+    {
+        $query = $request->get('query');
+        
+        $templates = Templetes::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->take(5)
+            ->get(['id', 'name', 'feature_image', 'slug'])
+            ->map(function($template) {
+                return [
+                    'id' => $template->id,
+                    'name' => $template->name,
+                    'feature_image' => asset('storage/' . $template->feature_image),
+                    'url' => route('landing.home', ['slug' => $template->slug])
+                ];
+            });
+
+        return response()->json($templates);
+    }
 }

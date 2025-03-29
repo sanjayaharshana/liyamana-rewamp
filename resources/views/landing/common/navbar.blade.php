@@ -8,7 +8,16 @@
             <ul class="main-nav">
                 <li><a href="{{url('/')}}" class="@if (Request::segment(1) == '') active @endif">Home</a></li>
                 <li><a href="{{url('market-place')}}" class="@if (Request::segment(1) == 'market-place') active @endif">Market Place</a></li>
-                <li><input type="text" class="form-control form-control-sm" style="background: #721f26;border-color: #860808;color: white;width: 410px;"></li>
+                <li class="search-container">
+                    <div class="search-wrapper">
+                        <input type="text" id="templateSearch" class="form-control form-control-sm" 
+                               style="background: #721f26;border-color: #860808;color: white;width: 410px;"
+                               placeholder="Search templates...">
+                        <div id="searchResults" class="search-results" style="display: none;">
+                            <div class="search-results-content"></div>
+                        </div>
+                    </div>
+                </li>
                 <li><a href="{{url('post-card')}}" class="@if (Request::segment(1) == 'post-card') active @endif">Memento</a></li>
                 <li class="has-mega-menu dropdown">
                     <a href="#" class="mega-menu-trigger">

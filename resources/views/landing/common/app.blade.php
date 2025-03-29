@@ -33,6 +33,8 @@
     @stack('head-js')
     <!-- Main CSS File -->
     <link href="{{url('landing_pages/assets/css/main.css')}}" rel="stylesheet">
+    <link href="{{url('css/search.css')}}" rel="stylesheet">
+    <script src="{{url('js/search.js')}}" defer></script>
     <style>
         .index-page .header {
             --background-color: rgba(255, 255, 255, 0);

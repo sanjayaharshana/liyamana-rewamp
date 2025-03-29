@@ -82,3 +82,5 @@ Route::get('market-place/dummy_data/products/load_products.json',[\App\Http\Cont
 
 Route::get('/dashboard/payment-history', [DashboardController::class, 'paymentHistory'])->name('dashboard.payment-history');
 
+Route::get('/search-templates', [\App\Http\Controllers\Frontend\HomeController::class, 'searchTemplates'])->name('search.templates');
+
