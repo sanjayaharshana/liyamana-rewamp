@@ -297,10 +297,10 @@
                 display: flex;
                 position: relative;
                 }
-                .state--default span:nth-child(3) {
+                .state--default span:nth-child(8) {
                 margin-right: 5px;
                 }
-                .state--default span:nth-child(7) {
+                .state--default span:nth-child(12) {
                 margin-right: 5px;
                 }
                 .state--sent {
@@ -540,21 +540,26 @@
                                           <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                                         </svg>
                                       </div>
-                                    <p>
-                                      <span style="--i:0">L</span>
-                                      <span style="--i:1">o</span>
-                                      <span style="--i:2">g</span>
-                                      <span style="--i:3">w</span>
-                                      <span style="--i:4">i</span>
-                                      <span style="--i:5">t</span>
-                                      <span style="--i:6">h</span>
-                                      <span style="--i:7">G</span>
-                                      <span style="--i:8">o</span>
-                                      <span style="--i:9">o</span>
-                                      <span style="--i:10">g</span>
-                                      <span style="--i:11">l</span>
-                                      <span style="--i:12">e</span>
-                                    </p>
+                                      <p>
+                                        <span style="--i:0">C</span>
+                                        <span style="--i:1">o</span>
+                                        <span style="--i:2">n</span>
+                                        <span style="--i:3">t</span>
+                                        <span style="--i:4">i</span>
+                                        <span style="--i:5">n</span>
+                                        <span style="--i:6">u</span>
+                                        <span style="--i:7">e</span>
+                                        <span style="--i:8">W</span>
+                                        <span style="--i:9">i</span>
+                                        <span style="--i:10">t</span>
+                                        <span style="--i:11">h</span>
+                                        <span style="--i:12">G</span>
+                                        <span style="--i:13">o</span>
+                                        <span style="--i:14">o</span>
+                                        <span style="--i:15">g</span>
+                                        <span style="--i:16">l</span>
+                                        <span style="--i:17">e</span>
+                                      </p>
                                   </div>
                                   <div class="state state--sent">
                                    <!-- Replace the second icon with loading animation -->
