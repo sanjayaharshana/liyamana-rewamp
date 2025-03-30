@@ -1,0 +1,145 @@
+/* Base section styles */
+.section {
+    padding: 80px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.section-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-light {
+    background-color: #f8f9fa;
+}
+
+.section-dark {
+    background-color: #343a40;
+    color: white;
+}
+
+/* Section title styles */
+.section-title {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #b4261c;
+    margin-bottom: 1rem;
+}
+
+.section-title p {
+    font-size: 1.2rem;
+    color: #6c757d;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Card styles */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Button styles */
+.btn-primary {
+    background: #b4261c;
+    border-color: #b4261c;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #8f0606;
+    border-color: #8f0606;
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: #b4261c;
+    border-color: #b4261c;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #b4261c;
+    border-color: #b4261c;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Animation styles */
+[data-aos] {
+    opacity: 0;
+    transition-property: opacity, transform;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section {
+        padding: 60px 0;
+    }
+    
+    .section-title h2 {
+        font-size: 2rem;
+    }
+    
+    .section-title p {
+        font-size: 1rem;
+    }
+    
+    .card {
+        margin-bottom: 20px;
+    }
+}
+
+/* Performance optimizations */
+.section {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+.card {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Print styles */
+@media print {
+    .section {
+        padding: 40px 0;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .btn-primary,
+    .btn-outline-primary {
+        display: none;
+    }
+} 

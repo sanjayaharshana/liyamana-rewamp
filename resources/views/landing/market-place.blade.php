@@ -208,9 +208,9 @@
                                     <div class="product-image">
                                         <img src="{{url('storage/'.$templeteItem->feature_image)}}" class="card-img-top" alt="{{$templeteItem->name}}">
                                         <div class="product-overlay">
-                                            <a href="{{ url('market-place/'.$templeteItem->slug) }}" class="btn btn-light btn-sm">
+                                            <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#quickViewModal" data-product-id="{{$templeteItem->id}}">
                                                 <i class="bi bi-eye me-2"></i>Quick View
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="card-body p-4">
@@ -253,15 +253,211 @@
     <div class="modal fade" id="quickViewModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-0">
                     <h5 class="modal-title">Quick View</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Quick view content will be loaded here -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img id="quickViewImage" src="" alt="" class="img-fluid rounded">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img id="quickViewImage2" src="" alt="" class="img-fluid rounded">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img id="quickViewImage3" src="" alt="" class="img-fluid rounded">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3">
+                                <div class="product-thumbnails d-flex gap-2">
+                                    <img id="thumbnail1" src="" alt="" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;">
+                                    <img id="thumbnail2" src="" alt="" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;">
+                                    <img id="thumbnail3" src="" alt="" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product-info">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 id="quickViewTitle" class="mb-0"></h4>
+                                    <div class="product-rating">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <span id="quickViewPrice" class="h5 text-danger"></span>
+                                    <span id="quickViewDiscount" class="badge bg-success ms-2"></span>
+                                </div>
+                                <div class="product-description mb-4">
+                                    <h6 class="text-muted mb-2">Description</h6>
+                                    <p id="quickViewDescription" class="text-muted"></p>
+                                </div>
+                                <div class="product-meta mb-4">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6 class="text-muted mb-2">Category</h6>
+                                            <p id="quickViewCategory" class="mb-0"></p>
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="text-muted mb-2">Seller</h6>
+                                            <p id="quickViewSeller" class="mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <a id="quickViewDetailsBtn" href="" class="btn btn-outline-danger flex-grow-1">View Details</a>
+                                    <button type="button" class="btn btn-danger flex-grow-1" id="quickViewEditBtn">Quick Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quickViewModal = document.getElementById('quickViewModal');
+            if (quickViewModal) {
+                quickViewModal.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget;
+                    const productId = button.getAttribute('data-product-id');
+                    
+                    // Show loading state
+                    const modalBody = quickViewModal.querySelector('.modal-body');
+                    modalBody.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-danger" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+                    
+                    // Fetch product details using AJAX
+                    fetch(`/market-place/${productId}/quick-view`, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Restore the original modal content
+                        modalBody.innerHTML = `
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img id="quickViewImage" src="${data.feature_image}" alt="${data.name}" class="img-fluid rounded">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img id="quickViewImage2" src="${data.image2 || data.feature_image}" alt="${data.name}" class="img-fluid rounded">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img id="quickViewImage3" src="${data.image3 || data.feature_image}" alt="${data.name}" class="img-fluid rounded">
+                                            </div>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="product-thumbnails d-flex gap-2">
+                                            <img id="thumbnail1" src="${data.feature_image}" alt="" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;">
+                                            <img id="thumbnail2" src="${data.image2 || data.feature_image}" alt="" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;">
+                                            <img id="thumbnail3" src="${data.image3 || data.feature_image}" alt="" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="product-info">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 id="quickViewTitle" class="mb-0">${data.name}</h4>
+                                            <div class="product-rating">
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-half text-warning"></i>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span id="quickViewPrice" class="h5 text-danger">LKR ${parseFloat(data.price).toFixed(2)}</span>
+                                            ${data.discount > 0 ? `<span id="quickViewDiscount" class="badge bg-success ms-2">-${data.discount}%</span>` : ''}
+                                        </div>
+                                        <div class="product-description mb-4">
+                                            <h6 class="text-muted mb-2">Description</h6>
+                                            <p id="quickViewDescription" class="text-muted">${data.description}</p>
+                                        </div>
+                                        <div class="product-meta mb-4">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h6 class="text-muted mb-2">Category</h6>
+                                                    <p id="quickViewCategory" class="mb-0">${data.category || 'N/A'}</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h6 class="text-muted mb-2">Seller</h6>
+                                                    <p id="quickViewSeller" class="mb-0">${data.seller || 'N/A'}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <a id="quickViewDetailsBtn" href="/market-place/${data.slug}" class="btn btn-outline-danger flex-grow-1">View Details</a>
+                                            <button type="button" class="btn btn-danger flex-grow-1" id="quickViewEditBtn">Quick Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        // Reinitialize thumbnail click handlers
+                        const thumbnails = document.querySelectorAll('.product-thumbnails img');
+                        thumbnails.forEach((thumb, index) => {
+                            thumb.addEventListener('click', function() {
+                                const carousel = new bootstrap.Carousel(document.getElementById('productCarousel'));
+                                carousel.to(index);
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        modalBody.innerHTML = `
+                            <div class="text-center py-5">
+                                <div class="alert alert-danger">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>
+                                    Failed to load product details. Please try again.
+                                </div>
+                            </div>
+                        `;
+                    });
+                });
+            }
+        });
+    </script>
+    @endpush
 @endsection

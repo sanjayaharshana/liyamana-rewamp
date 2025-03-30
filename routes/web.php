@@ -84,3 +84,5 @@ Route::get('/dashboard/payment-history', [DashboardController::class, 'paymentHi
 
 Route::get('/search-templates', [\App\Http\Controllers\Frontend\HomeController::class, 'searchTemplates'])->name('search.templates');
 
+Route::get('/market-place/{id}/quick-view', [App\Http\Controllers\Landing\MarketPlaceController::class, 'quickView'])->name('market-place.quick-view');
+
