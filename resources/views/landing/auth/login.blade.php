@@ -1,112 +1,121 @@
 @extends('landing.common.app')
 
+@section('title', 'Login - Liyamana')
+@section('meta_description', 'Login to your Liyamana account to send heartfelt letters and connect with loved ones worldwide.')
+
 @section('content')
-<div class="login-page">
-    <div class="row g-0">
-        <!-- Left side with background image -->
-        <div class="col-lg-6 login-bg">
-            <div class="login-bg-content">
-                <img src="{{url('landing_pages/banding/liyamana_logo.png')}}" alt="Liyamana Logo" class="login-bg-logo">
-                <h1>Welcome to Liyamana</h1>
-                <p>Your trusted platform for sending heartfelt letters and connecting with loved ones.</p>
-                <div class="login-features">
-                    <div class="feature-item">
-                        <i class="bi bi-envelope-paper"></i>
-                        <span>Send Beautiful Letters</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="bi bi-shield-check"></i>
-                        <span>Secure & Reliable</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="bi bi-globe"></i>
-                        <span>Worldwide Delivery</span>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="row g-0">
+            <!-- Left side with branding -->
+            <div class="col-lg-5 auth-brand">
+                <div class="brand-content">
+                    <img src="{{url('landing_pages/banding/liyamana_logo.png')}}" alt="Liyamana Logo" class="brand-logo">
+                    <h2>Welcome to Liyamana</h2>
+                    <p>Your trusted platform for sending heartfelt letters and connecting with loved ones.</p>
+
+                    <div class="brand-features">
+                        <div class="feature">
+                            <i class="bi bi-envelope-paper"></i>
+                            <span>Send Beautiful Letters</span>
+                        </div>
+                        <div class="feature">
+                            <i class="bi bi-shield-check"></i>
+                            <span>Secure & Reliable</span>
+                        </div>
+                        <div class="feature">
+                            <i class="bi bi-globe"></i>
+                            <span>Worldwide Delivery</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Right side with login form -->
-        <div class="col-lg-6 login-form-container">
-            <div class="login-form-wrapper">
-                <div class="text-center mb-4">
-                    <h2 class="login-title">Welcome Back</h2>
-                    <p class="login-subtitle">Please login to your account</p>
-                </div>
-
-                @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
+            <!-- Right side with login form -->
+            <div class="col-lg-7 auth-form">
+                <div class="form-wrapper">
+                    <div class="form-header">
+                        <h2>Welcome Back</h2>
+                        <p>Please login to your account</p>
                     </div>
-                @endif
 
-                <form method="POST" action="{{ route('landing.login') }}">
-                    @csrf
-                    <div class="form-group mb-4">
-                        <label for="email" class="form-label">Email Address</label>
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-envelope"></i>
-                            </span>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                   id="email" name="email" value="{{ old('email') }}" required autofocus>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
                         </div>
-                    </div>
+                    @endif
 
-                    <div class="form-group mb-4">
-                        <label for="password" class="form-label">Password</label>
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="bi bi-lock"></i>
-                            </span>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                   id="password" name="password" required>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
                         </div>
-                    </div>
+                    @endif
 
-                    <div class="form-group mb-4 d-flex justify-content-between align-items-center">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" 
-                                   id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="remember">
-                                Remember Me
-                            </label>
+                    @if(session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
                         </div>
-                        <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password?</a>
-                    </div>
+                    @endif
 
-                    <div class="d-grid mb-4">
-                        <button type="submit" class="btn btn-primary login-btn">
-                            Login
-                        </button>
-                    </div>
+                    <form method="POST" action="{{ route('landing.login') }}">
+                        @csrf
 
-                    <div class="divider">
-                        <span>OR</span>
-                    </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                       value="{{ old('email') }}" required autofocus placeholder="Enter your email">
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                    <div class="d-grid mb-4">
-                        <a href="{{ route('google-auth') }}" class="btn btn-outline-primary google-btn">
-                            <img src="{{url('landing_pages/assets/img/google-icon.png')}}" alt="Google" class="google-icon">
-                            Continue with Google
-                        </a>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                                       required placeholder="Enter your password">
+                                <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                </button>
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                <div class="text-center">
-                    <p class="mb-0">Don't have an account? 
-                        <a href="{{ route('landing.registerPage') }}" class="register-link">Register</a>
-                    </p>
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <label for="remember">Remember Me</label>
+                            </div>
+                            <a href="{{ route('password.request') }}" class="forgot-link">Forgot Password?</a>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-login">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
+                            </button>
+                        </div>
+
+                        <div class="social-divider">
+                            <span> <b>Or</b> </span>
+                        </div>
+
+                        <div class="social-login">
+                            <a href="{{ route('google-auth') }}" class="btn btn-google">
+                                <img src="{{url('landing_pages/assets/img/google-icon.png')}}" alt="Google">
+                                <span>Continue with Google</span>
+                            </a>
+                        </div>
+
+                        <div class="register-prompt">
+                            <p>Don't have an account? <a href="{{ route('landing.registerPage') }}">Register Now</a></p>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -114,262 +123,442 @@
 </div>
 
 <style>
-.login-page {
+/* Auth Container Styles */
+.auth-container {
     min-height: 100vh;
-    background-color: #f8f9fa;
-}
-
-.login-bg {
-    background: linear-gradient(rgba(114, 31, 38, 0.9), rgba(114, 31, 38, 0.9)),
-                url('{{url('landing_pages/assets/img/letter-bg.jpg')}}') center/cover no-repeat;
-    min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
-    color: white;
+    padding-top: 2rem;
+    background-color: #f8f9fa;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
 }
 
-.login-bg-content {
-    max-width: 500px;
+.auth-card {
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand Section Styles */
+.auth-brand {
+    background: linear-gradient(135deg, #721f26 0%, #8b262f 100%);
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-brand::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('{{url('landing_pages/assets/img/letter-bg.jpg')}}');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.brand-content {
+    position: relative;
+    z-index: 1;
     text-align: center;
+    margin-top: -100px;
 }
 
-.login-bg-logo {
-    height: 80px;
-    margin-bottom: 30px;
+.brand-logo {
+    height: 70px;
+    margin-bottom: 1.5rem;
     filter: brightness(0) invert(1);
 }
 
-.login-bg h1 {
-    font-size: 36px;
+.auth-brand h2 {
+    font-size: 1.8rem;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
+    color: #e9e6e5;
 }
 
-.login-bg p {
-    font-size: 18px;
+.auth-brand p {
+    font-size: 1rem;
     opacity: 0.9;
-    margin-bottom: 40px;
+    margin-bottom: 2rem;
 }
 
-.login-features {
+.brand-features {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1rem;
 }
 
-.feature-item {
+.feature {
     display: flex;
     align-items: center;
-    gap: 15px;
-    font-size: 16px;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-.feature-item i {
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.9);
+.feature:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
 }
 
-.login-form-container {
+.feature i {
+    font-size: 1.25rem;
+}
+
+/* Form Section Styles */
+.auth-form {
+    padding: 0;
+    background: #fff;
+}
+
+.form-wrapper {
+    padding: 3rem 2.5rem;
+    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    background: white;
+    flex-direction: column;
 }
 
-.login-form-wrapper {
-    max-width: 400px;
-    width: 100%;
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.login-title {
+.form-header h2 {
     color: #721f26;
-    font-size: 28px;
+    font-size: 2.4rem;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
 }
 
-.login-subtitle {
+.form-header p {
     color: #6c757d;
-    font-size: 16px;
 }
 
-.form-label {
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
     color: #495057;
     font-weight: 500;
-    margin-bottom: 8px;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.input-group:focus-within {
+    box-shadow: 0 0 0 3px rgba(114, 31, 38, 0.15);
 }
 
 .input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
     background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
     border-right: none;
     color: #721f26;
 }
 
 .form-control {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e9ecef;
     border-left: none;
-    padding: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
 .form-control:focus {
-    border-color: #721f26;
-    box-shadow: 0 0 0 0.2rem rgba(114, 31, 38, 0.25);
+    outline: none;
+    border-color: #e9ecef;
 }
 
-.input-group:focus-within {
-    box-shadow: 0 0 0 0.2rem rgba(114, 31, 38, 0.25);
+.form-control.is-invalid {
+    border-color: #dc3545;
 }
 
-.input-group:focus-within .input-group-text,
-.input-group:focus-within .form-control {
-    border-color: #721f26;
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }
 
-.login-btn {
-    background-color: #721f26;
+/* Password Toggle Button */
+.password-toggle {
+    background: none;
     border: none;
-    padding: 12px;
-    font-weight: 500;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-.login-btn:hover {
-    background-color: #5a1920;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(114, 31, 38, 0.2);
-}
-
-.google-btn {
-    border: 1px solid #721f26;
-    color: #721f26;
-    padding: 12px;
-    font-weight: 500;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    padding: 0 15px;
+    color: #6c757d;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-left: none;
+    transition: color 0.3s ease;
 }
 
-.google-btn:hover {
+.password-toggle:hover {
+    color: #721f26;
+}
+
+.password-toggle:focus {
+    outline: none;
+}
+
+.password-toggle i {
+    font-size: 1rem;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.remember-me input {
+    width: 16px;
+    height: 16px;
+}
+
+.remember-me label {
+    margin-bottom: 0;
+    color: #6c757d;
+    font-weight: normal;
+}
+
+.forgot-link {
+    color: #721f26;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+
+.forgot-link:hover {
+    color: #5a1920;
+    text-decoration: underline;
+}
+
+.form-actions {
+    margin-bottom: 1.5rem;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 0.75rem;
     background-color: #721f26;
-    color: white;
-    transform: translateY(-1px);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #5a1920;
+    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(114, 31, 38, 0.2);
 }
 
-.google-icon {
+.social-divider {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.social-divider::before,
+.social-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 70px);
+    height: 1px;
+    background-color: #e9ecef;
+}
+
+.social-divider::before {
+    left: 0;
+}
+
+.social-divider::after {
+    right: 0;
+}
+
+.social-divider span {
+    display: inline-block;
+    padding: 0 1rem;
+    background-color: #fff;
+    color: #6c757d;
+    font-size: 0.875rem;
+    position: relative;
+    z-index: 1;
+}
+
+.social-login {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    color: #212529;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn-google:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-google img {
     width: 20px;
     height: 20px;
 }
 
-.register-link {
+.register-prompt {
+    text-align: center;
+    margin-top: auto;
+}
+
+.register-prompt p {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.register-prompt a {
     color: #721f26;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.register-link:hover {
+.register-prompt a:hover {
     color: #5a1920;
     text-decoration: underline;
-}
-
-.forgot-password {
-    color: #721f26;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
-}
-
-.forgot-password:hover {
-    color: #5a1920;
-    text-decoration: underline;
-}
-
-.form-check-label {
-    color: #6c757d;
-}
-
-.divider {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin: 20px 0;
-    color: #6c757d;
-    font-size: 14px;
-}
-
-.divider::before,
-.divider::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.divider span {
-    padding: 0 10px;
 }
 
 .alert {
-    border-radius: 10px;
-    margin-bottom: 20px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
 }
 
 .alert-danger {
-    background-color: #fff5f5;
-    border-color: #ffebeb;
-    color: #721f26;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
 }
 
-.invalid-feedback {
-    color: #721f26;
-    font-size: 14px;
-}
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+    .auth-card {
+        max-width: 600px;
+    }
 
-@media (max-width: 991px) {
-    .login-bg {
-        min-height: 300px;
-        padding: 20px;
+    .auth-brand {
+        padding: 2rem;
     }
-    
-    .login-bg-content {
-        max-width: 100%;
-    }
-    
-    .login-bg h1 {
-        font-size: 28px;
-    }
-    
-    .login-bg p {
-        font-size: 16px;
-    }
-    
-    .login-form-container {
-        padding: 20px;
+
+    .form-wrapper {
+        padding: 2rem;
     }
 }
 
-@media (max-width: 576px) {
-    .login-bg {
-        min-height: 250px;
+@media (max-width: 767.98px) {
+    .auth-container {
+        padding: 1rem;
     }
-    
-    .login-bg-logo {
-        height: 60px;
+
+    .auth-card {
+        border-radius: 12px;
     }
-    
-    .login-title {
-        font-size: 24px;
+
+    .auth-brand {
+        padding: 1.5rem;
     }
-    
-    .feature-item {
-        font-size: 14px;
+
+    .form-wrapper {
+        padding: 1.5rem;
+    }
+
+    .form-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .social-divider::before,
+    .social-divider::after {
+        width: calc(50% - 60px);
     }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function() {
+        // Toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+
+        // Toggle the icon
+        this.classList.toggle('bi-eye');
+        this.classList.toggle('bi-eye-slash');
+    });
+});
+</script>
 @endsection
