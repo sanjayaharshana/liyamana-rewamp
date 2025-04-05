@@ -185,7 +185,7 @@
                                 </button>
                             </div>
                         </div>
-                        <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">{{$design[$key.'_page']['objects'][$keyItem]['text'] ?? null}}</textarea>
+                        <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">{{isset($design[$key.'_page']) ? ($design[$key.'_page']['objects'][$keyItem]['text'] ?? '') : (getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? '')}}</textarea>
                     </div>
                 @else
                     <div class="form-group">
@@ -245,7 +245,7 @@
                                 </button>
                             </div>
                         </div>
-                        <input style="background-color: #8f0606;border-style: none;color: white;" value="{{$design[$key.'_page']['objects'][$keyItem]['text'] ?? null}}" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
+                        <input style="background-color: #8f0606;border-style: none;color: white;" value="{{isset($design[$key.'_page']) ? ($design[$key.'_page']['objects'][$keyItem]['text'] ?? '') : (getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? '')}}" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
                     </div>
                 @endif
             @endforeach
@@ -312,8 +312,9 @@
     @else
         @php
             $templatePosition = getTemplatePositions($template->id,$key,$fieldItem->name);
+            $templateText = $templatePosition['text'] ?? 'Default Text';
         @endphp
-        const {{$key}}{{ removeUnderscores($fieldItem->name) }} = new fabric.{{$fieldItem->type == 'text'? 'Text' : 'Textbox' }}(`{!! $templatePosition['text'] ?? 'Default Text' !!}`, {
+        const {{$key}}{{ removeUnderscores($fieldItem->name) }} = new fabric.{{$fieldItem->type == 'text'? 'Text' : 'Textbox' }}(`{!! $templateText !!}`, {
             left: {{$templatePosition['left'] ?? 100}},
             top: {{$templatePosition['top'] ?? 100}},
             width: 800,
@@ -325,6 +326,14 @@
             fontFamily: '{{$templatePosition['fontFamily'] ?? 'Arial'}}',
             textAlign: '{{$templatePosition['textAlign'] ?? 'left'}}',
             editable: false,
+        });
+
+        // Set the initial text value in the input/textarea field
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputField = document.getElementById('{{$key}}{{ removeUnderscores($fieldItem->name) }}');
+            if (inputField) {
+                inputField.value = `{!! $templateText !!}`;
+            }
         });
     @endif
 
