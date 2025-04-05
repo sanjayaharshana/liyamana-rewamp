@@ -319,6 +319,7 @@
 .feature-text h3 {
     font-size: 1.125rem;
     font-weight: 600;
+    color: white;
     margin-bottom: 0.25rem;
 }
 

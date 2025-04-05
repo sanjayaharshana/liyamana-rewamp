@@ -47,7 +47,7 @@
         margin: 0 5px;
     }
     .text-formatting-options .btn-light {
-        background: #8f0606;
+        background: #6c0303;
         color: white;
         border: none;
     }
@@ -130,10 +130,8 @@
                 @if($fieldItem->type == 'textarea')
                     <div class="form-group">
                         <label for="textInput">{{$fieldItem->label}}:</label>
-                        <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">{{$design[$key.'_page']['objects'][$keyItem]['text'] ?? null}}</textarea>
-                        <!-- Text Formatting Options -->
-                        <div class="text-formatting-options mt-2">
-                            <div class="btn-group btn-group-sm">
+                        <div style="padding: 0px;background: #6c0303;" class="text-formatting-options mt-2">
+                            <div class="btn-group btn-group-sm" style="background: #6c0303;">
                                 <button type="button" class="btn btn-light" onclick="toggleFontSizeSelect_{{$key}}_{{ removeUnderscores($fieldItem->name) }}()" title="Font Size">
                                     <i class="bi bi-text-paragraph"></i>
                                 </button>
@@ -187,12 +185,11 @@
                                 </button>
                             </div>
                         </div>
+                        <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">{{$design[$key.'_page']['objects'][$keyItem]['text'] ?? null}}</textarea>
                     </div>
                 @else
                     <div class="form-group">
                         <label for="textInput">{{$fieldItem->label}}:</label>
-                        <input style="background-color: #8f0606;border-style: none;color: white;" value="{{$design[$key.'_page']['objects'][$keyItem]['text'] ?? null}}" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
-                        <!-- Text Formatting Options -->
                         <div class="text-formatting-options mt-2">
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-light" onclick="toggleFontSizeSelect_{{$key}}_{{ removeUnderscores($fieldItem->name) }}()" title="Font Size">
@@ -248,6 +245,7 @@
                                 </button>
                             </div>
                         </div>
+                        <input style="background-color: #8f0606;border-style: none;color: white;" value="{{$design[$key.'_page']['objects'][$keyItem]['text'] ?? null}}" class="form-control" type="{{$fieldItem->type}}" id="{{$key}}{{ removeUnderscores($fieldItem->name) }}" name="{{ removeUnderscores($fieldItem->name) }}" placeholder="Enter text">
                     </div>
                 @endif
             @endforeach
@@ -303,22 +301,29 @@
             top: {{$design[$key.'_page']['objects'][$keyField]['top'] ?? 100}},
             width: 800,
             height: 1000,
-            scaleX: {{  $design[$key.'_page']['objects'][$keyField]['scaleX'] ?? 100}},
-            scaleY: {{  $design[$key.'_page']['objects'][$keyField]['scaleY'] ?? 100}},
-            fontSize: 30,
-            fill: 'black',
+            scaleX: {{$design[$key.'_page']['objects'][$keyField]['scaleX'] ?? 1}},
+            scaleY: {{$design[$key.'_page']['objects'][$keyField]['scaleY'] ?? 1}},
+            fontSize: {{$design[$key.'_page']['objects'][$keyField]['fontSize'] ?? 30}},
+            fill: '{{$design[$key.'_page']['objects'][$keyField]['fill'] ?? 'black'}}',
+            fontFamily: '{{$design[$key.'_page']['objects'][$keyField]['fontFamily'] ?? 'Arial'}}',
+            textAlign: '{{$design[$key.'_page']['objects'][$keyField]['textAlign'] ?? 'left'}}',
             editable: false,
         });
     @else
-        const {{$key}}{{ removeUnderscores($fieldItem->name) }} = new fabric.{{$fieldItem->type == 'text'? 'Text' : 'Textbox' }}(`{!! getTemplatePositions($template->id,$key,$fieldItem->name)['text'] ?? 'Default Text' !!}`, {
-            left: {{getTemplatePositions($template->id,$key,$fieldItem->name)['left'] ?? 100}},
-            top: {{getTemplatePositions($template->id,$key,$fieldItem->name)['top'] ?? 100}},
+        @php
+            $templatePosition = getTemplatePositions($template->id,$key,$fieldItem->name);
+        @endphp
+        const {{$key}}{{ removeUnderscores($fieldItem->name) }} = new fabric.{{$fieldItem->type == 'text'? 'Text' : 'Textbox' }}(`{!! $templatePosition['text'] ?? 'Default Text' !!}`, {
+            left: {{$templatePosition['left'] ?? 100}},
+            top: {{$templatePosition['top'] ?? 100}},
             width: 800,
             height: 1000,
-            scaleX: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleX'] ?? 100}},
-            scaleY: {{getTemplatePositions($template->id,$key,$fieldItem->name)['scaleY'] ?? 100}},
-            fontSize: 30,
-            fill: 'black',
+            scaleX: {{$templatePosition['scaleX'] ?? 1}},
+            scaleY: {{$templatePosition['scaleY'] ?? 1}},
+            fontSize: {{$templatePosition['fontSize'] ?? 30}},
+            fill: '{{$templatePosition['fill'] ?? 'black'}}',
+            fontFamily: '{{$templatePosition['fontFamily'] ?? 'Arial'}}',
+            textAlign: '{{$templatePosition['textAlign'] ?? 'left'}}',
             editable: false,
         });
     @endif
@@ -360,9 +365,31 @@
 
     // Save data for this specific tab
     saveDataButton.addEventListener("click", function() {
-        const {{$key}}canvasJSON = JSON.stringify({{$key}}canvas.toJSON());
+        const {{$key}}canvasObjects = {{$key}}canvas.getObjects();
+        const {{$key}}pageData = {
+            objects: {}
+        };
+
+        {{$key}}canvasObjects.forEach((obj, index) => {
+            if (obj.type === 'text' || obj.type === 'textbox' || obj.type === 'i-text') {
+                {{$key}}pageData.objects[index] = {
+                    top: obj.top,
+                    left: obj.left,
+                    text: obj.text,
+                    angle: obj.angle,
+                    scaleX: obj.scaleX,
+                    scaleY: obj.scaleY,
+                    stroke: obj.stroke,
+                    fontSize: obj.fontSize,
+                    fontFamily: obj.fontFamily,
+                    fill: obj.fill,
+                    textAlign: obj.textAlign
+                };
+            }
+        });
+
         const {{$key}}_page_data = document.getElementById('{{$key}}_page_data');
-        {{$key}}_page_data.value = {{$key}}canvasJSON;
+        {{$key}}_page_data.value = JSON.stringify({{$key}}pageData);
     });
 
     // Text formatting toolbar functionality
