@@ -71,8 +71,66 @@
     <div class="row">
         <div class="col-md-4" style="background: #b5261c;color: white;padding-top: 20px;">
             <div class="d-flex align-items-center mb-3">
+                <button type="button" class="btn btn-light me-2" id="addTextBtn_{{$key}}">Add Text</button>
                 <!-- Text Formatting Toolbar -->
-                
+                <div id="textToolbar_{{$key}}" class="text-toolbar" style="display: none; background: #8f0606; box-shadow: none; padding: 5px;">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light" id="deleteText_{{$key}}" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-light" id="fontSize_{{$key}}" title="Font Size">
+                            <i class="bi bi-text-paragraph"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-light" id="fontFamily_{{$key}}" title="Font Family">
+                            <i class="bi bi-fonts"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-light" id="textColor_{{$key}}" title="Text Color">
+                            <i class="bi bi-palette"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-light" id="textAlign_{{$key}}" title="Text Alignment">
+                            <i class="bi bi-text-left"></i>
+                        </button>
+                    </div>
+                    <!-- Font Size Dropdown -->
+                    <select id="fontSizeSelect_{{$key}}" class="form-select form-select-sm d-none" style="width: auto; display: inline-block; background: #8f0606; color: white; border: none;">
+                        <option value="12">12px</option>
+                        <option value="14">14px</option>
+                        <option value="16">16px</option>
+                        <option value="18">18px</option>
+                        <option value="20">20px</option>
+                        <option value="24">24px</option>
+                        <option value="28">28px</option>
+                        <option value="32">32px</option>
+                        <option value="36">36px</option>
+                        <option value="48">48px</option>
+                        <option value="64">64px</option>
+                        <option value="72">72px</option>
+                        <option value="96">96px</option>
+                    </select>
+                    <!-- Font Family Dropdown -->
+                    <select id="fontFamilySelect_{{$key}}" class="form-select form-select-sm d-none" style="width: auto; display: inline-block; background: #8f0606; color: white; border: none;">
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Helvetica">Helvetica</option>
+                    </select>
+                    <!-- Text Color Input -->
+                    <input type="color" id="textColorPicker_{{$key}}" class="form-control form-control-sm d-none" style="width: auto; display: inline-block; background: #8f0606; border: none;">
+                    <!-- Text Alignment Buttons -->
+                    <div id="textAlignButtons_{{$key}}" class="btn-group d-none">
+                        <button type="button" class="btn btn-sm btn-light" data-align="left" title="Align Left">
+                            <i class="bi bi-text-left"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-light" data-align="center" title="Align Center">
+                            <i class="bi bi-text-center"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-light" data-align="right" title="Align Right">
+                            <i class="bi bi-text-right"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             @foreach(json_decode($layoutItem['form_data']) as $keyField => $fieldItem)
                 <div class="form-group" id="field_group_{{$key}}_{{ removeUnderscores($fieldItem->name) }}">
@@ -168,6 +226,43 @@
 
     // Track deleted fields in an object - moved outside the loop
     const {{$key}}_deletedFields = {};
+
+    // Add Text button functionality
+    document.getElementById('addTextBtn_{{$key}}').addEventListener('click', function() {
+        // Create a unique ID for the new text field
+        const timestamp = new Date().getTime();
+        const newFieldId = `custom_${timestamp}`;
+        
+        // Create the fabric text object
+        const text = new fabric.IText('Double click to edit', {
+            id: newFieldId,
+            left: 100,
+            top: 100,
+            fontSize: 20,
+            fill: 'black',
+            editable: true,
+            fontFamily: 'Arial',
+            textAlign: 'left',
+            width: 200,
+            height: 50,
+            scaleX: 1,
+            scaleY: 1,
+            angle: 0
+        });
+
+        // Add the text object to canvas
+        {{$key}}canvas.add(text);
+        {{$key}}canvas.setActiveObject(text);
+        text.enterEditing();
+        {{$key}}canvas.renderAll();
+
+        // Show the text toolbar
+        const textToolbar = document.getElementById('textToolbar_{{$key}}');
+        if (textToolbar) {
+            textToolbar.style.display = 'block';
+            updateToolbarValues_{{$key}}(text);
+        }
+    });
 
     // Add right-click context menu functionality
     {{$key}}canvas.on('mouse:down', function(options) {
@@ -383,100 +478,139 @@
     const fontFamilySelect_{{$key}} = document.getElementById('fontFamilySelect_{{$key}}');
     const textColorPicker_{{$key}} = document.getElementById('textColorPicker_{{$key}}');
     const textAlignButtons_{{$key}} = document.getElementById('textAlignButtons_{{$key}}');
+    const deleteTextBtn_{{$key}} = document.getElementById('deleteText_{{$key}}');
+    const fontSizeBtn_{{$key}} = document.getElementById('fontSize_{{$key}}');
+    const fontFamilyBtn_{{$key}} = document.getElementById('fontFamily_{{$key}}');
+    const textColorBtn_{{$key}} = document.getElementById('textColor_{{$key}}');
+    const textAlignBtn_{{$key}} = document.getElementById('textAlign_{{$key}}');
 
     // Show/hide toolbar based on selection
     {{$key}}canvas.on('selection:created', function(e) {
         if (e.selected[0] && e.selected[0].type === 'i-text') {
-            textToolbar_{{$key}}.style.display = 'block';
-            updateToolbarValues_{{$key}}(e.selected[0]);
+            if (textToolbar_{{$key}}) {
+                textToolbar_{{$key}}.style.display = 'block';
+                updateToolbarValues_{{$key}}(e.selected[0]);
+            }
         }
     });
 
     {{$key}}canvas.on('selection:updated', function(e) {
         if (e.selected[0] && e.selected[0].type === 'i-text') {
-            textToolbar_{{$key}}.style.display = 'block';
-            updateToolbarValues_{{$key}}(e.selected[0]);
+            if (textToolbar_{{$key}}) {
+                textToolbar_{{$key}}.style.display = 'block';
+                updateToolbarValues_{{$key}}(e.selected[0]);
+            }
         }
     });
 
     {{$key}}canvas.on('selection:cleared', function() {
-        textToolbar_{{$key}}.style.display = 'none';
-    });
-
-    // Update toolbar values based on selected text
-    function updateToolbarValues_{{$key}}(textObject) {
-        fontSizeSelect_{{$key}}.value = textObject.fontSize;
-        fontFamilySelect_{{$key}}.value = textObject.fontFamily;
-        textColorPicker_{{$key}}.value = textObject.fill;
-    }
-
-    // Delete text button
-    document.getElementById('deleteText_{{$key}}').addEventListener('click', function() {
-        const activeObject = {{$key}}canvas.getActiveObject();
-        if (activeObject && activeObject.type === 'i-text') {
-            {{$key}}canvas.remove(activeObject);
-            {{$key}}canvas.renderAll();
+        if (textToolbar_{{$key}}) {
             textToolbar_{{$key}}.style.display = 'none';
         }
     });
 
-    // Font size button
-    document.getElementById('fontSize_{{$key}}').addEventListener('click', function() {
-        fontSizeSelect_{{$key}}.classList.toggle('d-none');
-    });
+    // Update toolbar values based on selected text
+    function updateToolbarValues_{{$key}}(textObject) {
+        if (fontSizeSelect_{{$key}}) fontSizeSelect_{{$key}}.value = textObject.fontSize;
+        if (fontFamilySelect_{{$key}}) fontFamilySelect_{{$key}}.value = textObject.fontFamily;
+        if (textColorPicker_{{$key}}) textColorPicker_{{$key}}.value = textObject.fill;
+    }
 
-    // Font family button
-    document.getElementById('fontFamily_{{$key}}').addEventListener('click', function() {
-        fontFamilySelect_{{$key}}.classList.toggle('d-none');
-    });
-
-    // Text color button
-    document.getElementById('textColor_{{$key}}').addEventListener('click', function() {
-        textColorPicker_{{$key}}.classList.toggle('d-none');
-    });
-
-    // Text align button
-    document.getElementById('textAlign_{{$key}}').addEventListener('click', function() {
-        textAlignButtons_{{$key}}.classList.toggle('d-none');
-    });
-
-    // Font size change handler
-    fontSizeSelect_{{$key}}.addEventListener('change', function() {
-        const activeObject = {{$key}}canvas.getActiveObject();
-        if (activeObject && activeObject.type === 'i-text') {
-            activeObject.set('fontSize', parseInt(this.value));
-            {{$key}}canvas.renderAll();
-        }
-    });
-
-    // Font family change handler
-    fontFamilySelect_{{$key}}.addEventListener('change', function() {
-        const activeObject = {{$key}}canvas.getActiveObject();
-        if (activeObject && activeObject.type === 'i-text') {
-            activeObject.set('fontFamily', this.value);
-            {{$key}}canvas.renderAll();
-        }
-    });
-
-    // Text color change handler
-    textColorPicker_{{$key}}.addEventListener('input', function() {
-        const activeObject = {{$key}}canvas.getActiveObject();
-        if (activeObject && activeObject.type === 'i-text') {
-            activeObject.set('fill', this.value);
-            {{$key}}canvas.renderAll();
-        }
-    });
-
-    // Text alignment handlers
-    textAlignButtons_{{$key}}.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', function() {
+    // Delete text button
+    if (deleteTextBtn_{{$key}}) {
+        deleteTextBtn_{{$key}}.addEventListener('click', function() {
             const activeObject = {{$key}}canvas.getActiveObject();
             if (activeObject && activeObject.type === 'i-text') {
-                activeObject.set('textAlign', this.dataset.align);
+                {{$key}}canvas.remove(activeObject);
+                {{$key}}canvas.renderAll();
+                if (textToolbar_{{$key}}) {
+                    textToolbar_{{$key}}.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    // Font size button
+    if (fontSizeBtn_{{$key}}) {
+        fontSizeBtn_{{$key}}.addEventListener('click', function() {
+            if (fontSizeSelect_{{$key}}) {
+                fontSizeSelect_{{$key}}.classList.toggle('d-none');
+            }
+        });
+    }
+
+    // Font family button
+    if (fontFamilyBtn_{{$key}}) {
+        fontFamilyBtn_{{$key}}.addEventListener('click', function() {
+            if (fontFamilySelect_{{$key}}) {
+                fontFamilySelect_{{$key}}.classList.toggle('d-none');
+            }
+        });
+    }
+
+    // Text color button
+    if (textColorBtn_{{$key}}) {
+        textColorBtn_{{$key}}.addEventListener('click', function() {
+            if (textColorPicker_{{$key}}) {
+                textColorPicker_{{$key}}.classList.toggle('d-none');
+            }
+        });
+    }
+
+    // Text align button
+    if (textAlignBtn_{{$key}}) {
+        textAlignBtn_{{$key}}.addEventListener('click', function() {
+            if (textAlignButtons_{{$key}}) {
+                textAlignButtons_{{$key}}.classList.toggle('d-none');
+            }
+        });
+    }
+
+    // Font size change handler
+    if (fontSizeSelect_{{$key}}) {
+        fontSizeSelect_{{$key}}.addEventListener('change', function() {
+            const activeObject = {{$key}}canvas.getActiveObject();
+            if (activeObject && activeObject.type === 'i-text') {
+                activeObject.set('fontSize', parseInt(this.value));
                 {{$key}}canvas.renderAll();
             }
         });
-    });
+    }
+
+    // Font family change handler
+    if (fontFamilySelect_{{$key}}) {
+        fontFamilySelect_{{$key}}.addEventListener('change', function() {
+            const activeObject = {{$key}}canvas.getActiveObject();
+            if (activeObject && activeObject.type === 'i-text') {
+                activeObject.set('fontFamily', this.value);
+                {{$key}}canvas.renderAll();
+            }
+        });
+    }
+
+    // Text color change handler
+    if (textColorPicker_{{$key}}) {
+        textColorPicker_{{$key}}.addEventListener('input', function() {
+            const activeObject = {{$key}}canvas.getActiveObject();
+            if (activeObject && activeObject.type === 'i-text') {
+                activeObject.set('fill', this.value);
+                {{$key}}canvas.renderAll();
+            }
+        });
+    }
+
+    // Text alignment handlers
+    if (textAlignButtons_{{$key}}) {
+        textAlignButtons_{{$key}}.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                const activeObject = {{$key}}canvas.getActiveObject();
+                if (activeObject && activeObject.type === 'i-text') {
+                    activeObject.set('textAlign', this.dataset.align);
+                    {{$key}}canvas.renderAll();
+                }
+            });
+        });
+    }
 
     // Add text formatting functions for each field
     @foreach(json_decode($layoutItem['form_data']) as $keyItem => $fieldItem)
