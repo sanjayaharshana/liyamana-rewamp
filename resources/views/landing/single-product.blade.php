@@ -37,7 +37,7 @@
 
                     <h1 class="product-title mb-3">{{ $template->name }}</h1>
                     <div class="product-price mb-4">
-                        <span class="h2 text-primary">LKR {{ number_format($template->price, 2) }}</span>
+                        <span class="h2 text-primary" style="color: maroon !important;">LKR {{ number_format($template->price, 2) }}</span>
                     </div>
 
                     <div class="product-description mb-4">
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="product-actions mb-4">
-                        <a href="{{ url('market-place/'.$template->slug.'/writing-desk/no-order') }}" class="btn btn-primary btn-lg me-2 quick-send-btn">
+                        <a style="background: maroon;border-color: maroon" href="{{ url('market-place/'.$template->slug.'/writing-desk/no-order') }}" class="btn btn-primary btn-lg me-2 quick-send-btn">
                             <i class="bi bi-envelope me-2"></i> Quick Send
                         </a>
                         <button class="btn btn-outline-primary btn-lg edit-template-btn">
@@ -94,7 +94,7 @@
                             <div class="card-body">
                                 <h5 class="card-title mb-3">Quick Actions</h5>
                                 <div class="d-grid gap-2">
-                                    <button class="btn btn-outline-primary share-btn" data-bs-toggle="modal" data-bs-target="#shareModal">
+                                    <button class="btn btn-outline-primary share-btn" data-bs-toggle="modal" data-bs-target="#shareModal" style="color: maroon !important;">
                                         <i class="bi bi-share me-2"></i> Share Template
                                     </button>
                                     <button class="btn btn-outline-primary">
@@ -221,7 +221,7 @@
     </div>
 
     @include('landing.single-product.models.quick-send')
-    
+
     <!-- Share Modal -->
     <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -301,7 +301,7 @@
         const flexSwitchCheckDefault = document.getElementById('flexSwitchCheckDefault');
         if (flexSwitchCheckDefault) {
             flexSwitchCheckDefault.addEventListener('change', function() {
-                document.getElementById('password_section').style.display = 
+                document.getElementById('password_section').style.display =
                     this.checked ? 'block' : 'none';
             });
         }
@@ -311,10 +311,10 @@
             const shareLink = document.getElementById('shareLink');
             shareLink.select();
             document.execCommand('copy');
-            
+
             const copySuccess = document.getElementById('copySuccess');
             copySuccess.style.display = 'block';
-            
+
             setTimeout(() => {
                 copySuccess.style.display = 'none';
             }, 2000);
@@ -328,7 +328,7 @@
                 this.appendChild(ripple);
 
                 const rect = button.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
+
                 const x = e.clientX - rect.left - size / 2;
                 const y = e.clientY - rect.top - size / 2;
 

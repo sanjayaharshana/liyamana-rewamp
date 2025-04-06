@@ -14,6 +14,9 @@
     }
     .text-toolbar {
         margin-left: 10px;
+        background: #8f0606;
+        padding: 5px;
+        border-radius: 4px;
     }
     .text-toolbar .btn-group {
         margin-right: 5px;
@@ -23,12 +26,13 @@
         margin: 0 5px;
     }
     .text-toolbar .btn-light {
-        background: #8f0606;
+        background: #b5261c;
         color: white;
         border: none;
+        padding: 5px 10px;
     }
     .text-toolbar .btn-light:hover {
-        background: #a71d1d;
+        background: #d32f2f;
     }
     .text-toolbar .form-select option {
         background: #8f0606;
@@ -38,6 +42,7 @@
         margin-top: 5px;
         padding: 5px;
         border-radius: 4px;
+        background: #8f0606;
     }
     .text-formatting-options .btn-group {
         margin-right: 5px;
@@ -47,12 +52,13 @@
         margin: 0 5px;
     }
     .text-formatting-options .btn-light {
-        background: #6c0303;
+        background: #b5261c;
         color: white;
         border: none;
+        padding: 5px 10px;
     }
     .text-formatting-options .btn-light:hover {
-        background: #a71d1d;
+        background: #d32f2f;
     }
     .text-formatting-options .form-select option {
         background: #8f0606;
@@ -66,6 +72,7 @@
         <div class="col-md-4" style="background: #b5261c;color: white;padding-top: 20px;">
             <div class="d-flex align-items-center mb-3">
                 <button type="button" class="btn btn-light me-2" id="addTextBtn_{{$key}}">Add Text</button>
+                <button type="button" class="btn btn-light me-2" id="addWithTextBtn_{{$key}}">With Text</button>
                 <!-- Text Formatting Toolbar -->
                 <div id="textToolbar_{{$key}}" class="text-toolbar" style="display: none; background: transparent; box-shadow: none; padding: 0;">
                     <div class="btn-group">
@@ -223,19 +230,327 @@
 
     // Add text button functionality for this specific tab
     document.getElementById('addTextBtn_{{$key}}').addEventListener('click', function() {
+        // Create a unique ID for the new text field
+        const timestamp = new Date().getTime();
+        const newFieldId = `custom_${timestamp}`;
+        
+        // Create the text object
         const text = new fabric.IText('Double click to edit', {
+            id: newFieldId,
             left: 100,
             top: 100,
             fontSize: 20,
             fill: 'black',
             editable: true,
-            fontFamily: 'Arial'
+            fontFamily: 'Arial',
+            textAlign: 'left',
+            width: 800,
+            height: 1000,
+            scaleX: 1,
+            scaleY: 1,
+            angle: 0
         });
 
+        // Add the text object to canvas
         {{$key}}canvas.add(text);
         {{$key}}canvas.setActiveObject(text);
         text.enterEditing();
         {{$key}}canvas.renderAll();
+
+        // Create a new form group for the text field
+        const formGroup = document.createElement('div');
+        formGroup.className = 'form-group';
+        formGroup.id = `field_group_{{$key}}_${newFieldId}`;
+        
+        formGroup.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center">
+                <label for="textInput">Custom Text:</label>
+                <button type="button" class="btn btn-sm btn-danger" onclick="removeTextField_{{$key}}_${newFieldId}()">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+            <div class="text-formatting-options mt-2">
+                <div class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-light" onclick="toggleFontSizeSelect_{{$key}}_${newFieldId}()" title="Font Size">
+                        <i class="bi bi-text-paragraph"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" onclick="toggleFontFamilySelect_{{$key}}_${newFieldId}()" title="Font Family">
+                        <i class="bi bi-fonts"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" onclick="toggleTextColorPicker_{{$key}}_${newFieldId}()" title="Text Color">
+                        <i class="bi bi-palette"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" onclick="toggleTextAlignButtons_{{$key}}_${newFieldId}()" title="Text Alignment">
+                        <i class="bi bi-text-left"></i>
+                    </button>
+                </div>
+                <!-- Font Size Dropdown -->
+                <select id="fontSizeSelect_{{$key}}_${newFieldId}" class="form-select form-select-sm d-none" style="width: auto; display: inline-block; background: #8f0606; color: white; border: none;">
+                    <option value="12">12px</option>
+                    <option value="14">14px</option>
+                    <option value="16">16px</option>
+                    <option value="18">18px</option>
+                    <option value="20">20px</option>
+                    <option value="24">24px</option>
+                    <option value="28">28px</option>
+                    <option value="32">32px</option>
+                    <option value="36">36px</option>
+                    <option value="48">48px</option>
+                    <option value="64">64px</option>
+                    <option value="72">72px</option>
+                    <option value="96">96px</option>
+                </select>
+                <!-- Font Family Dropdown -->
+                <select id="fontFamilySelect_{{$key}}_${newFieldId}" class="form-select form-select-sm d-none" style="width: auto; display: inline-block; background: #8f0606; color: white; border: none;">
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Helvetica">Helvetica</option>
+                </select>
+                <!-- Text Color Input -->
+                <input type="color" id="textColorPicker_{{$key}}_${newFieldId}" class="form-control form-control-sm d-none" style="width: auto; display: inline-block; background: #8f0606; border: none;">
+                <!-- Text Alignment Buttons -->
+                <div id="textAlignButtons_{{$key}}_${newFieldId}" class="btn-group d-none">
+                    <button type="button" class="btn btn-sm btn-light" onclick="setTextAlign_{{$key}}_${newFieldId}('left')" title="Align Left">
+                        <i class="bi bi-text-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-light" onclick="setTextAlign_{{$key}}_${newFieldId}('center')" title="Align Center">
+                        <i class="bi bi-text-center"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-light" onclick="setTextAlign_{{$key}}_${newFieldId}('right')" title="Align Right">
+                        <i class="bi bi-text-right"></i>
+                    </button>
+                </div>
+            </div>
+            <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" id="{{$key}}${newFieldId}" placeholder="Enter text"></textarea>
+        `;
+
+        // Add the form group to the container
+        document.querySelector('.col-md-4').appendChild(formGroup);
+
+        // Add event listeners for the new text field
+        const textarea = formGroup.querySelector('textarea');
+        textarea.addEventListener('input', function() {
+            text.set('text', this.value);
+            {{$key}}canvas.renderAll();
+        });
+
+        // Add formatting functions for the new text field
+        window[`toggleFontSizeSelect_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`fontSizeSelect_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`toggleFontFamilySelect_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`fontFamilySelect_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`toggleTextColorPicker_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`textColorPicker_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`toggleTextAlignButtons_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`textAlignButtons_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`setTextAlign_{{$key}}_${newFieldId}`] = function(align) {
+            text.set('textAlign', align);
+            {{$key}}canvas.renderAll();
+        };
+
+        // Add event listeners for formatting controls
+        document.getElementById(`fontSizeSelect_{{$key}}_${newFieldId}`).addEventListener('change', function() {
+            text.set('fontSize', parseInt(this.value));
+            {{$key}}canvas.renderAll();
+        });
+
+        document.getElementById(`fontFamilySelect_{{$key}}_${newFieldId}`).addEventListener('change', function() {
+            text.set('fontFamily', this.value);
+            {{$key}}canvas.renderAll();
+        });
+
+        document.getElementById(`textColorPicker_{{$key}}_${newFieldId}`).addEventListener('input', function() {
+            text.set('fill', this.value);
+            {{$key}}canvas.renderAll();
+        });
+
+        // Add remove function for the new text field
+        window[`removeTextField_{{$key}}_${newFieldId}`] = function() {
+            formGroup.remove();
+            {{$key}}canvas.remove(text);
+            {{$key}}canvas.renderAll();
+            {{$key}}_deletedFields[newFieldId] = true;
+        };
+    });
+
+    // Add "With Text" button functionality
+    document.getElementById('addWithTextBtn_{{$key}}').addEventListener('click', function() {
+        // Create a unique ID for the new text field
+        const timestamp = new Date().getTime();
+        const newFieldId = `with_text_${timestamp}`;
+        
+        // Create the text object with specific dimensions
+        const text = new fabric.IText('Double click to edit', {
+            id: newFieldId,
+            left: 100,
+            top: 100,
+            fontSize: 20,
+            fill: 'black',
+            editable: true,
+            fontFamily: 'Arial',
+            textAlign: 'left',
+            width: 400,  // Wider default width
+            height: 100, // Taller default height
+            backgroundColor: 'rgba(255, 255, 255, 0.8)', // Light background
+            padding: 10  // Add padding
+        });
+
+        // Add the text object to canvas
+        {{$key}}canvas.add(text);
+        {{$key}}canvas.setActiveObject(text);
+        text.enterEditing();
+        {{$key}}canvas.renderAll();
+
+        // Create a new form group for the text field
+        const formGroup = document.createElement('div');
+        formGroup.className = 'form-group';
+        formGroup.id = `field_group_{{$key}}_${newFieldId}`;
+        
+        formGroup.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center">
+                <label for="textInput">With Text:</label>
+                <button type="button" class="btn btn-sm btn-danger" onclick="removeTextField_{{$key}}_${newFieldId}()">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+            <div class="text-formatting-options mt-2">
+                <div class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-light" onclick="toggleFontSizeSelect_{{$key}}_${newFieldId}()" title="Font Size">
+                        <i class="bi bi-text-paragraph"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" onclick="toggleFontFamilySelect_{{$key}}_${newFieldId}()" title="Font Family">
+                        <i class="bi bi-fonts"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" onclick="toggleTextColorPicker_{{$key}}_${newFieldId}()" title="Text Color">
+                        <i class="bi bi-palette"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" onclick="toggleTextAlignButtons_{{$key}}_${newFieldId}()" title="Text Alignment">
+                        <i class="bi bi-text-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" onclick="toggleBackgroundColor_{{$key}}_${newFieldId}()" title="Background Color">
+                        <i class="bi bi-square-fill"></i>
+                    </button>
+                </div>
+                <!-- Font Size Dropdown -->
+                <select id="fontSizeSelect_{{$key}}_${newFieldId}" class="form-select form-select-sm d-none" style="width: auto; display: inline-block; background: #8f0606; color: white; border: none;">
+                    <option value="12">12px</option>
+                    <option value="14">14px</option>
+                    <option value="16">16px</option>
+                    <option value="18">18px</option>
+                    <option value="20">20px</option>
+                    <option value="24">24px</option>
+                    <option value="28">28px</option>
+                    <option value="32">32px</option>
+                    <option value="36">36px</option>
+                    <option value="48">48px</option>
+                    <option value="64">64px</option>
+                    <option value="72">72px</option>
+                    <option value="96">96px</option>
+                </select>
+                <!-- Font Family Dropdown -->
+                <select id="fontFamilySelect_{{$key}}_${newFieldId}" class="form-select form-select-sm d-none" style="width: auto; display: inline-block; background: #8f0606; color: white; border: none;">
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Helvetica">Helvetica</option>
+                </select>
+                <!-- Text Color Input -->
+                <input type="color" id="textColorPicker_{{$key}}_${newFieldId}" class="form-control form-control-sm d-none" style="width: auto; display: inline-block; background: #8f0606; border: none;">
+                <!-- Background Color Input -->
+                <input type="color" id="backgroundColorPicker_{{$key}}_${newFieldId}" class="form-control form-control-sm d-none" style="width: auto; display: inline-block; background: #8f0606; border: none;">
+                <!-- Text Alignment Buttons -->
+                <div id="textAlignButtons_{{$key}}_${newFieldId}" class="btn-group d-none">
+                    <button type="button" class="btn btn-sm btn-light" onclick="setTextAlign_{{$key}}_${newFieldId}('left')" title="Align Left">
+                        <i class="bi bi-text-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-light" onclick="setTextAlign_{{$key}}_${newFieldId}('center')" title="Align Center">
+                        <i class="bi bi-text-center"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-light" onclick="setTextAlign_{{$key}}_${newFieldId}('right')" title="Align Right">
+                        <i class="bi bi-text-right"></i>
+                    </button>
+                </div>
+            </div>
+            <input type="text" style="background-color: #8f0606;border-style: none;color: white;" class="form-control" id="{{$key}}${newFieldId}" placeholder="Enter text">
+        `;
+
+        // Add the form group to the container
+        document.querySelector('.col-md-4').appendChild(formGroup);
+
+        // Add event listeners for the new text field
+        const inputField = formGroup.querySelector('input[type="text"]');
+        inputField.addEventListener('input', function() {
+            text.set('text', this.value);
+            {{$key}}canvas.renderAll();
+        });
+
+        // Add formatting functions for the new text field
+        window[`toggleFontSizeSelect_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`fontSizeSelect_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`toggleFontFamilySelect_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`fontFamilySelect_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`toggleTextColorPicker_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`textColorPicker_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`toggleTextAlignButtons_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`textAlignButtons_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`toggleBackgroundColor_{{$key}}_${newFieldId}`] = function() {
+            document.getElementById(`backgroundColorPicker_{{$key}}_${newFieldId}`).classList.toggle('d-none');
+        };
+
+        window[`setTextAlign_{{$key}}_${newFieldId}`] = function(align) {
+            text.set('textAlign', align);
+            {{$key}}canvas.renderAll();
+        };
+
+        // Add event listeners for formatting controls
+        document.getElementById(`fontSizeSelect_{{$key}}_${newFieldId}`).addEventListener('change', function() {
+            text.set('fontSize', parseInt(this.value));
+            {{$key}}canvas.renderAll();
+        });
+
+        document.getElementById(`fontFamilySelect_{{$key}}_${newFieldId}`).addEventListener('change', function() {
+            text.set('fontFamily', this.value);
+            {{$key}}canvas.renderAll();
+        });
+
+        document.getElementById(`textColorPicker_{{$key}}_${newFieldId}`).addEventListener('input', function() {
+            text.set('fill', this.value);
+            {{$key}}canvas.renderAll();
+        });
+
+        document.getElementById(`backgroundColorPicker_{{$key}}_${newFieldId}`).addEventListener('input', function() {
+            text.set('backgroundColor', this.value);
+            {{$key}}canvas.renderAll();
+        });
+
+        // Add remove function for the new text field
+        window[`removeTextField_{{$key}}_${newFieldId}`] = function() {
+            formGroup.remove();
+            {{$key}}canvas.remove(text);
+            {{$key}}canvas.renderAll();
+            {{$key}}_deletedFields[newFieldId] = true;
+        };
     });
 
     // Add a text element to the canvas for each fieldItem
