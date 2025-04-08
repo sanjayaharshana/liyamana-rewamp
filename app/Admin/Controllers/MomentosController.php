@@ -30,7 +30,7 @@ class MomentosController extends AdminController
         $grid->column('name', __('Name'));
         $grid->column('short_description', __('Short description'));
         $grid->column('description', __('Description'));
-        $grid->column('feature_image', __('Feature image'));
+        $grid->column('feature_image')->image();
         $grid->column('article', __('Article'));
         $grid->column('taken_by', __('Taken by'));
         $grid->column('template_id', __('Template id'));
@@ -87,21 +87,21 @@ class MomentosController extends AdminController
     {
         $form = new Form(new Momentos());
 
-        $form->textarea('name', __('Name'));
-        $form->textarea('short_description', __('Short description'));
-        $form->textarea('description', __('Description'));
-        $form->textarea('feature_image', __('Feature image'));
-        $form->textarea('article', __('Article'));
-        $form->textarea('taken_by', __('Taken by'));
-        $form->textarea('template_id', __('Template id'));
-        $form->text('user_id', __('User id'));
-        $form->textarea('category_ids', __('Category ids'));
+        $form->textarea('name', __('Name'))->rules('required');
+        $form->textarea('short_description', __('Short description'))->rules('required');
+        $form->textarea('description', __('Description'))->rules('required');
+        $form->image('feature_image', __('Feature image'))->rules('required');
+        $form->textarea('article', __('Article'))->rules('required');
+        $form->textarea('taken_by', __('Taken by'))->rules('required');
+        $form->textarea('template_id', __('Template id'))->rules('required');
+        $form->text('user_id', __('User id'))->rules('required');
+        $form->textarea('category_ids', __('Category ids'))->rules('required');
         $form->text('theme', __('Theme'));
         $form->text('configuration', __('Configuration'));
         $form->text('video_links', __('Video links'));
         $form->textarea('seo_tags', __('Seo tags'));
         $form->textarea('seo_description', __('Seo description'));
-        $form->text('slug');
+        $form->text('slug')->readonly();
 
         return $form;
     }
