@@ -69,7 +69,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4" style="background: #b5261c;color: white;padding-top: 20px;">
+        <div class="col-md-4 sidepanbolder" style="background: #b5261c;color: white;padding-top: 20px;overflow: scroll;height: 650px;">
             <div class="d-flex align-items-center mb-3">
                 <button type="button" class="btn btn-light me-2" id="addTextBtn_{{$key}}">Add Text</button>
                 <!-- Text Formatting Toolbar -->
@@ -232,7 +232,7 @@
         // Create a unique ID for the new text field
         const timestamp = new Date().getTime();
         const newFieldId = `custom_${timestamp}`;
-        
+
         // Create the fabric text object
         const text = new fabric.IText('Double click to edit', {
             id: newFieldId,
@@ -260,8 +260,9 @@
         const formGroup = document.createElement('div');
         formGroup.className = 'form-group';
         formGroup.id = `field_group_{{$key}}_${newFieldId}`;
-        
+
         formGroup.innerHTML = `
+        <div class="form-group">
             <div class="d-flex justify-content-between align-items-center">
                 <label for="textInput">New Text:</label>
                 <button type="button" class="btn btn-sm btn-danger" onclick="removeTextField_{{$key}}_${newFieldId}()">
@@ -324,10 +325,11 @@
                 </div>
             </div>
             <textarea style="background-color: #8f0606;border-style: none;color: white;" rows="5" class="form-control" id="{{$key}}${newFieldId}" placeholder="Enter text"></textarea>
+        </div>
         `;
 
         // Add the form group to the container
-        const container = document.querySelector('.col-md-4');
+        const container = document.querySelector('.sidepanbolder');
         if (container) {
             container.appendChild(formGroup);
         }
@@ -417,10 +419,10 @@
                 // Show the text toolbar
                 const textToolbar = document.getElementById('textToolbar_{{$key}}');
                 textToolbar.style.display = 'block';
-                
+
                 // Update toolbar values
                 updateToolbarValues_{{$key}}(target);
-                
+
                 // Prevent default context menu
                 options.e.preventDefault();
             }
