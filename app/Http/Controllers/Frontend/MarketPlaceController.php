@@ -118,11 +118,49 @@ class MarketPlaceController extends Controller
                 ->where('template_id',$templates->id)
                 ->get();
         }
+
+        // If design data exists, use field_details for text fields
+        if ($orderDetails && $orderDetails->design) {
+            $design = $orderDetails->design;
+            $fieldDetails = $orderDetails->field_details;
+
+            // Update design objects with field_details data
+            foreach ($design as $pageKey => $pageData) {
+                if (isset($pageData['objects']) && isset($fieldDetails[$pageKey])) {
+                    foreach ($fieldDetails[$pageKey] as $fieldDetail) {
+                        $fieldName = $fieldDetail['field_name'];
+                        if (isset($pageData['objects'][$fieldName])) {
+                            // Update positions
+                            $pageData['objects'][$fieldName]['left'] = $fieldDetail['positions']['left'];
+                            $pageData['objects'][$fieldName]['top'] = $fieldDetail['positions']['top'];
+                            $pageData['objects'][$fieldName]['width'] = $fieldDetail['positions']['width'];
+                            $pageData['objects'][$fieldName]['height'] = $fieldDetail['positions']['height'];
+                            $pageData['objects'][$fieldName]['scaleX'] = $fieldDetail['positions']['scaleX'];
+                            $pageData['objects'][$fieldName]['scaleY'] = $fieldDetail['positions']['scaleY'];
+                            $pageData['objects'][$fieldName]['angle'] = $fieldDetail['positions']['angle'];
+
+                            // Update configuration
+                            $pageData['objects'][$fieldName]['fontSize'] = $fieldDetail['configuration']['fontSize'];
+                            $pageData['objects'][$fieldName]['fontFamily'] = $fieldDetail['configuration']['fontFamily'];
+                            $pageData['objects'][$fieldName]['fill'] = $fieldDetail['configuration']['fill'];
+                            $pageData['objects'][$fieldName]['textAlign'] = $fieldDetail['configuration']['textAlign'];
+                            $pageData['objects'][$fieldName]['fontWeight'] = $fieldDetail['configuration']['fontWeight'];
+                            $pageData['objects'][$fieldName]['fontStyle'] = $fieldDetail['configuration']['fontStyle'];
+                            $pageData['objects'][$fieldName]['underline'] = $fieldDetail['configuration']['underline'];
+                            $pageData['objects'][$fieldName]['linethrough'] = $fieldDetail['configuration']['linethrough'];
+                            $pageData['objects'][$fieldName]['textBackgroundColor'] = $fieldDetail['configuration']['textBackgroundColor'];
+                        }
+                    }
+                    $design[$pageKey] = $pageData;
+                }
+            }
+        }
+
         return view('landing.writing-desk.index',[
             'template' => $templates,
             'previousOrder' => $previousOrder ?? null,
             'order_details' => $orderDetails,
-            'design' => $orderDetails->design ?? null
+            'design' => $design ?? null
         ]);
     }
 
@@ -183,14 +221,46 @@ class MarketPlaceController extends Controller
         unset($pageDetails['_token']);
 
         $arrayOutput = [];
-        foreach ($pageDetails as $key => $item)
-        {
-            $arrayOutput[$key] = json_decode($item);
+        $fieldDetails = [];
+
+        foreach ($pageDetails as $key => $item) {
+            $decodedItem = json_decode($item, true);
+            $arrayOutput[$key] = $decodedItem;
+
+            // Extract field details from the decoded item
+            if (isset($decodedItem['objects'])) {
+                foreach ($decodedItem['objects'] as $fieldKey => $fieldData) {
+                    $fieldDetails[$key][] = [
+                        'field_name' => $fieldKey,
+                        'positions' => [
+                            'left' => $fieldData['left'] ?? null,
+                            'top' => $fieldData['top'] ?? null,
+                            'width' => $fieldData['width'] ?? null,
+                            'height' => $fieldData['height'] ?? null,
+                            'scaleX' => $fieldData['scaleX'] ?? 1,
+                            'scaleY' => $fieldData['scaleY'] ?? 1,
+                            'angle' => $fieldData['angle'] ?? 0,
+                        ],
+                        'configuration' => [
+                            'fontSize' => $fieldData['fontSize'] ?? null,
+                            'fontFamily' => $fieldData['fontFamily'] ?? null,
+                            'fill' => $fieldData['fill'] ?? null,
+                            'textAlign' => $fieldData['textAlign'] ?? null,
+                            'fontWeight' => $fieldData['fontWeight'] ?? null,
+                            'fontStyle' => $fieldData['fontStyle'] ?? null,
+                            'underline' => $fieldData['underline'] ?? false,
+                            'linethrough' => $fieldData['linethrough'] ?? false,
+                            'textBackgroundColor' => $fieldData['textBackgroundColor'] ?? null,
+                        ]
+                    ];
+                }
+            }
         }
 
-        $orderDesign =  OrderedDesign::where('id', $order_id)->first();
+        $orderDesign = OrderedDesign::where('id', $order_id)->first();
 
         $orderDesign->design = $arrayOutput;
+        $orderDesign->field_details = $fieldDetails; // Save field details
         $orderDesign->user_id = auth()->user()->id ?? null;
 
         $orderDesign->save();
