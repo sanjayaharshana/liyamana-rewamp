@@ -11,7 +11,8 @@ class OrderedDesign extends Model
     protected $casts =[
         'order_details' => 'json',
         'address' => 'json',
-        'design' => 'json'
+        'design' => 'json',
+        'field_details' => 'json'
     ];
 
 }

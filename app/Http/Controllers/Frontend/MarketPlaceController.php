@@ -223,46 +223,53 @@ class MarketPlaceController extends Controller
         $arrayOutput = [];
         $fieldDetails = [];
 
+        // Get template layouts
+        $template = Templetes::where('slug', $slug)->first();
+        $layouts = $template->layouts;
+
         foreach ($pageDetails as $key => $item) {
             $decodedItem = json_decode($item, true);
             $arrayOutput[$key] = $decodedItem;
 
             // Extract field details from the decoded item
             if (isset($decodedItem['objects'])) {
+                $formFields = [];
                 foreach ($decodedItem['objects'] as $fieldKey => $fieldData) {
-                    $fieldDetails[$key][] = [
-                        'field_name' => $fieldKey,
-                        'positions' => [
-                            'left' => $fieldData['left'] ?? null,
-                            'top' => $fieldData['top'] ?? null,
-                            'width' => $fieldData['width'] ?? null,
-                            'height' => $fieldData['height'] ?? null,
-                            'scaleX' => $fieldData['scaleX'] ?? 1,
-                            'scaleY' => $fieldData['scaleY'] ?? 1,
-                            'angle' => $fieldData['angle'] ?? 0,
-                        ],
-                        'configuration' => [
-                            'fontSize' => $fieldData['fontSize'] ?? null,
-                            'fontFamily' => $fieldData['fontFamily'] ?? null,
-                            'fill' => $fieldData['fill'] ?? null,
-                            'textAlign' => $fieldData['textAlign'] ?? null,
-                            'fontWeight' => $fieldData['fontWeight'] ?? null,
-                            'fontStyle' => $fieldData['fontStyle'] ?? null,
-                            'underline' => $fieldData['underline'] ?? false,
-                            'linethrough' => $fieldData['linethrough'] ?? false,
-                            'textBackgroundColor' => $fieldData['textBackgroundColor'] ?? null,
-                        ]
+                    $formFields[] = [
+                        'type' => $fieldData['type'] ?? 'text',
+                        'required' => false,
+                        'label' => $fieldData['label'] ?? 'Text Field',
+                        'className' => 'form-control',
+                        'name' => $fieldKey,
+                        'access' => false,
+                        'subtype' => 'text'
                     ];
                 }
+
+                // Get layout data for this page
+                $layoutData = collect($layouts)->firstWhere('key', $key);
+                
+                dd($layouts);
+
+                // Remove _page suffix from key
+                $cleanKey = str_replace('_page', '', $key);
+
+                $fieldDetails[$cleanKey] = [
+                    'name' => $layoutData['name'] ?? 'Page ' . $cleanKey,
+                    'image' => $layoutData['image'] ?? '',
+                    'form_data' => json_encode($formFields),
+                    'description' => $layoutData['description'] ?? ''
+                ];
             }
         }
 
         $orderDesign = OrderedDesign::where('id', $order_id)->first();
 
         $orderDesign->design = $arrayOutput;
-        $orderDesign->field_details = $fieldDetails; // Save field details
+        $orderDesign->field_details = $fieldDetails;
         $orderDesign->user_id = auth()->user()->id ?? null;
 
+        dd($fieldDetails);
         $orderDesign->save();
 
         return redirect()->route('landing.checkout',[
