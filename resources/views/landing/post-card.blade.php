@@ -791,27 +791,26 @@
 @endsection
 
 @push('footer-js')
-<script>
-    const data = @json(
-        (!$momentos->isEmpty())
-            ? $momentos->map(function($momento) {
-                return [
-                    'place' => $momento->category_ids ?? 'Uncategorized',
-                    'title' => $momento->name ?? 'Untitled',
-                    'description' => $momento->description ?? 'No description available',
-                    'image' => $momento->feature_image ?? 'default-image.jpg'
-                ];
-            })->toArray()
-            : []
-    );
-</script>
+    <script>
+        const data = {{
+    json_encode( !$momentos->isEmpty()
+                ? $momentos->map(function ($momento) {
+                    return [
+                        'place' => $momento->category_ids ?? 'Uncategorized',
+                        'title' => $momento->name ?? 'Untitled',
+                        'description' => $momento->description ?? 'No description available',
+                        'image' => $momento->feature_image ?? 'default-image.jpg',
+                    ];
+                })->toArray()
+                : [])
+}};
+    </script>
 
-
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="{{ asset('landing_pages/assets/js/post-card.js') }}"></script>
 @endpush
+
 
 @section('footer')
 @endsection
