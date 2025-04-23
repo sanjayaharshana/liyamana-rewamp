@@ -109,12 +109,12 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
+
         .price-range {
             width: 100%;
             margin: 10px 0;
         }
-        
+
         .search-box {
             border-radius: 25px;
             padding: 12px 20px;
@@ -122,12 +122,12 @@
             width: 100%;
             transition: border-color 0.3s ease;
         }
-        
+
         .search-box:focus {
             border-color: #b4261c;
             outline: none;
         }
-        
+
         .sort-select {
             border-radius: 25px;
             padding: 8px 15px;
@@ -143,6 +143,39 @@
             background-clip: text;
             text-fill-color: transparent;
         }
+        .search-box {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: none;
+            height: 38px;
+        }
+
+        .input-group .btn {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            padding: 6px 12px;
+        }
+
+        /* If you want to maintain your custom styling for the search box */
+        .search-box.form-control {
+            border-radius: 25px 0 0 25px;
+            padding: 12px 20px;
+            border: 2px solid #eee;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box.form-control:focus {
+            border-color: #b4261c;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .input-group .btn {
+            border-radius: 0 25px 25px 0;
+            border: 2px solid #b4261c;
+            border-left: none;
+        }
+
     </style>
 
     <div class="container py-5">
@@ -151,12 +184,27 @@
             <div class="col-md-3">
                 <div class="filter-sidebar">
                     <h4 class="mb-4">Filters</h4>
-                    
+
+                    <!-- Replace the search box in the sidebar with this -->
                     <div class="mb-4">
-                        <label class="form-label">Search</label>
-                        <input type="text" class="search-box" placeholder="Search templates...">
+                        <form id="searchForm" method="GET" action="{{ url()->current() }}">
+                            <!-- Preserve existing query parameters except search_keyword -->
+                            @foreach(request()->except('search_keyword') as $key => $value)
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endforeach
+
+                            <label class="form-label">Search</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control search-box" name="search_keyword" value="{{ request('search_keyword') }}" placeholder="Search templates...">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    
+
+
+
                     <div class="mb-4">
                         <label class="form-label">Price Range</label>
                         <input type="range" class="price-range" min="0" max="1000" step="100">
@@ -165,7 +213,7 @@
                             <span>LKR 1000</span>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <label class="form-label">Categories</label>
                         <div class="form-check">
@@ -189,16 +237,24 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h3>All Templates</h3>
                     <div class="d-flex align-items-center">
-                        <label class="me-2">Sort By:</label>
-                        <select class="sort-select" onchange="this.form.submit()" name="sort_by">
-                            <option value="price_low_to_high">Price: Low to High</option>
-                            <option value="price_high_to_low">Price: High to Low</option>
-                            <option value="last">Latest First</option>
-                            <option value="older">Oldest First</option>
-                            <option value="name">Name: A to Z</option>
-                        </select>
+                        <form id="sortForm" method="GET" action="{{ url()->current() }}">
+                            <!-- Preserve existing query parameters -->
+                            @foreach(request()->except('sort_by') as $key => $value)
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endforeach
+
+                            <label class="me-2">Sort By:</label>
+                            <select class="sort-select" name="sort_by" onchange="document.getElementById('sortForm').submit()">
+                                <option value="price_low_to_high" {{ request('sort_by') == 'price_low_to_high' ? 'selected' : '' }}>Price: Low to High</option>
+                                <option value="price_high_to_low" {{ request('sort_by') == 'price_high_to_low' ? 'selected' : '' }}>Price: High to Low</option>
+                                <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>Latest First</option>
+                                <option value="oldest" {{ request('sort_by') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
+                                <option value="name" {{ request('sort_by') == 'name' ? 'selected' : '' }}>Name: A to Z</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
+
 
                 <div class="row g-4">
                     @foreach($templates as $templeteItem)
@@ -341,11 +397,11 @@
                 quickViewModal.addEventListener('show.bs.modal', function(event) {
                     const button = event.relatedTarget;
                     const productId = button.getAttribute('data-product-id');
-                    
+
                     // Show loading state
                     const modalBody = quickViewModal.querySelector('.modal-body');
                     modalBody.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-danger" role="status"><span class="visually-hidden">Loading...</span></div></div>';
-                    
+
                     // Fetch product details using AJAX
                     fetch(`/market-place/${productId}/quick-view`, {
                         method: 'GET',
