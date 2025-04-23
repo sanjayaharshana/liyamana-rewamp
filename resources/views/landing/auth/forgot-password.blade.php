@@ -16,9 +16,10 @@
     .form-control:focus {
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         border-color: #80bdff;
+        color: #ffffff;
     }
     .form-control::placeholder {
-        color: #ffffff;
+        color: #f1d5c9;
         opacity: 1;
     }
 </style>

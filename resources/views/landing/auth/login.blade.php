@@ -9,7 +9,6 @@
         <!-- Left side - Illustration/Content -->
         <div class="split-screen__left">
             <div class="brand-content">
-                <img src="{{url('landing_pages/banding/liyamana_logo.png')}}" alt="Liyamana Logo" class="brand-logo">
                 <h1 style="color: white">Welcome to Liyamana</h1>
                 <p class="brand-description">Your trusted platform for sending heartfelt letters and connecting with loved ones worldwide.</p>
 
@@ -49,7 +48,7 @@
         <div class="split-screen__right" style="margin-top: 50px">
             <div class="form-wrapper">
                 <div class="form-header">
-                    <h2>Welcome back</h2>
+                    <h2>Log in to begin</h2>
                     <p>Please sign in to your account</p>
                 </div>
 
@@ -134,8 +133,8 @@
 
 <style>
 :root {
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
+    --primary-color: #721f26;
+    --primary-hover: #5a1920;
     --danger-color: #dc2626;
     --success-color: #059669;
     --text-primary: #111827;
@@ -165,7 +164,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3rem;
+    padding: 1rem;
     position: relative;
     overflow: hidden;
 }
@@ -185,6 +184,7 @@
     position: relative;
     z-index: 1;
     max-width: 480px;
+    margin-top: -50px;
 }
 
 .brand-logo {
@@ -480,6 +480,7 @@
     margin-bottom: 1.5rem;
 }
 
+/* Replace the existing auth-separator styles with these improved ones */
 .auth-separator {
     position: relative;
     text-align: center;
@@ -491,7 +492,7 @@
     content: '';
     position: absolute;
     top: 50%;
-    width: calc(50% - 1rem);
+    width: calc(50% - 2rem);
     height: 1px;
     background-color: var(--border-color);
 }
@@ -505,11 +506,15 @@
 }
 
 .auth-separator span {
+    display: inline-block;
     background-color: white;
     padding: 0 1rem;
+    position: relative;
+    z-index: 1;
     color: var(--text-secondary);
     font-size: 0.875rem;
 }
+
 
 .btn-google {
     background-color: white;

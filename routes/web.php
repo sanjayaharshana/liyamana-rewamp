@@ -53,12 +53,13 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'registerPage'])->name('landing.registerPage');
     Route::post('/register', [AuthController::class, 'register'])->name('landing.register');
 
-    // Add these new routes
+    // Fix the method name to match the controller
     Route::get('/forgot-password', [AuthController::class, 'forgotPasswordPage'])->name('password.request');
-    Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+    Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('password.email');
     Route::get('/reset-password/{token}', [AuthController::class, 'resetPasswordPage'])->name('password.reset');
     Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 });
+
 
 
 Route::middleware('auth')->group(function () {
