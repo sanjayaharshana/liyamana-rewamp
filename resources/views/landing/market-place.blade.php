@@ -103,12 +103,7 @@
         }
 
         /* Filter styles */
-        .filter-sidebar {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+
 
         .price-range {
             width: 100%;
@@ -176,9 +171,32 @@
             border-left: none;
         }
 
+        .filter-sidebar .form-label {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #b4261c;
+            position: relative;
+            padding-left: 12px;
+            display: block;
+        }
+
+        .filter-sidebar .form-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background: linear-gradient(to bottom, #b4261c, #8f0606);
+            border-radius: 2px;
+        }
+
+
     </style>
 
-    <div class="container py-5">
+    <div class="container py-5" style="margin-top: 30px;">
         <div class="row">
             <!-- Filters Sidebar -->
             <div class="col-md-3">
@@ -190,7 +208,13 @@
                         <form id="searchForm" method="GET" action="{{ url()->current() }}">
                             <!-- Preserve existing query parameters except search_keyword -->
                             @foreach(request()->except('search_keyword') as $key => $value)
-                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @if(is_array($value))
+                                    @foreach($value as $arrayValue)
+                                        <input type="hidden" name="{{ $key }}[]" value="{{ $arrayValue }}">
+                                    @endforeach
+                                @else
+                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @endif
                             @endforeach
 
                             <label class="form-label">Search</label>
@@ -206,31 +230,62 @@
 
 
                     <div class="mb-4">
-                        <label class="form-label">Price Range</label>
-                        <input type="range" class="price-range" min="0" max="1000" step="100">
-                        <div class="d-flex justify-content-between">
-                            <span>LKR 0</span>
-                            <span>LKR 1000</span>
-                        </div>
+                        <form id="priceRangeForm" method="GET" action="{{ url()->current() }}">
+                            <!-- Preserve existing query parameters except price_range -->
+                            @foreach(request()->except(['price_min', 'price_max']) as $key => $value)
+                                @if(is_array($value))
+                                    @foreach($value as $arrayValue)
+                                        <input type="hidden" name="{{ $key }}[]" value="{{ $arrayValue }}">
+                                    @endforeach
+                                @else
+                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @endif
+                            @endforeach
+                            <label class="form-label">Price Range</label>
+                            <input type="range" class="price-range" id="priceRangeSlider" min="0" max="1000" step="100"
+                                   value="{{ request('price_max', 1000) }}">
+                            <div class="d-flex justify-content-between">
+                                <span>LKR <span id="priceRangeMin">{{ request('price_min', 0) }}</span></span>
+                                <span>LKR <span id="priceRangeMax">{{ request('price_max', 1000) }}</span></span>
+                            </div>
+                            <input type="hidden" name="price_min" id="priceMinInput" value="{{ request('price_min', 0) }}">
+                            <input type="hidden" name="price_max" id="priceMaxInput" value="{{ request('price_max', 1000) }}">
+                        </form>
                     </div>
 
                     <div class="mb-4">
                         <label class="form-label">Categories</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="business">
-                            <label class="form-check-label" for="business">Business Letters</label>
+                        <form id="categoryFilterForm" method="GET" action="{{ url()->current() }}">
+                            <!-- Preserve existing query parameters except categories -->
+                            @foreach(request()->except('categories') as $key => $value)
+                                @if(is_array($value))
+                                    @foreach($value as $arrayValue)
+                                        <input type="hidden" name="{{ $key }}[]" value="{{ $arrayValue }}">
+                                    @endforeach
+                                @else
+                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @endif
+                            @endforeach
+
+                            @foreach($templateCategories as $category)
+                            <div class="form-check">
+                                <input class="form-check-input category-checkbox" type="checkbox"
+                                       id="category_{{ $category->id }}"
+                                       name="categories[]"
+                                       value="{{ $category->slug }}"
+                                       {{ in_array($category->slug, (array)request('categories', [])) ? 'checked' : '' }}
+                                       onchange="document.getElementById('categoryFilterForm').submit()">
+                                <label class="form-check-label" for="category_{{ $category->id }}">
+                                    {{ $category->category_name }}
+                                </label>
                             </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="personal">
-                            <label class="form-check-label" for="personal">Personal Letters</label>
-                                    </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="creative">
-                            <label class="form-check-label" for="creative">Creative Letters</label>
-                        </div>
+                            @endforeach
+                        </form>
                     </div>
+
+
                 </div>
-                        </div>
+            </div>
 
             <!-- Products Grid -->
             <div class="col-md-9">
@@ -240,7 +295,13 @@
                         <form id="sortForm" method="GET" action="{{ url()->current() }}">
                             <!-- Preserve existing query parameters -->
                             @foreach(request()->except('sort_by') as $key => $value)
-                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @if(is_array($value))
+                                    @foreach($value as $arrayValue)
+                                        <input type="hidden" name="{{ $key }}[]" value="{{ $arrayValue }}">
+                                    @endforeach
+                                @else
+                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @endif
                             @endforeach
 
                             <label class="me-2">Sort By:</label>
@@ -390,9 +451,42 @@
     </div>
 
     @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const quickViewModal = document.getElementById('quickViewModal');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Price Range Slider
+        const priceRangeSlider = document.getElementById('priceRangeSlider');
+        const priceRangeMin = document.getElementById('priceRangeMin');
+        const priceRangeMax = document.getElementById('priceRangeMax');
+        const priceMinInput = document.getElementById('priceMinInput');
+        const priceMaxInput = document.getElementById('priceMaxInput');
+        const priceRangeForm = document.getElementById('priceRangeForm');
+
+        if (priceRangeSlider) {
+            priceRangeSlider.addEventListener('input', function() {
+                priceRangeMax.textContent = this.value;
+                priceMaxInput.value = this.value;
+            });
+
+            priceRangeSlider.addEventListener('change', function() {
+                priceRangeForm.submit();
+            });
+        }
+
+        // Category Checkboxes
+        const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+        const categoryFilterForm = document.getElementById('categoryFilterForm');
+
+        if (categoryFilterForm && categoryCheckboxes.length > 0) {
+            categoryCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    console.log('Category checkbox changed, submitting form');
+                    categoryFilterForm.submit();
+                });
+            });
+        }
+
+        // Quick View Modal functionality (existing code)
+        const quickViewModal = document.getElementById('quickViewModal');
             if (quickViewModal) {
                 quickViewModal.addEventListener('show.bs.modal', function(event) {
                     const button = event.relatedTarget;
@@ -513,7 +607,8 @@
                     });
                 });
             }
-        });
-    </script>
-    @endpush
+    });
+</script>
+@endpush
+
 @endsection

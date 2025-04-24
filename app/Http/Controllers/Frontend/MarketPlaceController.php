@@ -15,55 +15,67 @@ use Illuminate\Support\Facades\Hash;
 class MarketPlaceController extends Controller
 {
     public function index(Request $request)
-{
-    $requestAllData = $request->all();
-    unset($requestAllData['_token']);
-    $templateCategories = TempleteCategories::where('status', 1)->get();
-    $templates = Templetes::where('status', 1);
-
-    if(key_exists('category',$requestAllData))
     {
-        if($requestAllData['category'])
-        {
-            $templateCategoriesFromId = TempleteCategories::where('slug', $requestAllData['category'])
-                ->first();
-            $stringId = (string)$templateCategoriesFromId->id;
-            $templates->whereJsonContains('category_ids', $stringId);
+        $requestAllData = $request->all();
+        unset($requestAllData['_token']);
+
+        $templateCategories = TempleteCategories::where('status', 1)->get();
+        $templates = Templetes::where('status', 1);
+
+        // Category filter
+        if ($request->has('categories') && !empty($request->categories)) {
+            $categoryIds = [];
+            foreach ((array)$request->categories as $categorySlug) {
+                $category = TempleteCategories::where('slug', $categorySlug)->first();
+                if ($category) {
+                    $categoryIds[] = (string)$category->id;
+                }
+            }
+            if (!empty($categoryIds)) {
+                $templates->where(function($query) use ($categoryIds) {
+                    foreach ($categoryIds as $categoryId) {
+                        $query->orWhereJsonContains('category_ids', $categoryId);
+                    }
+                });
+            }
         }
-    }
 
-    if(key_exists('search_keyword',$requestAllData))
-    {
-        if($requestAllData['search_keyword'])
-        {
+
+        // Price range filter
+        if ($request->has('price_min') || $request->has('price_max')) {
+            $minPrice = $request->input('price_min', 0);
+            $maxPrice = $request->input('price_max', 1000);
+
+            $templates->whereBetween('price', [$minPrice, $maxPrice]);
+        }
+
+        // Search keyword filter
+        if (key_exists('search_keyword', $requestAllData) && $requestAllData['search_keyword']) {
             $templates->where('name', 'like', '%'.$requestAllData['search_keyword'].'%');
         }
-    }
 
-    if(key_exists('sort_by',$requestAllData))
-    {
-        if($requestAllData['sort_by'])
-        {
-            if($requestAllData['sort_by'] == 'price_high_to_low'){
+        // Sort filter
+        if (key_exists('sort_by', $requestAllData) && $requestAllData['sort_by']) {
+            if ($requestAllData['sort_by'] == 'price_high_to_low') {
                 $templates->orderBy('price', 'desc');
-            }else if($requestAllData['sort_by'] == 'price_low_to_high'){
+            } else if ($requestAllData['sort_by'] == 'price_low_to_high') {
                 $templates->orderBy('price', 'asc');
-            }else if($requestAllData['sort_by'] == 'newest'){
+            } else if ($requestAllData['sort_by'] == 'newest') {
                 $templates->orderBy('created_at', 'desc');
-            }else if($requestAllData['sort_by'] == 'oldest'){
+            } else if ($requestAllData['sort_by'] == 'oldest') {
                 $templates->orderBy('created_at', 'asc');
-            }else if($requestAllData['sort_by'] == 'name'){
+            } else if ($requestAllData['sort_by'] == 'name') {
                 $templates->orderBy('name', 'asc');
             }
         }
+
+        return view('landing.market-place', [
+            'templateCategories' => $templateCategories,
+            'templates' => $templates->get(),
+            'query' => $requestAllData
+        ]);
     }
 
-    return view('landing.market-place',[
-        'templateCategories' => $templateCategories,
-        'templates' => $templates->get(),
-        'query' => $requestAllData
-    ]);
-}
 
     public function show($slug)
     {
@@ -307,6 +319,25 @@ class MarketPlaceController extends Controller
             'order_id' => $request->navigate_order_id
         ]);
 
+    }
+
+    public function quickView($id)
+    {
+        $template = Templetes::findOrFail($id);
+
+        return response()->json([
+            'id' => $template->id,
+            'name' => $template->name,
+            'slug' => $template->slug,
+            'description' => $template->description,
+            'price' => $template->price,
+            'discount' => $template->discount,
+            'feature_image' => url('storage/'.$template->feature_image),
+            'image2' => $template->image2 ? url('storage/'.$template->image2) : null,
+            'image3' => $template->image3 ? url('storage/'.$template->image3) : null,
+            'category' => $template->categories->pluck('category_name')->implode(', '),
+            'seller' => $template->user ? $template->user->name : 'Admin',
+        ]);
     }
 
     public function previewDesignStore(Request $request)
