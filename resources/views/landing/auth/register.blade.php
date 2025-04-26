@@ -57,7 +57,7 @@
 
         <!-- Right side - Registration Form -->
         <div class="split-screen__right">
-            <div class="form-wrapper" style="padding-top: 40px;padding-bottom: 0px;">
+            <div class="form-wrapper" style="padding-bottom: 0px;">
                 <div class="form-header" style="font-size:14r">
                     <h2>Create Your Account</h2>
                 </div>
@@ -255,7 +255,7 @@
     position: relative;
     z-index: 1;
     max-width: 480px;
-    margin-top: -1rem;
+    margin-top: -100px;
 }
 
 .brand-logo {
@@ -267,6 +267,7 @@
 .brand-content h1 {
     font-size: 2.25rem;
     font-weight: 700;
+    color: #e5e7eb;
     margin-bottom: 0.75rem;
     line-height: 1.2;
 }
@@ -384,7 +385,8 @@
 .form-wrapper {
     width: 100%;
     max-width: 420px;
-    padding: 1.5rem;
+    padding: 1rem;
+    margin-top: 70px;
 }
 
 .form-header {
@@ -614,11 +616,11 @@
     justify-content: space-between;
 }
 
-/* Auth separator */
+/* Replace the existing auth-separator styles with these improved ones */
 .auth-separator {
     position: relative;
     text-align: center;
-    margin: 1.25rem 0;
+    margin: 1.5rem 0;
 }
 
 .auth-separator::before,
@@ -626,7 +628,7 @@
     content: '';
     position: absolute;
     top: 50%;
-    width: calc(50% - 0.75rem);
+    width: calc(50% - 2rem);
     height: 1px;
     background-color: var(--border-color);
 }
@@ -640,11 +642,15 @@
 }
 
 .auth-separator span {
+    display: inline-block;
     background-color: white;
-    padding: 0 0.75rem;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
     color: var(--text-secondary);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
 }
+
 
 /* Google button */
 .btn-google {
@@ -748,7 +754,7 @@
 
     .brand-content {
         text-align: center;
-        margin: 0 auto;
+        margin: 50px auto;
     }
 
     .features-grid {

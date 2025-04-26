@@ -652,6 +652,17 @@
         overflow: hidden;
     }
 
+    .no-data-message {
+        text-align: center;
+        padding: 50px;
+        color: white;
+        font-size: 18px;
+        background: rgba(30, 30, 30, 0.7);
+        border-radius: 10px;
+        margin: 0 auto;
+        max-width: 500px;
+    }
+
     /* Responsive adjustments for popup */
     @media (max-width: 768px) {
         .post-popup-header {
@@ -780,10 +791,26 @@
 @endsection
 
 @push('footer-js')
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js'></script>
+    <script>
+        const data = {{
+    json_encode( !$momentos->isEmpty()
+                ? $momentos->map(function ($momento) {
+                    return [
+                        'place' => $momento->category_ids ?? 'Uncategorized',
+                        'title' => $momento->name ?? 'Untitled',
+                        'description' => $momento->description ?? 'No description available',
+                        'image' => $momento->feature_image ?? 'default-image.jpg',
+                    ];
+                })->toArray()
+                : [])
+}};
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="{{ asset('landing_pages/assets/js/post-card.js') }}"></script>
 @endpush
+
 
 @section('footer')
 @endsection
