@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\PostCardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticPageController;
 use App\Admin\Controllers\AuthController;
+use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\User\DashboardController;
 
@@ -22,6 +23,7 @@ use App\Http\Controllers\User\DashboardController;
 Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->name('landing.home');
 Route::get('/about-us',[\App\Http\Controllers\Frontend\AboutUsController::class,'index'])->name('landing.about-us');
 Route::get('/post-card',[PostCardController::class,'index'])->name('landing.post-card');
+Route::get('/blog',[BlogController::class,'index'])->name('landing.blog');
 
 
 
