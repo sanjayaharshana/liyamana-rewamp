@@ -69,29 +69,50 @@ class BlogPosts extends Model
     public function getFeaturedImageUrlAttribute()
     {
         if (empty($this->featured_image)) {
+            \Log::info('Blog post #' . $this->id . ': No featured image set');
             return asset('landing_pages/assets/img/blog-placeholder.jpg');
         }
 
-        $imagePath = $this->featured_image;
-        // Remove any leading slashes
+        // If it's already a full URL, return it
+        if (filter_var($this->featured_image, FILTER_VALIDATE_URL)) {
+            \Log::info('Blog post #' . $this->id . ': Using full URL: ' . $this->featured_image);
+            return $this->featured_image;
+        }
+
+        // Clean the path
+        $imagePath = str_replace('\\', '/', $this->featured_image);
         $imagePath = ltrim($imagePath, '/');
 
-        // Check if the path is already a full URL
-        if (filter_var($imagePath, FILTER_VALIDATE_URL)) {
-            return $imagePath;
+        // Log the original and cleaned path
+        \Log::info('Blog post #' . $this->id . ': Original path: ' . $this->featured_image);
+        \Log::info('Blog post #' . $this->id . ': Cleaned path: ' . $imagePath);
+
+        // Check if file exists in storage
+        $storagePath = storage_path('app/public/' . $imagePath);
+        if (file_exists($storagePath)) {
+            $url = asset('storage/' . $imagePath);
+            \Log::info('Blog post #' . $this->id . ': File exists in storage: ' . $url);
+            return $url;
         }
 
-        // If the path starts with 'storage/'
-        if (strpos($imagePath, 'storage/') === 0) {
-            return asset($imagePath);
+        // Check if file exists in public storage
+        $publicPath = public_path('storage/' . $imagePath);
+        if (file_exists($publicPath)) {
+            $url = asset('storage/' . $imagePath);
+            \Log::info('Blog post #' . $this->id . ': File exists in public storage: ' . $url);
+            return $url;
         }
 
-        // If the path contains 'files/' but doesn't start with 'storage/'
-        if (strpos($imagePath, 'files/') === 0) {
-            return asset('storage/' . $imagePath);
+        // If file doesn't exist, try to find it in the files directory
+        $filesPath = storage_path('app/public/files/' . basename($imagePath));
+        if (file_exists($filesPath)) {
+            $url = asset('storage/files/' . basename($imagePath));
+            \Log::info('Blog post #' . $this->id . ': File exists in files directory: ' . $url);
+            return $url;
         }
 
-        // If it's just a filename, assume it's in the files directory
-        return asset('storage/files/' . basename($imagePath));
+        // If all else fails, return placeholder
+        \Log::warning('Blog post #' . $this->id . ': Image not found in any location');
+        return asset('landing_pages/assets/img/blog-placeholder.jpg');
     }
 }

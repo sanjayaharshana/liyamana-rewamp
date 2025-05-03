@@ -45,8 +45,42 @@ class BlogController extends Controller
         foreach ($posts as $post) {
             // Fix image path - ensure it has the correct storage path
             if (!empty($post->featured_image)) {
-                // Process the image path to ensure proper display
-                $post->featured_image = $this->getCorrectImagePath($post->featured_image);
+                // Clean the path
+                $imagePath = str_replace('\\', '/', $post->featured_image);
+                $imagePath = ltrim($imagePath, '/');
+
+                // If it's a full URL, keep it as is
+                if (filter_var($imagePath, FILTER_VALIDATE_URL)) {
+                    $post->featured_image = $imagePath;
+                    continue;
+                }
+
+                // Check if file exists in storage
+                $storagePath = storage_path('app/public/' . $imagePath);
+                if (file_exists($storagePath)) {
+                    $post->featured_image = $imagePath;
+                    \Log::info('Blog post #' . $post->id . ': Using storage path: ' . $imagePath);
+                    continue;
+                }
+
+                // Check if file exists in public storage
+                $publicPath = public_path('storage/' . $imagePath);
+                if (file_exists($publicPath)) {
+                    $post->featured_image = $imagePath;
+                    \Log::info('Blog post #' . $post->id . ': Using public storage path: ' . $imagePath);
+                    continue;
+                }
+
+                // If file doesn't exist, try to find it in the files directory
+                $filesPath = storage_path('app/public/files/' . basename($imagePath));
+                if (file_exists($filesPath)) {
+                    $post->featured_image = 'files/' . basename($imagePath);
+                    \Log::info('Blog post #' . $post->id . ': Using files directory path: ' . $post->featured_image);
+                    continue;
+                }
+
+                // If all else fails, log a warning
+                \Log::warning('Blog post #' . $post->id . ': Image not found in any location. Original path: ' . $imagePath);
             }
 
             // Map category IDs to category names

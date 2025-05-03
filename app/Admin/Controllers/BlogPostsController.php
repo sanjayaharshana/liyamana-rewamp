@@ -110,7 +110,13 @@ class BlogPostsController extends AdminController
         $form->text('slug', __('Slug'))->required();
         $form->switch('status', __('Status'))->default(1);
         $form->switch('is_featured', __('Is featured'))->default(0);
-        $form->file('featured_image', __('Featured image'));
+        
+        // Update file upload handling
+        $form->image('featured_image', __('Featured image'))
+            ->move('files')
+            ->uniqueName()
+            ->rules('image|mimes:jpeg,png,jpg,gif|max:2048')
+            ->help('Upload an image (max 2MB). Supported formats: JPEG, PNG, JPG, GIF');
 
         $blog = TempleteCategories::where('status', 1)
             ->pluck('category_name', 'id');
@@ -118,12 +124,8 @@ class BlogPostsController extends AdminController
         $users = Administrator::get()
             ->pluck('username', 'id');
 
-        // Change from multipleSelect to select for user_id
         $form->select('user_id', __('User'))->options($users)->required();
-
-        // Keep multipleSelect for category_ids
         $form->multipleSelect('category_ids', __('Categories'))->options($blog);
-
         $form->tags('tags', __('Tags'));
         $form->textarea('seo_description', __('Seo description'));
 
