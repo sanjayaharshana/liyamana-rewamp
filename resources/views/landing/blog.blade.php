@@ -2,7 +2,6 @@
 @section('title', 'Blog - Liyamana Online Platform')
 @section('meta_description', 'Explore our blog for insights, tips, and stories about letter writing, communication, and connecting with loved ones.')
 @section('meta_keywords', 'blog, letter writing, communication, Liyamana blog, writing tips')
-
 @push('head-css')
 <style>
     /* Modern Blog Page Styles */
@@ -11,12 +10,11 @@
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-        padding: 180px 0 100px;
-        margin-bottom: 80px;
+        padding: 120px 0 60px; /* Reduced padding */
+        margin-bottom: 50px; /* Reduced margin */
         position: relative;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
-
     .blog-hero::before {
         content: '';
         position: absolute;
@@ -27,41 +25,40 @@
         background: linear-gradient(45deg, rgba(139, 38, 47, 0.9), rgba(139, 38, 47, 0.7));
         z-index: 1;
     }
-
     .blog-hero-content {
         position: relative;
-        z-index: 1;
+        z-index: 2; /* Increased z-index to ensure content stays above overlay */
         text-align: center;
         color: #fff;
     }
-
     .blog-hero h1 {
-        font-size: 4rem;
+        font-size: 3.5rem; /* Slightly reduced size */
         font-weight: 800;
-        margin-bottom: 25px;
+        margin-bottom: 15px; /* Reduced margin */
         animation: fadeInUp 1s ease;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        background: linear-gradient(45deg, #fff, #fff);
-        color: #f5f5f5 ;
+        background: linear-gradient(45deg, #fff, #f5f5f5);
         -webkit-background-clip: text;
+        -webkit-text-fill-color: #f5f5f5; /* Fixed: Use solid color instead of transparent */
         letter-spacing: 1px;
     }
-
     .blog-hero p {
-        font-size: 1.3rem;
+        font-size: 1.2rem; /* Slightly reduced size */
         max-width: 800px;
-        margin: 0 auto 35px;
+        margin: 0 auto 20px; /* Reduced margin */
         animation: fadeInUp 1.2s ease;
         line-height: 1.6;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
-
     /* Modern Card Styles */
     .blog-card {
-        border-radius: 20px;
+        border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transition:
+            opacity 0.3s ease,
+            box-shadow 0.3s ease,
+            transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -70,24 +67,22 @@
         opacity: 0;
         transform: translateY(30px);
         border: none;
+        will-change: transform;
     }
 
     .blog-card.animated {
         animation: fadeInUp 0.5s ease forwards;
     }
-
     .blog-card:hover {
         transform: translateY(-15px) !important;
         box-shadow: 0 20px 40px rgba(139, 38, 47, 0.2);
     }
-
     .blog-card-img {
         height: 250px;
         overflow: hidden;
         position: relative;
         background: #f5f5f5;
     }
-
     .blog-card-img::before {
         content: '';
         position: absolute;
@@ -100,11 +95,9 @@
         opacity: 0;
         transition: opacity 0.5s ease;
     }
-
     .blog-card:hover .blog-card-img::before {
         opacity: 1;
     }
-
     .blog-card-img img {
         width: 100%;
         height: 100%;
@@ -114,19 +107,15 @@
         animation: fadeIn 0.3s ease forwards;
         transform: scale(1);
     }
-
     .blog-card:hover .blog-card-img img {
         transform: scale(1.1);
     }
-
     .blog-card-img img.loaded {
         opacity: 1;
     }
-
     .blog-card-img img.error {
         opacity: 1;
     }
-
     .featured-badge {
         position: absolute;
         top: 20px;
@@ -143,7 +132,6 @@
         animation: badgeBounce 0.5s ease forwards;
         letter-spacing: 0.5px;
     }
-
     .blog-card-body {
         padding: 30px;
         flex-grow: 1;
@@ -153,7 +141,6 @@
         background: #fff;
         z-index: 2;
     }
-
     .blog-card-title {
         font-size: 1.5rem;
         font-weight: 700;
@@ -162,26 +149,14 @@
         line-height: 1.4;
         position: relative;
         display: inline-block;
+        transition: color 0.3s ease;
     }
-
-    .blog-card-title::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -5px;
-        left: 0;
-        transition: width 0.4s ease;
-    }
-
     .blog-card:hover .blog-card-title {
         color: #8b262f;
     }
-
     .blog-card:hover .blog-card-title::after {
         width: 100%;
     }
-
     .blog-card-text {
         color: #666;
         margin-bottom: 25px;
@@ -193,7 +168,6 @@
         line-height: 1.7;
         font-size: 1.05rem;
     }
-
     .blog-card-meta {
         display: flex;
         justify-content: space-between;
@@ -203,12 +177,10 @@
         padding-top: 20px;
         border-top: 1px solid #f0f0f0;
     }
-
     .blog-card-meta i {
         margin-right: 8px;
         color: #8b262f;
     }
-
     .blog-card-link {
         display: inline-flex;
         align-items: center;
@@ -221,16 +193,13 @@
         overflow: hidden;
         font-size: 1.1rem;
     }
-
     .blog-card-link i {
         margin-left: 8px;
         transition: transform 0.3s ease;
     }
-
     .blog-card-link:hover i {
         transform: translateX(8px);
     }
-
     .blog-card-link::after {
         content: '';
         position: absolute;
@@ -243,12 +212,10 @@
         transform-origin: right;
         transition: transform 0.3s ease;
     }
-
     .blog-card-link:hover::after {
         transform: scaleX(1);
         transform-origin: left;
     }
-
     /* Modern Category Tags */
     .blog-category {
         display: inline-block;
@@ -264,7 +231,6 @@
         position: relative;
         overflow: hidden;
     }
-
     .blog-category::before {
         content: '';
         position: absolute;
@@ -275,18 +241,15 @@
         background: rgba(255, 255, 255, 0.2);
         transition: all 0.4s ease;
     }
-
     .blog-category:hover::before {
         left: 100%;
     }
-
     .blog-category:hover {
         background: #8b262f;
         color: white;
         transform: translateY(-3px);
         box-shadow: 0 5px 15px rgba(139, 38, 47, 0.2);
     }
-
     /* Modern Pagination */
     .blog-pagination {
         margin: 60px 0;
@@ -294,16 +257,23 @@
         justify-content: center;
     }
 
+    .blog-pagination .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
     .blog-pagination .page-item.active .page-link {
         background: linear-gradient(45deg, #8b262f, #c0392b);
         border-color: #8b262f;
         box-shadow: 0 5px 15px rgba(139, 38, 47, 0.2);
+        color: #f5f5f5;
     }
 
     .blog-pagination .page-link {
         color: #8b262f;
         border-radius: 10px;
-        margin: 0 5px;
         transition: all 0.3s ease;
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         border: none;
@@ -311,28 +281,38 @@
         font-weight: 500;
         position: relative;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .blog-pagination .page-link::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.3);
-        transition: all 0.4s ease;
+    .blog-pagination .page-link i {
+        margin: 0 5px;
     }
 
-    .blog-pagination .page-link:hover::before {
-        left: 100%;
+    .blog-pagination .page-item.disabled .page-link {
+        color: #aaa;
+        background-color: #f5f5f5;
+        cursor: not-allowed;
     }
 
-    .blog-pagination .page-link:hover {
+    .blog-pagination .page-link:hover:not(.disabled .page-link) {
         background: linear-gradient(45deg, #8b262f, #c0392b);
         color: white;
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(139, 38, 47, 0.3);
+    }
+
+    /* Responsive pagination */
+    @media (max-width: 576px) {
+        .blog-pagination .page-link {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .blog-pagination .pagination {
+            gap: 5px;
+        }
     }
 
     /* Enhanced Animations */
@@ -346,7 +326,6 @@
             transform: translateY(0);
         }
     }
-
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -355,23 +334,19 @@
             opacity: 1;
         }
     }
-
     @keyframes badgeBounce {
         0% { transform: translateY(-5px); }
         50% { transform: translateY(5px); }
         100% { transform: translateY(0); }
     }
-
     @keyframes shimmer {
         0% { background-position: -200% 0; }
         100% { background-position: 200% 0; }
     }
-
     /* Loading Animation */
     .blog-card.loading {
         animation: none;
     }
-
     .blog-card-img.loading::after {
         content: '';
         position: absolute;
@@ -383,32 +358,37 @@
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
     }
-
     /* Responsive Design */
     @media (max-width: 1200px) {
         .blog-hero h1 {
-            font-size: 3.5rem;
-        }
-    }
-
-    @media (max-width: 992px) {
-        .blog-hero h1 {
             font-size: 3rem;
         }
+        .blog-hero {
+            padding: 100px 0 50px;
+        }
+    }
+    @media (max-width: 992px) {
+        .blog-hero h1 {
+            font-size: 2.8rem;
+            -webkit-text-fill-color: #ffffff; /* Ensure text is visible on smaller screens */
+        }
         .blog-hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         .blog-card-img {
             height: 220px;
         }
+        .blog-hero {
+            padding: 90px 0 40px;
+        }
     }
-
     @media (max-width: 768px) {
         .blog-hero {
-            padding: 150px 0 80px;
+            padding: 80px 0 40px;
         }
         .blog-hero h1 {
             font-size: 2.5rem;
+            -webkit-text-fill-color: #ffffff; /* Ensure text is visible on smaller screens */
         }
         .blog-hero p {
             font-size: 1.1rem;
@@ -419,11 +399,15 @@
         .blog-card-body {
             padding: 20px;
         }
+        .blog-pagination .page-link {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
     }
-
     @media (max-width: 576px) {
         .blog-hero h1 {
             font-size: 2rem;
+            -webkit-text-fill-color: #ffffff; /* Ensure text is visible on smaller screens */
         }
         .blog-hero p {
             font-size: 1rem;
@@ -431,8 +415,18 @@
         .blog-card-img {
             height: 200px;
         }
+        .blog-hero {
+            padding: 70px 0 30px;
+        }
+        .blog-card-meta {
+            flex-direction: column;
+            gap: 5px;
+        }
+        .blog-pagination .page-link {
+            padding: 6px 12px;
+            margin: 0 2px;
+        }
     }
-
     /* Section Title Animation */
     .featured-title {
         text-align: center;
@@ -441,11 +435,9 @@
         opacity: 0;
         transform: translateY(20px);
     }
-
     .featured-title.animated {
         animation: fadeInUp 0.8s ease forwards;
     }
-
     .featured-title h2 {
         font-size: 2.5rem;
         font-weight: 700;
@@ -457,7 +449,6 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-
     .featured-title h2::after {
         content: '';
         position: absolute;
@@ -470,11 +461,9 @@
         animation: expandWidth 1s ease forwards 0.5s;
         border-radius: 2px;
     }
-
     @keyframes expandWidth {
         to { transform: scaleX(1); }
     }
-
     /* No Posts Animation */
     .no-posts {
         text-align: center;
@@ -482,20 +471,17 @@
         color: #666;
         animation: fadeIn 1s ease;
     }
-
     .no-posts i {
         font-size: 4rem;
         color: #8b262f;
         margin-bottom: 25px;
         animation: pulse 2s infinite;
     }
-
     @keyframes pulse {
         0% { transform: scale(1); opacity: 1; }
         50% { transform: scale(1.1); opacity: 0.8; }
         100% { transform: scale(1); opacity: 1; }
     }
-
     /* Card hover effects */
     .blog-card::before {
         content: '';
@@ -509,20 +495,66 @@
         opacity: 0;
         transition: opacity 0.5s ease;
     }
-
     .blog-card:hover::before {
         opacity: 1;
     }
-
-    /* Floating animation for featured badge */
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
-        100% { transform: translateY(0px); }
+    /* Enhanced card animations */
+    .blog-card-wrapper {
+        perspective: 1000px;
+        transform-style: preserve-3d;
     }
-
-    .featured-badge {
-        animation: float 3s ease-in-out infinite;
+    .blog-card {
+        transform-origin: center bottom;
+        backface-visibility: hidden;
+    }
+    /* Card slip animation */
+    @keyframes cardSlip {
+        0% { transform: translateX(-20px) rotate(-2deg); opacity: 0; }
+        100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    }
+    /* Gradient color transitions */
+    .blog-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #8b262f, #c0392b, #e74c3c, #c0392b, #8b262f);
+        background-size: 200% 100%;
+        animation: gradientShift 3s ease infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .blog-card:hover::after {
+        opacity: 1;
+    }
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    /* Smooth hover transitions */
+    .blog-card {
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+                    box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .blog-card-img::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image:
+            radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 3%),
+            radial-gradient(circle at 80% 20%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 3%),
+            radial-gradient(circle at 40% 70%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 3%),
+            radial-gradient(circle at 70% 60%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 3%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        z-index: 2;
     }
 </style>
 @endpush
@@ -531,7 +563,7 @@
 <!-- Blog Hero Section -->
 <section class="blog-hero">
     <div class="container">
-        <div class="blog-hero-content" data-aos="fade-up">
+        <div class="blog-hero-content">
             <h1>Our Blog</h1>
             <p>Discover insights, stories, and tips about letter writing, communication, and connecting with loved ones.</p>
         </div>
@@ -630,17 +662,46 @@
             </div>
             @endforeach
         </div>
-        <!-- Pagination -->
-        <div class="blog-pagination">
-            {{ $blogPosts->links() }}
-        </div>
-        @else
-        <div class="no-posts" data-aos="fade-up">
-            <i class="bi bi-journal-x"></i>
-            <h3>No blog posts found</h3>
-            <p>Check back later for new content!</p>
-        </div>
         @endif
+        <!-- Pagination -->
+        @if($blogPosts->hasPages())
+            <div class="blog-pagination">
+                <nav aria-label="Blog pagination">
+                    <ul class="pagination">
+                        @if($blogPosts->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link"><i class="bi bi-chevron-left"></i> Previous</span>
+                            </li>
+                        @else
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $blogPosts->previousPageUrl() }}" rel="prev">
+                                    <i class="bi bi-chevron-left"></i> Previous
+                                </a>
+                            </li>
+                        @endif
+
+                        @foreach($blogPosts->getUrlRange(1, $blogPosts->lastPage()) as $page => $url)
+                            <li class="page-item {{ $page == $blogPosts->currentPage() ? 'active' : '' }} d-none d-md-block">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        @if($blogPosts->hasMorePages())
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $blogPosts->nextPageUrl() }}" rel="next">
+                                    Next <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                        @else
+                            <li class="page-item disabled">
+                                <span class="page-link">Next <i class="bi bi-chevron-right"></i></span>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+            </div>
+        @endif
+
     </div>
 </section>
 @endsection
@@ -650,16 +711,106 @@
 @push('footer-js')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Intersection Observer for animation on scroll
+        // Load GSAP library dynamically if not already loaded
+        if (typeof gsap === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js';
+            script.onload = initAnimations;
+            document.head.appendChild(script);
+            // Load ScrollTrigger plugin
+            const scrollTriggerScript = document.createElement('script');
+            scrollTriggerScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js';
+            document.head.appendChild(scrollTriggerScript);
+        } else {
+            initAnimations();
+        }
+
+        function initAnimations() {
+            // GSAP animations for blog cards
+            if (typeof gsap !== 'undefined') {
+                // Register ScrollTrigger plugin if available
+                if (gsap.registerPlugin && typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+                }
+
+                // Fix: Ensure hero title is visible by using direct DOM manipulation
+                const heroTitle = document.querySelector('.blog-hero-content h1');
+                if (heroTitle) {
+                    heroTitle.style.opacity = '1';
+                    heroTitle.style.visibility = 'visible';
+                    heroTitle.style.color = '#ffffff';
+                }
+
+                // Hero section animation - modified to prevent disappearing
+                gsap.fromTo('.blog-hero-content h1',
+                    {y: 50, opacity: 0.5},
+                    {y: 0, opacity: 1, duration: 1, ease: 'power3.out', clearProps: "all"}
+                );
+
+                gsap.fromTo('.blog-hero-content p',
+                    {y: 30, opacity: 0},
+                    {y: 0, opacity: 1, duration: 1, delay: 0.3, ease: 'power3.out', clearProps: "all"}
+                );
+
+                // Section titles animation
+                gsap.utils.toArray('.featured-title').forEach(title => {
+                    gsap.fromTo(title,
+                        {y: 30, opacity: 0},
+                        {
+                            scrollTrigger: {
+                                trigger: title,
+                                start: 'top 80%',
+                            },
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            ease: 'power2.out',
+                            clearProps: "all"
+                        }
+                    );
+                });
+
+                // Blog cards staggered animation
+                const blogCards = gsap.utils.toArray('.blog-card');
+                blogCards.forEach((card, index) => {
+                    gsap.set(card, {
+                        opacity: 0,
+                        y: 30,
+                        rotateX: 5,
+                        transformOrigin: 'center bottom'
+                    });
+
+                    ScrollTrigger.create({
+                        trigger: card,
+                        start: 'top 85%',
+                        onEnter: () => {
+                            gsap.to(card, {
+                                opacity: 1,
+                                y: 0,
+                                rotateX: 0,
+                                duration: 0.8,
+                                delay: index % 3 * 0.1,
+                                ease: 'power3.out',
+                                onComplete: () => {
+                                    card.classList.remove('loading');
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+        }
+
+        // Intersection Observer for animation on scroll (fallback if GSAP fails)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animated');
-
                     // For blog cards, add staggered animation
                     if (entry.target.classList.contains('blog-card')) {
                         const index = Array.from(document.querySelectorAll('.blog-card')).indexOf(entry.target);
                         entry.target.style.animationDelay = (index * 0.1) + 's';
+                        entry.target.style.animationName = 'cardSlip';
                     }
                 }
             });
@@ -683,16 +834,14 @@
             // Preload image
             const tempImage = new Image();
             tempImage.src = img.src;
-
             tempImage.onload = function() {
                 img.classList.add('loaded');
                 img.closest('.blog-card-img').classList.remove('loading');
                 img.closest('.blog-card').classList.remove('loading');
-
                 // Add a subtle fade-in effect
-                img.style.animation = 'fadeIn 0.5s ease forwards';
+                gsap ? gsap.to(img, {opacity: 1, duration: 0.5, ease: 'power2.out'}) :
+                       img.style.animation = 'fadeIn 0.5s ease forwards';
             };
-
             tempImage.onerror = function() {
                 img.src = '{{ asset('landing_pages/assets/img/blog-placeholder.jpg') }}';
                 img.classList.add('error');
@@ -716,54 +865,129 @@
         // Enhanced hover effects for blog cards
         document.querySelectorAll('.blog-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-                this.style.boxShadow = '0 15px 30px rgba(139, 38, 47, 0.2)';
+                if (typeof gsap !== 'undefined') {
+                    // Cancel any ongoing animations
+                    gsap.killTweensOf(this);
 
-                // Add subtle rotation
-                this.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    gsap.to(this, {
+                        y: -10,
+                        boxShadow: '0 15px 30px rgba(139, 38, 47, 0.2)',
+                        duration: 0.4,
+                        ease: 'power2.out'
+                    });
 
-                // Animate the read more link
-                const link = this.querySelector('.blog-card-link i');
-                if (link) {
-                    link.style.transform = 'translateX(8px)';
+                    // Animate the read more link
+                    const link = this.querySelector('.blog-card-link i');
+                    if (link) {
+                        gsap.to(link, {
+                            x: 8,
+                            duration: 0.3,
+                            ease: 'power1.out'
+                        });
+                    }
+
+                    // Subtle card tilt effect
+                    gsap.to(this, {
+                        rotationY: 2,
+                        rotationX: -2,
+                        duration: 0.4,
+                        ease: 'power1.out'
+                    });
+                } else {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 15px 30px rgba(139, 38, 47, 0.2)';
+
+                    // Animate the read more link
+                    const link = this.querySelector('.blog-card-link i');
+                    if (link) {
+                        link.style.transform = 'translateX(8px)';
+                    }
                 }
             });
 
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                if (typeof gsap !== 'undefined') {
+                    // Cancel any ongoing animations
+                    gsap.killTweensOf(this);
 
-                // Reset rotation
-                this.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    gsap.to(this, {
+                        y: 0,
+                        boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
+                        rotationY: 0,
+                        rotationX: 0,
+                        duration: 0.4,
+                        ease: 'power2.out'
+                    });
 
-                // Reset the read more link
-                const link = this.querySelector('.blog-card-link i');
-                if (link) {
-                    link.style.transform = 'translateX(0)';
+                    // Reset the read more link
+                    const link = this.querySelector('.blog-card-link i');
+                    if (link) {
+                        gsap.to(link, {
+                            x: 0,
+                            duration: 0.3,
+                            ease: 'power1.out'
+                        });
+                    }
+                } else {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+
+                    // Reset the read more link
+                    const link = this.querySelector('.blog-card-link i');
+                    if (link) {
+                        link.style.transform = 'translateX(0)';
+                    }
                 }
             });
         });
+
 
         // Add parallax effect to hero section
         window.addEventListener('scroll', function() {
             const scrollPosition = window.pageYOffset;
             const heroSection = document.querySelector('.blog-hero');
-
             if (heroSection) {
-                heroSection.style.backgroundPositionY = (scrollPosition * 0.5) + 'px';
+                heroSection.style.backgroundPositionY = (scrollPosition * 0.3) + 'px';
             }
         });
 
         // Add animation to category tags
         document.querySelectorAll('.blog-category').forEach(tag => {
             tag.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(this, {
+                        y: -3,
+                        scale: 1.05,
+                        backgroundColor: '#8b262f',
+                        color: '#fff',
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                } else {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                    this.style.backgroundColor = '#8b262f';
+                    this.style.color = '#fff';
+                }
             });
-
             tag.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(this, {
+                        y: 0,
+                        scale: 1,
+                        backgroundColor: 'rgba(139, 38, 47, 0.1)',
+                        color: '#8b262f',
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                } else {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.backgroundColor = 'rgba(139, 38, 47, 0.1)';
+                    this.style.color = '#8b262f';
+                }
             });
         });
     });
 </script>
 @endpush
+
+
