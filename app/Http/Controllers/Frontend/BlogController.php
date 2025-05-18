@@ -7,6 +7,7 @@ use App\Models\BlogPosts;
 use App\Models\TempleteCategories;
 use Illuminate\Support\Facades\Storage;
 use OpenAdmin\Admin\Auth\Database\Administrator;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -132,6 +133,123 @@ class BlogController extends Controller
 
         // If it's just a filename, assume it's in the files directory
         return 'storage/files/' . basename($imagePath);
+    }
+
+    public function show($slug)
+    {
+        try {
+            \Log::info('Attempting to fetch blog post with slug: ' . $slug);
+            
+            // Get the post with its relationships
+            $post = BlogPosts::where('slug', $slug)
+                ->where('status', 1)
+                ->first();
+
+            if (!$post) {
+                \Log::warning('Blog post not found with slug: ' . $slug);
+                if (request()->wantsJson() || request()->ajax()) {
+                    return response()->json(['error' => true, 'message' => 'Blog post not found'], 404);
+                }
+                throw new \Exception('Blog post not found');
+            }
+
+            \Log::info('Found blog post: ' . $post->id);
+
+            // Get or create session ID
+            if (!session()->has('visitor_id')) {
+                session(['visitor_id' => Str::random(40)]);
+            }
+            $sessionId = session('visitor_id');
+
+            // Get client IP address - handle both local and hosted environments
+            $ipAddress = request()->header('X-Forwarded-For') ?? 
+                        request()->header('X-Real-IP') ?? 
+                        request()->ip();
+            
+            // Get user agent
+            $userAgent = request()->userAgent();
+
+            // Record the view
+            $viewRecorded = $post->recordView(
+                $sessionId,
+                $ipAddress,
+                $userAgent
+            );
+
+            if (!$viewRecorded) {
+                \Log::warning('Failed to record view for post #' . $post->id);
+            }
+
+            // Get categories
+            $categories = TempleteCategories::whereIn('id', $post->category_ids ?? [])
+                ->where('status', 1)
+                ->pluck('category_name', 'id')
+                ->toArray();
+
+            // Get author
+            $author = Administrator::where('id', $post->user_id)->first();
+
+            // Process the featured image
+            $featuredImageUrl = $post->featured_image_url;
+
+            // Get approved comments
+            $comments = $post->approvedComments;
+
+            // Get related posts
+            $relatedPosts = BlogPosts::where('status', 1)
+                ->where('id', '!=', $post->id)
+                ->where(function($query) use ($post) {
+                    $query->whereJsonContains('category_ids', $post->category_ids)
+                        ->orWhereJsonContains('tags', $post->tags);
+                })
+                ->orderBy('created_at', 'desc')
+                ->take(3)
+                ->get();
+
+            // Format the response data
+            $response = [
+                'id' => $post->id,
+                'title' => $post->title,
+                'slug' => $post->slug,
+                'content' => $post->content,
+                'featured_image_url' => $featuredImageUrl,
+                'created_at' => $post->created_at,
+                'updated_at' => $post->updated_at,
+                'category_names' => $categories,
+                'tags' => $post->tags ?? [],
+                'author' => $author ? [
+                    'name' => $author->username,
+                    'email' => $author->email
+                ] : null,
+                'is_featured' => $post->is_featured,
+                'views' => $post->views,
+                'likes' => $post->likes,
+                'dislikes' => $post->dislikes
+            ];
+
+            \Log::info('Prepared response data for blog post: ' . $post->id);
+
+            // Check if it's an AJAX request or wants JSON
+            if (request()->wantsJson() || request()->ajax()) {
+                \Log::info('Returning JSON response for AJAX/JSON request');
+                return response()->json($response);
+            }
+
+            // For regular web requests, return the view
+            \Log::info('Returning view for regular request');
+            return view('landing.blog-single', compact('post', 'categories', 'author', 'featuredImageUrl', 'comments', 'relatedPosts'));
+        } catch (\Exception $e) {
+            \Log::error('Blog post error: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            if (request()->wantsJson() || request()->ajax()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Blog post not found',
+                    'debug' => config('app.debug') ? $e->getMessage() : null
+                ], 404);
+            }
+            abort(404, 'Blog post not found');
+        }
     }
 
 }

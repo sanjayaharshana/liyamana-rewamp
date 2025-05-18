@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\BlogCommentController;
+use App\Http\Controllers\Frontend\BlogReactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('save-position_item',[\App\Admin\Controllers\TempletesController::class,'savePosition'])->name('save_positions_admin');
+
+Route::get('/blog/{slug}', [BlogController::class, 'show'])
+    ->name('api.blog.show');

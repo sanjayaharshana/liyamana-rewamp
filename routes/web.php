@@ -7,6 +7,8 @@ use App\Admin\Controllers\AuthController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\Frontend\BlogReactionController;
+use App\Http\Controllers\Frontend\BlogCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,7 @@ Route::get('/',[\App\Http\Controllers\Frontend\HomeController::class,'index'])->
 Route::get('/about-us',[\App\Http\Controllers\Frontend\AboutUsController::class,'index'])->name('landing.about-us');
 Route::get('/post-card',[PostCardController::class,'index'])->name('landing.post-card');
 Route::get('/blog',[BlogController::class,'index'])->name('landing.blog');
+Route::get('/blog/{slug}',[BlogController::class,'show'])->name('landing.blog.show');
 
 
 
@@ -88,4 +91,25 @@ Route::get('/dashboard/payment-history', [DashboardController::class, 'paymentHi
 Route::get('/search-templates', [\App\Http\Controllers\Frontend\HomeController::class, 'searchTemplates'])->name('search.templates');
 
 Route::get('/market-place/{id}/quick-view', [App\Http\Controllers\Landing\MarketPlaceController::class, 'quickView'])->name('market-place.quick-view');
+
+// Add this route to your existing web.php file
+//Route::get('/api/blog/{slug}', [\App\Http\Controllers\Api\BlogController::class, 'show'])
+//    ->name('api.blog.show');
+
+// Add these routes to your existing web.php file
+Route::post('/blog/comment', [App\Http\Controllers\Frontend\BlogCommentController::class, 'store'])->name('blog.comment.store');
+
+// Blog routes
+Route::prefix('blog')->group(function () {
+    // Reaction routes
+    Route::get('reaction/{id}/get', [BlogReactionController::class, 'getReaction'])->name('blog.reaction.get');
+    Route::post('reaction/{id}/like', [BlogReactionController::class, 'like'])->name('blog.reaction.like');
+    Route::post('reaction/{id}/dislike', [BlogReactionController::class, 'dislike'])->name('blog.reaction.dislike');
+
+    // Comment routes
+    Route::post('comment', [BlogCommentController::class, 'store'])->name('blog.comment.store');
+    Route::put('comment/{id}', [BlogCommentController::class, 'update'])->name('blog.comment.update');
+    Route::delete('comment/{id}', [BlogCommentController::class, 'destroy'])->name('blog.comment.destroy');
+});
+
 

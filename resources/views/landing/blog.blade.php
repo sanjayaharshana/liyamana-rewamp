@@ -556,6 +556,321 @@
         pointer-events: none;
         z-index: 2;
     }
+
+    /* Blog Post Modal Styles */
+    .blog-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        overflow-y: auto;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .blog-modal.active {
+        display: block;
+        opacity: 1;
+    }
+
+    .blog-modal-content {
+        position: relative;
+        background: #fff;
+        width: 90%;
+        max-width: 900px;
+        margin: 50px auto;
+        border-radius: 15px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        transform: translateY(30px);
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        overflow: hidden;
+    }
+
+    .blog-modal.active .blog-modal-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .blog-modal-header {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .blog-modal-header img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .blog-modal-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+    }
+
+    .blog-modal-body {
+        padding: 30px 40px 40px;
+    }
+
+    .blog-modal-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #333;
+        line-height: 1.3;
+    }
+
+    .blog-modal-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 25px;
+        color: #666;
+        font-size: 0.95rem;
+    }
+
+    .blog-modal-meta span {
+        display: flex;
+        align-items: center;
+    }
+
+    .blog-modal-meta i {
+        margin-right: 8px;
+        color: #8b262f;
+    }
+
+    .blog-modal-categories {
+        margin-bottom: 25px;
+    }
+
+    .blog-modal-content-text {
+        line-height: 1.8;
+        color: #444;
+        font-size: 1.1rem;
+    }
+
+    .blog-modal-content-text p {
+        margin-bottom: 20px;
+    }
+
+    .blog-modal-content-text img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+
+    .blog-modal-content-text h2,
+    .blog-modal-content-text h3 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .blog-modal-content-text ul,
+    .blog-modal-content-text ol {
+        margin-bottom: 20px;
+        padding-left: 25px;
+    }
+
+    .blog-modal-content-text li {
+        margin-bottom: 10px;
+    }
+
+    .blog-modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .blog-modal-close:hover {
+        background: #8b262f;
+        transform: rotate(90deg);
+    }
+
+    .blog-modal-close:hover i {
+        color: #fff;
+    }
+
+    .blog-modal-close i {
+        font-size: 1.5rem;
+        color: #8b262f;
+        transition: color 0.3s ease;
+    }
+
+    .blog-modal-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+    }
+
+    .blog-modal-loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(139, 38, 47, 0.2);
+        border-top: 5px solid #8b262f;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .blog-modal-footer {
+        padding: 20px 40px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .blog-modal-share {
+        display: flex;
+        gap: 15px;
+    }
+
+    .blog-modal-share a {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        transition: all 0.3s ease;
+    }
+
+    .blog-modal-share a:hover {
+        background: #8b262f;
+        color: #fff;
+        transform: translateY(-3px);
+    }
+
+    .blog-modal-full-link {
+        display: inline-flex;
+        align-items: center;
+        color: #8b262f;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .blog-modal-full-link i {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .blog-modal-full-link:hover {
+        color: #c0392b;
+    }
+
+    .blog-modal-full-link:hover i {
+        transform: translateX(5px);
+    }
+
+    /* Prevent body scrolling when modal is open */
+    body.modal-open {
+        overflow: hidden;
+    }
+
+    /* Responsive styles for modal */
+    @media (max-width: 992px) {
+        .blog-modal-content {
+            width: 95%;
+            margin: 30px auto;
+        }
+
+        .blog-modal-header {
+            height: 250px;
+        }
+
+        .blog-modal-title {
+            font-size: 1.8rem;
+        }
+
+        .blog-modal-body {
+            padding: 25px 30px 35px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .blog-modal-header {
+            height: 200px;
+        }
+
+        .blog-modal-title {
+            font-size: 1.6rem;
+        }
+
+        .blog-modal-content-text {
+            font-size: 1rem;
+        }
+
+        .blog-modal-body {
+            padding: 20px 25px 30px;
+        }
+
+        .blog-modal-meta {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .blog-modal-footer {
+            padding: 15px 25px;
+            flex-direction: column;
+            gap: 15px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .blog-modal-content {
+            margin: 15px auto;
+        }
+
+        .blog-modal-header {
+            height: 180px;
+        }
+
+        .blog-modal-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .blog-modal-body {
+            padding: 15px 20px 25px;
+        }
+
+        .blog-modal-close {
+            top: 10px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
+        }
+    }
+
 </style>
 @endpush
 
@@ -704,11 +1019,14 @@
 
     </div>
 </section>
+
 @endsection
 
 @section('footer', true)
 
 @push('footer-js')
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Load GSAP library dynamically if not already loaded

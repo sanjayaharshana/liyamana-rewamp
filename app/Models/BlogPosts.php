@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class BlogPosts extends Model
 {
@@ -18,15 +19,19 @@ class BlogPosts extends Model
         'category_ids',
         'tags',
         'is_featured',
+        'views',
+        'likes',
+        'dislikes',
         'status',
         'user_id',
         'seo_description'
     ];
 
     // Cast JSON fields to arrays
-    protected $casts = [
-        'category_ids' => 'json',
-        'tags' => 'json',
+     protected $casts = [
+        'category_ids' => 'array',
+        'tags' => 'array',
+        'is_featured' => 'boolean',
     ];
 
     // Allow dynamic properties
@@ -68,51 +73,98 @@ class BlogPosts extends Model
     // Get the URL for the featured image
     public function getFeaturedImageUrlAttribute()
     {
-        if (empty($this->featured_image)) {
-            \Log::info('Blog post #' . $this->id . ': No featured image set');
-            return asset('landing_pages/assets/img/blog-placeholder.jpg');
+        if ($this->featured_image) {
+            return asset('storage/' . $this->featured_image);
         }
-
-        // If it's already a full URL, return it
-        if (filter_var($this->featured_image, FILTER_VALIDATE_URL)) {
-            \Log::info('Blog post #' . $this->id . ': Using full URL: ' . $this->featured_image);
-            return $this->featured_image;
-        }
-
-        // Clean the path
-        $imagePath = str_replace('\\', '/', $this->featured_image);
-        $imagePath = ltrim($imagePath, '/');
-
-        // Log the original and cleaned path
-        \Log::info('Blog post #' . $this->id . ': Original path: ' . $this->featured_image);
-        \Log::info('Blog post #' . $this->id . ': Cleaned path: ' . $imagePath);
-
-        // Check if file exists in storage
-        $storagePath = storage_path('app/public/' . $imagePath);
-        if (file_exists($storagePath)) {
-            $url = asset('storage/' . $imagePath);
-            \Log::info('Blog post #' . $this->id . ': File exists in storage: ' . $url);
-            return $url;
-        }
-
-        // Check if file exists in public storage
-        $publicPath = public_path('storage/' . $imagePath);
-        if (file_exists($publicPath)) {
-            $url = asset('storage/' . $imagePath);
-            \Log::info('Blog post #' . $this->id . ': File exists in public storage: ' . $url);
-            return $url;
-        }
-
-        // If file doesn't exist, try to find it in the files directory
-        $filesPath = storage_path('app/public/files/' . basename($imagePath));
-        if (file_exists($filesPath)) {
-            $url = asset('storage/files/' . basename($imagePath));
-            \Log::info('Blog post #' . $this->id . ': File exists in files directory: ' . $url);
-            return $url;
-        }
-
-        // If all else fails, return placeholder
-        \Log::warning('Blog post #' . $this->id . ': Image not found in any location');
         return asset('landing_pages/assets/img/blog-placeholder.jpg');
+    }
+
+    // Add this method to help with debugging
+    public static function findBySlug($slug)
+    {
+        $post = self::where('slug', $slug)->first();
+        \Log::info('Looking up post by slug: ' . $slug . ', found: ' . ($post ? 'yes' : 'no'));
+        return $post;
+    }
+
+     /**
+     * Get the author of the post.
+     */
+    public function author()
+    {
+        return $this->belongsTo(Administrator::class, 'author_id');
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function comments()
+    {
+        return $this->hasMany(BlogComment::class, 'post_id');
+    }
+
+    /**
+     * Get approved comments for the blog post.
+     */
+    public function approvedComments()
+    {
+        return $this->hasMany(BlogComment::class, 'post_id')
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * Get the views for the blog post.
+     */
+    public function views()
+    {
+        return $this->hasMany(BlogView::class, 'post_id');
+    }
+
+    /**
+     * Record a view for this post.
+     */
+    public function recordView($sessionId, $ipAddress = null, $userAgent = null)
+    {
+        try {
+            // Start a database transaction
+            DB::beginTransaction();
+
+            // Create a new view record
+            $view = $this->views()->create([
+                'session_id' => $sessionId,
+                'ip_address' => $ipAddress,
+                'user_agent' => $userAgent,
+                'viewed_at' => now()
+            ]);
+
+            // Increment the views counter using a direct update to avoid race conditions
+            DB::table('blog_posts')
+                ->where('id', $this->id)
+                ->update(['views' => DB::raw('views + 1')]);
+
+            // Commit the transaction
+            DB::commit();
+
+            // Refresh the model to get the updated view count
+            $this->refresh();
+            
+            // Log successful view recording
+            \Log::info("View recorded for post #{$this->id} by session {$sessionId}. New view count: {$this->views}");
+            return true;
+        } catch (\Exception $e) {
+            // Rollback the transaction on error
+            DB::rollBack();
+            
+            // Log any errors
+            \Log::error("Error recording view for post #{$this->id}: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // Relationship with reactions
+    public function reactions()
+    {
+        return $this->hasMany(BlogReaction::class, 'post_id');
     }
 }
